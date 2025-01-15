@@ -107,14 +107,14 @@
     # --------------------------------------------------------------------------------
     {
       mode = "n";
-      key = "<localleader>cx";
+      key = "<leader>cx";
       action.__raw = ''
         function()
-            require("treesitter-context").go_to_context(vim.v.count1)
+          require("treesitter-context").go_to_context(vim.v.count1)
         end
       '';
       options = {
-        desc = "Jumping to code context (upwards)";
+        desc = "Jumping to context code (upwards)";
         silent = true;
       };
     }

@@ -1,5 +1,11 @@
-{ config, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
+  extraPackages = with pkgs; [
+    bat
+    fd
+    ripgrep # a.k.a rg
+  ];
+
   plugins = {
     fzf-lua = {
       enable = true;
@@ -11,13 +17,61 @@
         };
         previewers = {
           bat = {
-            cmd = "${pkgs.bat}/bin/bat";
+            cmd = lib.getExe pkgs.bat;
             args = "--color=always --style=numbers,changes";
           };
         };
       };
 
       keymaps = {
+        # --------------------------------------------------------------------------------
+        # Live Grep
+        # --------------------------------------------------------------------------------
+        "<leader>//" = {
+          action = "live_grep";
+          settings = {
+            prompt = "❯ ";
+          };
+          options = {
+            silent = true;
+            desc = "Live Grep (cwd)";
+          };
+        };
+        "<leader>/b" = {
+          action = "lgrep_curbuf"; # live grep on current buffer
+          settings = {
+            prompt = "❯ ";
+          };
+          options = {
+            silent = true;
+            desc = "Fuzzy Current Buffer";
+          };
+        };
+        "<leader>/r" = {
+          action = "live_grep";
+          settings = {
+            prompt = "❯ ";
+            cwd.__raw = ''
+              vim.fs.root(0, { ".git", "flake.nix", "Makefile", "go.work" })
+            '';
+          };
+          options = {
+            silent = true;
+            desc = "Live Grep Project Root Directory (Upward)";
+          };
+        };
+        "<leader>/." = {
+          action = "live_grep";
+          settings = {
+            prompt = "❯ ";
+            cwd.__raw = "vim.fn.expand('%:h:p')";
+          };
+          options = {
+            silent = true;
+            desc = "Live Grep Relative Working File";
+          };
+        };
+
         # --------------------------------------------------------------------------------
         # Auto Commands
         # --------------------------------------------------------------------------------
@@ -35,34 +89,14 @@
         # --------------------------------------------------------------------------------
         # Buffers
         # --------------------------------------------------------------------------------
-        "<leader>fb" = {
+        "<leader>," = {
           action = "buffers"; # find buffers
           settings = {
             prompt = "❯ ";
           };
           options = {
             silent = true;
-            desc = "Find Buffer";
-          };
-        };
-        "<leader>," = {
-          action = "buffers"; # find buffers (alias leader-fb)
-          settings = {
-            prompt = "❯ ";
-          };
-          options = {
-            silent = true;
             desc = "Pick Buffer";
-          };
-        };
-        "<leader>/b" = {
-          action = "lgrep_curbuf"; # live grep on current buffer
-          settings = {
-            prompt = "❯ ";
-          };
-          options = {
-            silent = true;
-            desc = "Fuzzy Current Buffer";
           };
         };
 
@@ -117,7 +151,7 @@
         # --------------------------------------------------------------------------------
         # Files
         # --------------------------------------------------------------------------------
-        "<leader>ff" = {
+        "<leader>p" = {
           action = "files";
           settings = {
             prompt = "❯ ";
@@ -127,17 +161,7 @@
             desc = "Find Files (cwd)";
           };
         };
-        "<leader>p" = {
-          action = "files"; # same as <leader>-ff
-          settings = {
-            prompt = "❯ ";
-          };
-          options = {
-            silent = true;
-            desc = "Find Files (cwd)";
-          };
-        };
-        "<leader>fF" = {
+        "<leader>sF" = {
           action = "files";
           settings = {
             # cwd_prompt = false;
@@ -151,7 +175,7 @@
             desc = "Find Files Project Root Directory (Upward)";
           };
         };
-        "<leader>fr" = {
+        "<leader>sf" = {
           action = "files";
           settings = {
             prompt = "❯ ";
@@ -162,44 +186,6 @@
             desc = "Find Files Relative Working File";
           };
         };
-
-        # --------------------------------------------------------------------------------
-        # Grep
-        # --------------------------------------------------------------------------------
-        "<leader>sg" = {
-          action = "live_grep";
-          settings = {
-            prompt = "❯ ";
-          };
-          options = {
-            silent = true;
-            desc = "Live Grep (cwd)";
-          };
-        };
-        "<leader>sG" = {
-          action = "live_grep";
-          settings = {
-            prompt = "❯ ";
-            cwd.__raw = ''
-              vim.fs.root(0, { ".git", "flake.nix", "Makefile", "go.work" })
-            '';
-          };
-          options = {
-            silent = true;
-            desc = "Live Grep Project Root Directory (Upward)";
-          };
-        };
-        # "<leader>sg." = {
-        #   action = "live_grep";
-        #   settings = {
-        #     prompt = "❯ ";
-        #     cwd.__raw = "vim.fn.expand('%:h:p')";
-        #   };
-        #   options = {
-        #     silent = true;
-        #     desc = "Live Grep Relative Working File";
-        #   };
-        # };
 
         # --------------------------------------------------------------------------------
         # Help
@@ -312,7 +298,7 @@
         # --------------------------------------------------------------------------------
         # Resume
         # --------------------------------------------------------------------------------
-        "<leader>sR" = {
+        "<leader>s<Up>" = {
           action = "resume";
           settings = {
             prompt = "❯ ";

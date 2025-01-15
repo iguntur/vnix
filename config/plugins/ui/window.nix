@@ -61,6 +61,7 @@ in
     FocusEnable.clear = true;
     FocusDisable.clear = true;
   };
+
   autoCmd = [
     {
       desc = "Disable autoresize window for FileType";

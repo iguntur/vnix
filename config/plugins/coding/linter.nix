@@ -11,9 +11,6 @@
     };
   };
 
-  # extraConfigLua = ''
-  # '';
-
   # keymaps = [
   #   {
   #     mode = "n";

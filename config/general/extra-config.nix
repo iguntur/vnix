@@ -1,13 +1,6 @@
 { config, pkgs, ... }:
 {
-  extraPackages = with pkgs; [
-    bat
-    delta
-    fd
-    git
-    ripgrep # a.k.a rg
-    coreutils
-  ];
+  extraPackages = with pkgs; [ coreutils ];
 
   # extraConfigLuaPre = "";
   # extraConfigLua = "";

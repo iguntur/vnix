@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   luaRaw,
   pkgs,
@@ -30,11 +29,11 @@
       }
       {
         mode = "n";
-        key = "<leader>qL";
+        key = "<leader>qs";
         action = persistence "load";
         options = {
           silent = true;
-          desc = "Load session";
+          desc = "Load the session for the current directory";
         };
       }
       {
@@ -48,7 +47,7 @@
       }
       {
         mode = "n";
-        key = "<leader>ql";
+        key = "<leader>qL";
         action = persistence' "load" { last = true; };
         options = {
           silent = true;

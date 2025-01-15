@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ lib, pkgs, ... }:
 {
   extraPackages = with pkgs; [
     golangci-lint
@@ -147,11 +142,11 @@
     }
 
     # --------------------------------------------------------------------------------
-    # LSP rename file (via snacks)
+    # Rename file (via snacks)
     # --------------------------------------------------------------------------------
     {
       mode = "n";
-      key = "<leader>rf";
+      key = "<leader>fR";
       action.__raw = ''
         function()
           Snacks.rename.rename_file()

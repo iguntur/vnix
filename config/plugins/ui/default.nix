@@ -1,20 +1,13 @@
-{ config, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
+  imports = [
+    ./mini.nix
+    ./snacks.nix
+    ./window.nix
+  ];
+
   plugins = {
     # web-devicons.enable = true;
-
-    mini.modules = {
-      icons = {
-        enable = true;
-      };
-      indentscope = {
-        # symbol = "▏";
-        symbol = "│";
-        options = {
-          try_as_border = true;
-        };
-      };
-    };
 
     # notify = {
     #   enable = true;
@@ -50,32 +43,4 @@
       };
     };
   };
-
-  autoCmd = [
-    {
-      event = [ "FileType" ];
-      callback.__raw = ''
-        function()
-          vim.b.miniindentscope_disable = true
-        end 
-      '';
-      pattern = [
-        "NvimTree"
-        "Trouble"
-        "alpha"
-        "dashboard"
-        "fzf"
-        "help"
-        "mason"
-        "neo-tree"
-        "notify"
-        "snacks_dashboard"
-        "snacks_notif"
-        "snacks_terminal"
-        "snacks_win"
-        "toggleterm"
-        "trouble"
-      ];
-    }
-  ];
 }

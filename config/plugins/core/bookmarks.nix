@@ -13,7 +13,7 @@
   keymaps = [
     {
       mode = "n";
-      key = "<leader>mqa";
+      key = "<localleader>mq";
       action = "<cmd>MarksQFListAll<cr>";
       options = {
         silent = true;

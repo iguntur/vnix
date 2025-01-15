@@ -1,5 +1,12 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ./move.nix
+    ./text-case.nix
+    ./treesj.nix
+    ./vim-table-mode.nix
+  ];
+
   plugins = {
     indent-o-matic = {
       enable = true;

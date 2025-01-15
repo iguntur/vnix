@@ -1,59 +1,30 @@
-{ config, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   plugins = {
-    mini = {
-      enable = true;
-      # modules = { };
-    };
-
-    snacks = {
-      enable = true;
-    };
-
-    snacks = {
-      settings = {
-        bufdelete = {
-          enabled = true;
-        };
-        dim = {
-          enabled = true;
-        };
-        # bigfile = {
-        #   enabled = true;
-        # };
-        notifier = {
-          enabled = true;
-          # timeout = 3000;
-        };
-        # quickfile = {
-        #   enabled = false;
-        # };
-        # statuscolumn = {
-        #   enabled = false;
-        # };
-        words = {
-          debounce = 100;
-          enabled = true;
-        };
-        toggle = {
-          enabled = true;
-        };
+    # --------------------------------------------------------------------------------
+    # Snacks modules
+    # --------------------------------------------------------------------------------
+    snacks.settings = {
+      bufdelete = {
+        enabled = true;
+      };
+      dim = {
+        enabled = true;
+      };
+      notifier = {
+        enabled = true;
+        # timeout = 3000;
+      };
+      toggle = {
+        enabled = true;
       };
     };
   };
 
   autoCmd = [
-    {
-      event = [ "User" ];
-      callback.__raw = ''
-        function()
-          -- Override print to use snacks for `:=` command
-          vim.print = function(...)
-            Snacks.debug.inspect(...)
-          end
-        end
-      '';
-    }
+    # --------------------------------------------------------------------------------
+    # Keymaps: Toggle UI
+    # --------------------------------------------------------------------------------
     {
       event = [ "User" ];
       callback.__raw = ''

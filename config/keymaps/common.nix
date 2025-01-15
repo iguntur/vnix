@@ -355,8 +355,20 @@
     }
 
     # --------------------------------------------------------------------------------
-    # Delete Line(s)
+    # Delete Char and Line(s) - skip register
     # --------------------------------------------------------------------------------
+    {
+      mode = "n";
+      key = "x"; # cut: do not yank with x
+      action = ''"_x'';
+      options.silent = true;
+    }
+    {
+      mode = "n";
+      key = "D";
+      action = ''"_D'';
+      options.silent = true;
+    }
     {
       mode = "n";
       key = "<M-d>"; # Alt-d
