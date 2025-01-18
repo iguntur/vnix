@@ -1,11 +1,23 @@
-{ config, pkgs, ... }:
+{ vnix, pkgs, ... }:
 {
   extraPackages = with pkgs; [
     delta
     git
   ];
 
+  extraConfigLuaPost = vnix.lua.mkRequire' "which-key" "add" [
+    {
+      __unkeyed-1 = "<leader>gh";
+      group = "Hunk";
+      icon = " ";
+    }
+  ];
+
   plugins = {
+    fugitive = {
+      enable = true;
+    };
+
     diffview = {
       enable = true;
     };
@@ -13,6 +25,15 @@
     gitignore = {
       enable = true;
     };
+
+    lazygit = {
+      enable = true;
+      settings = { };
+    };
+
+    # git-worktree = {
+    #   enable = true;
+    # };
 
     gitsigns = {
       enable = true;
@@ -50,17 +71,34 @@
               vim.keymap.set("n", "<M-,>", "<cmd>Gitsigns next_hunk<cr>zz", { buffer = bufnr, silent = true, desc = "Next Hunk" })
 
               vim.keymap.set("n", "[H", function()
-                  gs.nav_hunk("first")
-                  vim.cmd.normal({ "zz", bang = true })
+                gs.nav_hunk("first")
+                vim.cmd.normal({ "zz", bang = true })
               end, { buffer = bufnr, silent = true, desc = "First Hunk" })
 
               vim.keymap.set("n", "]H", function()
-                  gs.nav_hunk("last")
-                  vim.cmd.normal({ "zz", bang = true })
+                gs.nav_hunk("last")
+                vim.cmd.normal({ "zz", bang = true })
               end, { buffer = bufnr, silent = true, desc = "Last Hunk" })
             end
           '';
       };
     };
   };
+
+  keymaps = [
+    {
+      mode = "n";
+      key = "<leader>gg";
+      action = "<cmd>LazyGit<cr>";
+      options.silent = true;
+      options.desc = "Lazygit";
+    }
+    {
+      mode = "n";
+      key = "<C-g>";
+      action = "<cmd>LazyGit<cr>";
+      options.silent = true;
+      options.desc = "Lazygit";
+    }
+  ];
 }

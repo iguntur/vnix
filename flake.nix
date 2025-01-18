@@ -8,12 +8,7 @@
   };
 
   outputs =
-    {
-      self,
-      nixvim,
-      flake-parts,
-      ...
-    }@inputs:
+    { nixvim, flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       # System types to support.
       systems = [
@@ -35,6 +30,7 @@
             # You can use `extraSpecialArgs` to pass additional arguments to your module files
             extraSpecialArgs = {
               vnix.icons = import ./lib/icons.nix;
+              vnix.lua = import ./lib/lua.nix { inherit lib; };
               luaRaw = import ./lib/fn.nix { inherit lib; };
             };
           };

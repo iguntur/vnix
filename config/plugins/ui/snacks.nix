@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, vnix, ... }:
 {
   plugins = {
     # --------------------------------------------------------------------------------
@@ -39,6 +39,14 @@
     }
   ];
 
+  extraConfigLuaPost = vnix.lua.mkRequire' "which-key" "add" [
+    {
+      __unkeyed-1 = "<leader>un";
+      group = "Notification";
+      icon = "󰎟 ";
+    }
+  ];
+
   keymaps = [
     # --------------------------------------------------------------------------------
     # Buffer: delete buffer
@@ -46,14 +54,14 @@
     {
       mode = "n";
       key = "<M-w>"; # Alt-w
-      action = ":lua Snacks.bufdelete()<cr>";
+      action = lib.nixvim.mkRaw "function() Snacks.bufdelete() end";
       options.desc = "Close current buffer";
       options.silent = true;
     }
     {
       mode = "n";
-      key = "<leader>bdo";
-      action = ":lua Snacks.bufdelete.other()<cr>";
+      key = "<leader>bD";
+      action = lib.nixvim.mkRaw "function() Snacks.bufdelete.other() end";
       options.desc = "Close other buffers";
       options.silent = true;
     }
@@ -63,15 +71,15 @@
     # --------------------------------------------------------------------------------
     {
       mode = "n";
-      key = "<localleader>unh";
-      action = ":lua Snacks.notifier.show_history()<cr>";
+      key = "<leader>unh";
+      action = lib.nixvim.mkRaw "function() Snacks.notifier.show_history() end";
       options.desc = "Notification History";
       options.silent = true;
     }
     {
       mode = "n";
-      key = "<localleader><localleader><esc>";
-      action = ":lua Snacks.notifier.hide()<cr>";
+      key = "<leader>und";
+      action = lib.nixvim.mkRaw "function() Snacks.notifier.hide() end";
       options.desc = "Dismiss All Notification";
       options.silent = true;
     }

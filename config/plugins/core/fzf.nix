@@ -103,7 +103,7 @@
         # --------------------------------------------------------------------------------
         # Commands
         # --------------------------------------------------------------------------------
-        "<leader>sc" = {
+        "<leader>s:" = {
           action = "commands";
           settings = {
             prompt = "❯ ";
@@ -172,7 +172,7 @@
           };
           options = {
             silent = true;
-            desc = "Find Files Project Root Directory (Upward)";
+            desc = "Files Project Root Directory (Upward)";
           };
         };
         "<leader>sf" = {
@@ -183,7 +183,7 @@
           };
           options = {
             silent = true;
-            desc = "Find Files Relative Working File";
+            desc = "Files Relative Working File";
           };
         };
 

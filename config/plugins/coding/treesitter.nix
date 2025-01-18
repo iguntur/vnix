@@ -39,24 +39,28 @@
           "]a" = "@parameter.inner";
           "]c" = "@class.outer";
           "]f" = "@function.outer";
+          "]i" = "@conditional.outer";
           "]l" = "@loop.outer";
         };
         gotoNextEnd = {
           "]A" = "@parameter.inner";
           "]C" = "@class.outer";
           "]F" = "@function.outer";
+          "]I" = "@conditional.outer";
           "]L" = "@loop.outer";
         };
         gotoPreviousStart = {
           "[a" = "@parameter.inner";
           "[c" = "@class.outer";
           "[f" = "@function.outer";
+          "[i" = "@conditional.outer";
           "[l" = "@loop.outer";
         };
         gotoPreviousEnd = {
           "[A" = "@parameter.inner";
           "[C" = "@class.outer";
           "[F" = "@function.outer";
+          "[I" = "@conditional.outer";
           "[L" = "@loop.outer";
         };
       };
@@ -82,10 +86,16 @@
       swap = {
         enable = true;
         swapNext = {
-          "<leader>a" = "@parameter.inner";
+          "<localleader>a" = {
+            query = "@parameter.inner";
+            desc = "Move parameter to the right";
+          };
         };
         swapPrevious = {
-          "<leader>A" = "@parameter.inner";
+          "<localleader>A" = {
+            query = "@parameter.inner";
+            desc = "Move parameter to the left";
+          };
         };
       };
     };
@@ -94,7 +104,7 @@
       enable = true;
     };
 
-    #   Use treesitter to autoclose and autorename html tag
+    # Use treesitter to autoclose and autorename html tag
     ts-autotag = {
       enable = true;
       # settings = { };
@@ -107,6 +117,13 @@
     # --------------------------------------------------------------------------------
     {
       mode = "n";
+      key = "<leader>ux";
+      action = "<cmd>TSContextToggle<cr>";
+      options.silent = true;
+      options.desc = "Toggle treesitter context";
+    }
+    {
+      mode = "n";
       key = "<leader>cx";
       action.__raw = ''
         function()
@@ -114,7 +131,7 @@
         end
       '';
       options = {
-        desc = "Jumping to context code (upwards)";
+        desc = "Goto context code (upwards)";
         silent = true;
       };
     }

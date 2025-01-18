@@ -141,7 +141,7 @@
     # }
     {
       mode = "n";
-      key = "<leader>bdd"; # Alt-w
+      key = "<leader>bd"; # Alt-w
       action = ":bdelete<cr>";
       options.desc = "Close current buffer and window";
       options.silent = true;

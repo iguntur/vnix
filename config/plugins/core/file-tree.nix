@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   plugins = {
     oil = {
@@ -16,12 +16,14 @@
           "<C-h>" = false;
           "<C-r>" = "actions.refresh";
           "y." = "actions.copy_entry_path";
-          "<localleader>|".__raw = ''
-            { "actions.select", opts = { vertical = true } }
-          '';
-          "<localleader>-".__raw = ''
-            { "actions.select", opts = { horizontal = true } }
-          '';
+          "<localleader>|" = {
+            __unkeyed-1 = "actions.select";
+            opts.vertical = true;
+          };
+          "<localleader>-" = {
+            __unkeyed-1 = "actions.select";
+            opts.horizontal = true;
+          };
         };
         skip_confirm_for_simple_edits = true;
         view_options = {
@@ -49,7 +51,7 @@
   keymaps = [
     {
       mode = "n";
-      key = "<leader><leader>o";
+      key = "<leader>f-";
       action = "<cmd>Oil<cr>";
       options = {
         silent = true;
@@ -58,7 +60,7 @@
     }
     {
       mode = "n";
-      key = "<leader><leader>-";
+      key = "<leader>fe";
       action = "<cmd>Yazi<cr>";
       options = {
         silent = true;
@@ -67,11 +69,20 @@
     }
     {
       mode = "n";
-      key = "<leader><leader><Up>";
+      key = "<leader>fE";
+      action = "<cmd>Yazi cwd<cr>";
+      options = {
+        silent = true;
+        desc = "Open Yazi (cwd)";
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>f<Up>";
       action = "<cmd>Yazi toggle<cr>";
       options = {
         silent = true;
-        desc = "Resume the last yazi session";
+        desc = "Resume the last Yazi session";
       };
     }
   ];

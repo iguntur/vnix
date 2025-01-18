@@ -8,8 +8,8 @@
   keymapRequire' = modName: method: args: {
     __raw =
       let
-        isSet = builtins.typeOf args == "set";
-        params = if isSet then "${lib.nixvim.toLuaObject args}" else null;
+        isSetOrList = builtins.typeOf args == "set" || builtins.typeOf args == "list";
+        params = if isSetOrList then "${lib.nixvim.toLuaObject args}" else null;
       in
       ''function() require("${modName}").${method}(${params}) end'';
   };

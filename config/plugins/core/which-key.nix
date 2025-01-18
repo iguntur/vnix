@@ -13,6 +13,22 @@
             hidden = true;
           }
           {
+            __unkeyed-1 = "g";
+            group = "Goto";
+          }
+          {
+            __unkeyed-1 = "[";
+            group = "Previous";
+          }
+          {
+            __unkeyed-1 = "]";
+            group = "Next";
+          }
+
+          # --------------------------------------------------------------------
+          # With Leader
+          # --------------------------------------------------------------------
+          {
             __unkeyed-1 = "<leader><tab>";
             group = "Tab";
             icon = "󰌒 ";
@@ -22,7 +38,6 @@
             group = "Leader";
             icon = "󱁐 ";
           }
-
           {
             __unkeyed-1 = "<leader>/";
             group = "Grep";
@@ -74,6 +89,11 @@
             icon = "󰙨 ";
           }
           {
+            __unkeyed-1 = "<leader>u";
+            group = "UI";
+            icon = " ";
+          }
+          {
             __unkeyed-1 = "<leader>w";
             group = "Windows";
             proxy = "<C-w>";
@@ -91,7 +111,7 @@
   keymaps = [
     {
       mode = "n";
-      key = "<leader>?";
+      key = "<leader><leader>?";
       action = luaRaw.keymapRequire' "which-key" "show" { global = false; };
       options = {
         silent = true;

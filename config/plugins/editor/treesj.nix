@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  luaRaw,
-  pkgs,
-  ...
-}:
+{ luaRaw, ... }:
 {
   plugins = {
     # join and split text line
@@ -20,20 +14,20 @@
   keymaps = [
     {
       mode = "n";
-      key = "<leader>m";
+      key = "<leader>cj";
       action = luaRaw.keymapRequire "treesj" "toggle";
       options = {
         silent = true;
-        desc = "Split and join code block";
+        desc = "Toggle split and join code block";
       };
     }
     {
       mode = "n";
-      key = "<leader>M";
+      key = "<leader>cJ";
       action = luaRaw.keymapRequire' "treesj" "toggle" { split.recursive = true; };
       options = {
         silent = true;
-        desc = "Split and join code block recursively";
+        desc = "Toggle split and join code block (recursively)";
       };
     }
   ];
