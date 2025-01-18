@@ -11,6 +11,11 @@
       group = "Hunk";
       icon = " ";
     }
+    {
+      __unkeyed-1 = "<leader>ga";
+      group = "Add";
+      icon = " ";
+    }
   ];
 
   plugins = {
@@ -88,6 +93,13 @@
   keymaps = [
     {
       mode = "n";
+      key = "<C-g>";
+      action = "<cmd>LazyGit<cr>";
+      options.silent = true;
+      options.desc = "Lazygit";
+    }
+    {
+      mode = "n";
       key = "<leader>gg";
       action = "<cmd>LazyGit<cr>";
       options.silent = true;
@@ -95,10 +107,10 @@
     }
     {
       mode = "n";
-      key = "<C-g>";
-      action = "<cmd>LazyGit<cr>";
+      key = "<leader>gaa";
+      action = "<cmd>Git aa<cr>";
       options.silent = true;
-      options.desc = "Lazygit";
+      options.desc = "Git add all";
     }
   ];
 }
