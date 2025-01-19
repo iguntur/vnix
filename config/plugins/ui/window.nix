@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  vnix,
+  ...
+}:
 let
   inherit (lib.nixvim) toLuaObject;
 
@@ -52,9 +57,7 @@ in
     # windows-nvim # Automatically expand width of the current window. Maximizes and restore it.
   ];
 
-  extraConfigLua = ''
-    require("focus").setup(${toLuaObject focus-settings})
-  '';
+  extraConfigLua = vnix.lua.mkRequire' "focus" "setup" focus-settings;
 
   autoGroups = {
     vnix_statuscolumn.clear = true;
@@ -67,7 +70,7 @@ in
       desc = "Disable autoresize window for FileType";
       event = [ "FileType" ];
       group = "FocusDisable";
-      callback.__raw = ''
+      callback = lib.nixvim.mkRaw ''
         function(_)
           if vim.tbl_contains(${toLuaObject ignore-filetypes}, vim.bo.filetype) then
             vim.b.focus_disable = true
@@ -81,7 +84,7 @@ in
       desc = "Disable autoresize window for BufType";
       event = [ "WinEnter" ];
       group = "FocusDisable";
-      callback.__raw = ''
+      callback = lib.nixvim.mkRaw ''
         function(_)
           if vim.tbl_contains(${toLuaObject ignore-buftypes}, vim.bo.buftype) then
             vim.w.focus_disable = true
@@ -98,7 +101,7 @@ in
         "BufEnter"
       ];
       group = "vnix_statuscolumn";
-      callback.__raw = ''
+      callback = lib.nixvim.mkRaw ''
         function()
           if vim.tbl_contains(${toLuaObject ignore-filetypes}, vim.bo.filetype) then
             vim.wo.statuscolumn = ""

@@ -1,26 +1,4 @@
-{ pkgs, lib, ... }:
-let
-  inherit (lib.nixvim) toLuaObject;
-
-  settings = {
-    move = {
-      line = {
-        enable = false; # Enables line movement
-        indent = false; # Toggles indentation
-      };
-      block = {
-        enable = false; # Enables block movement
-        indent = false; # Toggles indentation
-      };
-      word = {
-        enable = true; # Enables word movement
-      };
-      char = {
-        enable = true; # Enables char movement
-      };
-    };
-  };
-in
+{ pkgs, vnix, ... }:
 {
   extraPlugins = [
     (pkgs.vimUtils.buildVimPlugin {
@@ -34,9 +12,22 @@ in
     })
   ];
 
-  extraConfigLua = ''
-    require("move").setup(${toLuaObject settings.move})
-  '';
+  extraConfigLua = vnix.lua.mkRequire' "move" "setup" {
+    line = {
+      enable = false; # Enables line movement
+      indent = false; # Toggles indentation
+    };
+    block = {
+      enable = false; # Enables block movement
+      indent = false; # Toggles indentation
+    };
+    word = {
+      enable = true; # Enables word movement
+    };
+    char = {
+      enable = true; # Enables char movement
+    };
+  };
 
   keymaps = [
     {
@@ -57,16 +48,16 @@ in
     {
       mode = "n";
       key = "<localleader>w[";
-      action = "<cmd>MoveWord(1)<cr>";
+      action = "<cmd>MoveWord(-1)<cr>";
       options.silent = true;
-      options.desc = "Move Word to The Right";
+      options.desc = "Move Word to The Left";
     }
     {
       mode = "n";
       key = "<localleader>w]";
-      action = "<cmd>MoveWord(-1)<cr>";
+      action = "<cmd>MoveWord(1)<cr>";
       options.silent = true;
-      options.desc = "Move Word to The Left";
+      options.desc = "Move Word to The Right";
     }
   ];
 }
