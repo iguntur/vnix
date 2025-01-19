@@ -1,5 +1,17 @@
 { pkgs, ... }:
 {
+  extraFiles = {
+    "queries/lua/highlights.scm" = {
+      enable = true;
+      text = ''
+        ;; extends
+
+        ((identifier) @namespace.builtin
+          (#eq? @namespace.builtin "vim"))
+      '';
+    };
+  };
+
   plugins = {
     treesitter = {
       enable = true;
