@@ -8,6 +8,7 @@
     ./diagnostics.nix
     ./formatter.nix
     ./git.nix
+    ./lazydev.nix
     ./linter.nix
     ./lsp.nix
     ./nvim-context-vt.nix
