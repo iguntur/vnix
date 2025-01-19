@@ -52,8 +52,9 @@
     linebreak = true; # wrap lines at convenient points
     list = true; # show some invisible characters (tabs...
     listchars = {
-      tab = "▸ ";
-      trail = "·";
+      tab = "│ "; # "│·"; # "▸ ";
+      trail = "∙"; # "·";
+      nbsp = "∙";
       # eol = "↴"; eol = '↲'; };
     };
     mouse = "a"; # enable mouse mode
