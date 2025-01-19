@@ -12,7 +12,7 @@
   keymaps = [
     {
       mode = "n";
-      key = "<localleader><localleader>ul";
+      key = "<leader>ul";
       action.__raw = "require('lsp_lines').toggle";
       options = {
         silent = true;

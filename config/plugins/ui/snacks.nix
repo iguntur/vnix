@@ -29,11 +29,11 @@
       event = [ "User" ];
       callback.__raw = ''
         function()
-          Snacks.toggle.inlay_hints():map("<localleader><localleader>uh", { silent = true, desc = "Toggle Inlay Hints" })
-          Snacks.toggle.diagnostics():map("<localleader><localleader>ud")
-          Snacks.toggle.dim():map("<localleader><localleader>uD", { silent = true, desc = "Toggle Dim" })
-          Snacks.toggle.option("wrap", { name = "Wrap" }):map("<localleader><localleader>uw")
-          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<localleader><localleader>uc")
+          Snacks.toggle.inlay_hints():map("<leader>uh", { silent = true, desc = "Toggle Inlay Hints" })
+          Snacks.toggle.diagnostics():map("<leader>ud")
+          Snacks.toggle.dim():map("<leader>uD", { silent = true, desc = "Toggle Dim" })
+          Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
         end
       '';
     }

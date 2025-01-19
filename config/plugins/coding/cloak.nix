@@ -26,7 +26,7 @@
   keymaps = [
     {
       mode = "n";
-      key = "<localleader><localleader>ue";
+      key = "<lleader>ue";
       action = "<cmd>CloakToggle<cr>";
       options = {
         silent = true;
