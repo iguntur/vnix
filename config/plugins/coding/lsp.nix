@@ -62,70 +62,120 @@
         # gI = { action = "implementation"; desc = "Goto Implementation"; };
         # gt = { action = "type_definition"; desc = "Goto Type Definition"; };
       };
-      extra = [
-        {
-          mode = "n";
-          key = "<leader>lr";
-          action = "<cmd>LspRestart<cr>";
-          options = {
-            silent = true;
-            desc = "Restart Engine (LSP)";
+      extra =
+        let
+          goto = direction: severity: {
+            __raw = ''
+              function()
+                vim.diagnostic.goto_${direction}({ severity = vim.diagnostic.severity.${severity} })
+              end
+            '';
           };
-        }
+        in
+        [
+          {
+            mode = "n";
+            key = "<leader>lr";
+            action = "<cmd>LspRestart<cr>";
+            options = {
+              silent = true;
+              desc = "Restart Engine (LSP)";
+            };
+          }
 
-        # --------------------------------------------------------------------------------
-        # Rename file (via snacks)
-        # --------------------------------------------------------------------------------
-        {
-          mode = "n";
-          key = "<leader>fR";
-          action.__raw = ''
-            function()
-              Snacks.rename.rename_file()
-            end
-          '';
-          options = {
-            silent = true;
-            desc = "Rename File";
-          };
-        }
+          # --------------------------------------------------------------------------------
+          # Diagnostics
+          # --------------------------------------------------------------------------------
+          {
+            mode = "n";
+            key = "]e";
+            action = goto "next" "ERROR";
+            options = {
+              silent = true;
+              desc = "Next Error";
+            };
+          }
+          {
+            mode = "n";
+            key = "[e";
+            action = goto "prev" "ERROR";
+            options = {
+              silent = true;
+              desc = "Previous Error";
+            };
+          }
+          {
+            mode = "n";
+            key = "]w";
+            action = goto "next" "WARN";
+            options = {
+              silent = true;
+              desc = "Next Warning";
+            };
+          }
+          {
+            mode = "n";
+            key = "[w";
+            action = goto "prev" "WARN";
+            options = {
+              silent = true;
+              desc = "Previous Warning";
+            };
+          }
 
-        # --------------------------------------------------------------------------------
-        # LSP references (via snacks)
-        # --------------------------------------------------------------------------------
-        {
-          mode = [
-            "n"
-            "t"
-          ];
-          key = "<M-n>"; # Alt-n
-          action.__raw = ''
-            function()
-              Snacks.words.jump(vim.v.count1, true)
-            end
-          '';
-          options = {
-            silent = true;
-            desc = "Next Reference";
-          };
-        }
-        {
-          mode = [
-            "n"
-            "t"
-          ];
-          key = "<M-p>"; # Alt-p
-          action.__raw = ''
-            function()
-              Snacks.words.jump(-vim.v.count1, true)
-            end
-          '';
-          options = {
-            silent = true;
-            desc = "Previous Reference";
-          };
-        }
-      ];
+          # --------------------------------------------------------------------------------
+          # Rename file (via snacks)
+          # --------------------------------------------------------------------------------
+          {
+            mode = "n";
+            key = "<leader>fR";
+            action.__raw = ''
+              function()
+                Snacks.rename.rename_file()
+              end
+            '';
+            options = {
+              silent = true;
+              desc = "Rename File";
+            };
+          }
+
+          # --------------------------------------------------------------------------------
+          # LSP references (via snacks)
+          # --------------------------------------------------------------------------------
+          {
+            mode = [
+              "n"
+              "t"
+            ];
+            key = "<M-n>"; # Alt-n
+            action.__raw = ''
+              function()
+                Snacks.words.jump(vim.v.count1, true)
+              end
+            '';
+            options = {
+              silent = true;
+              desc = "Next Reference";
+            };
+          }
+          {
+            mode = [
+              "n"
+              "t"
+            ];
+            key = "<M-p>"; # Alt-p
+            action.__raw = ''
+              function()
+                Snacks.words.jump(-vim.v.count1, true)
+              end
+            '';
+            options = {
+              silent = true;
+              desc = "Previous Reference";
+            };
+          }
+        ];
     };
 
     # --------------------------------------------------------------------------------
