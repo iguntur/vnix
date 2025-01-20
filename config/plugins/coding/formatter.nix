@@ -1,5 +1,9 @@
 { pkgs, lib, ... }:
 {
+  opts = {
+    formatexpr = "v:lua.require('conform').formatexpr()";
+  };
+
   plugins = {
     # --------------------------------------------------------------------------------
     # LSP Format
