@@ -31,15 +31,15 @@
           action = "goto_prev";
           desc = "Previous Diagnostic";
         };
-        "<leader>cd" = {
-          action = "open_float";
-          desc = "Previous Diagnostic";
-        };
+        # "<leader>[D" = {
+        #   action = "open_float";
+        #   desc = "Previous Diagnostic";
+        # };
       };
       lspBuf = {
         "<leader>cr" = {
           action = "rename";
-          desc = "Rename";
+          desc = "Code Rename";
         };
         # "<leader>ca" = {
         #   # mode = [ "n" "v" ];

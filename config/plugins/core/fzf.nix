@@ -374,34 +374,34 @@
         # --------------------------------------------------------------------------------
         # LSP
         # --------------------------------------------------------------------------------
-        "<leader>lca" = {
+        "<leader>ca" = {
           action = "lsp_code_actions";
           settings = {
             prompt = "❯ ";
           };
           options = {
             silent = true;
-            desc = "LSP Code Action";
+            desc = "Code Action";
           };
         };
-        "<leader>lds" = {
+        "<leader>cd" = {
           action = "lsp_document_symbol";
           settings = {
             prompt = "❯ ";
           };
           options = {
             silent = true;
-            desc = "LSP Document Symbol";
+            desc = "Document Symbol";
           };
         };
-        "<leader>lws" = {
+        "<leader>cw" = {
           action = "lsp_live_workspace_symbol";
           settings = {
             prompt = "❯ ";
           };
           options = {
             silent = true;
-            desc = "LSP Workspace Symbol";
+            desc = "Workspace Symbol";
           };
         };
 
