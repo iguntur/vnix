@@ -9,8 +9,8 @@
   diagnostics = {
     Error = " ";
     Warn = " ";
-    Hint = " ";
     Info = " ";
+    Hint = " ";
   };
   git = {
     added = " ";
