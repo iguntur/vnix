@@ -19,6 +19,14 @@
         enabled = true;
       };
     };
+
+    which-key.luaConfig.post = vnix.lua.mkRequire' "which-key" "add" [
+      {
+        __unkeyed-1 = "<leader>un";
+        group = "Notification";
+        icon = "󰎟 ";
+      }
+    ];
   };
 
   autoCmd = [
@@ -36,14 +44,6 @@
           Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
         end
       '';
-    }
-  ];
-
-  extraConfigLuaPost = vnix.lua.mkRequire' "which-key" "add" [
-    {
-      __unkeyed-1 = "<leader>un";
-      group = "Notification";
-      icon = "󰎟 ";
     }
   ];
 

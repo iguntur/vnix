@@ -5,19 +5,6 @@
     git
   ];
 
-  extraConfigLuaPost = vnix.lua.mkRequire' "which-key" "add" [
-    {
-      __unkeyed-1 = "<leader>gh";
-      group = "Hunk";
-      icon = " ";
-    }
-    {
-      __unkeyed-1 = "<leader>ga";
-      group = "Add";
-      icon = " ";
-    }
-  ];
-
   plugins = {
     fugitive = {
       enable = true;
@@ -88,6 +75,19 @@
           '';
       };
     };
+
+    which-key.luaConfig.post = vnix.lua.mkRequire' "which-key" "add" [
+      {
+        __unkeyed-1 = "<leader>gh";
+        group = "Hunk";
+        icon = " ";
+      }
+      {
+        __unkeyed-1 = "<leader>ga";
+        group = "Add";
+        icon = " ";
+      }
+    ];
   };
 
   keymaps = [
