@@ -10,7 +10,6 @@
   opts = {
     # shortmess:append("I") -- Disable Neovim welcome page
     # shortmess:append("Ws") -- Disable Neovim welcome page
-    # statuscolumn = [[%!v:lua.require('util.ui').statuscolumn()]]
     # wildcharm      = 4
     autoindent = true;
     background = "dark";

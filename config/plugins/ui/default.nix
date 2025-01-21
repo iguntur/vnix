@@ -3,6 +3,7 @@
   imports = [
     ./mini.nix
     ./snacks.nix
+    ./statuscolumn.nix
     ./window.nix
   ];
 
