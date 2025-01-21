@@ -14,6 +14,7 @@
     ./nvim-context-vt.nix
     ./sibling-swap.nix
     ./test.nix
+    ./todo-comments.nix
     ./treesitter.nix
     ./trouble.nix
   ];
