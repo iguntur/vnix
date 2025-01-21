@@ -9,6 +9,7 @@
     ./goto-linenumber.nix
     ./session.nix
     ./which-key.nix
+    ./yanky.nix
   ];
 
   plugins = {
