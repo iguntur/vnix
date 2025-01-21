@@ -27,7 +27,8 @@ in
         segments = [
           {
             text = [
-              part.fold
+              # part.fold
+              { __raw = "require('statuscol.builtin').foldfunc"; }
               part.space
             ]; # fold
             click = "v:lua.ScFa";

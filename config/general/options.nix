@@ -33,15 +33,6 @@
     encoding = "utf-8";
     expandtab = false; # use tabs instead
     fileencoding = "utf-8";
-    fillchars = {
-      foldopen = "";
-      foldclose = "";
-      fold = " ";
-      foldsep = " ";
-      diff = "╱";
-      eob = " ";
-    };
-    foldlevel = 99;
     hlsearch = true; # highlight search result
     ignorecase = true; # ignore case
     inccommand = "nosplit"; # preview incremental substitute

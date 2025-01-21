@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
+    ./fold.nix
     ./move.nix
     ./text-case.nix
     ./treesj.nix
