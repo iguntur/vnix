@@ -161,7 +161,17 @@
             desc = "Find Files (cwd)";
           };
         };
-        "<leader>sF" = {
+        "<leader>ff" = {
+          action = "files";
+          settings = {
+            prompt = "❯ ";
+          };
+          options = {
+            silent = true;
+            desc = "Find Files (cwd)";
+          };
+        };
+        "<leader>fF" = {
           action = "files";
           settings = {
             # cwd_prompt = false;
@@ -175,7 +185,7 @@
             desc = "Files Project Root Directory (Upward)";
           };
         };
-        "<leader>sf" = {
+        "<leader>f." = {
           action = "files";
           settings = {
             prompt = "❯ ";
@@ -184,6 +194,30 @@
           options = {
             silent = true;
             desc = "Files Relative Working File";
+          };
+        };
+
+        # --------------------------------------------------------------------------------
+        # Git Files
+        # --------------------------------------------------------------------------------
+        "<leader>gf" = {
+          action = "git_files";
+          settings = {
+            prompt = "❯ ";
+          };
+          options = {
+            silent = true;
+            desc = "Git Files";
+          };
+        };
+        "<leader>gs" = {
+          action = "git_status";
+          settings = {
+            prompt = "❯ ";
+          };
+          options = {
+            silent = true;
+            desc = "Git Status";
           };
         };
 
