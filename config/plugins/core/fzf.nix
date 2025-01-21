@@ -419,7 +419,7 @@
           };
         };
         "<leader>cd" = {
-          action = "lsp_document_symbol";
+          action = "lsp_document_symbols";
           settings = {
             prompt = "❯ ";
           };
@@ -429,7 +429,7 @@
           };
         };
         "<leader>cw" = {
-          action = "lsp_live_workspace_symbol";
+          action = "lsp_live_workspace_symbols";
           settings = {
             prompt = "❯ ";
           };
