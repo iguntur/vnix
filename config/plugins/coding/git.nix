@@ -112,5 +112,12 @@
       options.silent = true;
       options.desc = "Git add all";
     }
+    {
+      mode = "n";
+      key = "<leader>ga%";
+      action = "<cmd>Git add %<cr>";
+      options.silent = true;
+      options.desc = "Git add current file";
+    }
   ];
 }
