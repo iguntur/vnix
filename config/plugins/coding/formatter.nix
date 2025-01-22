@@ -55,8 +55,23 @@
             "golines"
           ];
           javascript = {
-            __unkeyed-1 = "prettierd";
-            __unkeyed-2 = "prettier";
+            __unkeyed-1 = "biome";
+            __unkeyed-2 = "prettierd";
+            __unkeyed-3 = "prettier";
+            timeout_ms = 2000;
+            stop_after_first = true;
+          };
+          typescript = {
+            __unkeyed-1 = "biome";
+            __unkeyed-2 = "prettierd";
+            __unkeyed-3 = "prettier";
+            timeout_ms = 2000;
+            stop_after_first = true;
+          };
+          json = {
+            __unkeyed-1 = "biome";
+            __unkeyed-2 = "prettierd";
+            __unkeyed-3 = "prettier";
             timeout_ms = 2000;
             stop_after_first = true;
           };
@@ -126,6 +141,7 @@
     isort # Python utility / library to sort Python imports
 
     # Typescript, Javascript, ...
+    biome # Toolchain of the web
     nodePackages.prettier # Prettier is an opinionated code formatter
     prettierd # Prettier, as a daemon, for improved formatting speed
   ];
