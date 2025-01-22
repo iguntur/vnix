@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, ... }:
 {
   plugins = {
     blink-cmp = {
@@ -8,6 +8,7 @@
           use_nvim_cmp_as_default = false;
           nerd_font_variant = "mono";
         };
+
         completion = {
           accept = {
             auto_brackets = {
@@ -30,9 +31,11 @@
             enabled = true;
           };
         };
+
         signature = {
           enabled = true; # Experimental signature help support
         };
+
         sources = {
           cmdline = [ ];
           default = [
@@ -57,6 +60,11 @@
             };
           };
         };
+
+        snippets = {
+          preset = if config.plugins.luasnip.enable then "luasnip" else "default";
+        };
+
         keymap = {
           preset = "default";
           "<Down>" = [

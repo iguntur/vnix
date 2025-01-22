@@ -14,6 +14,7 @@
     ./lsp.nix
     ./nvim-context-vt.nix
     ./sibling-swap.nix
+    ./snippet.nix
     ./test.nix
     ./todo-comments.nix
     ./treesitter.nix
