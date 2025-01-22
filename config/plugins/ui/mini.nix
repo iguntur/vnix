@@ -6,7 +6,24 @@
     # --------------------------------------------------------------------------------
     mini.mockDevIcons = true;
     mini.modules = {
-      icons.enable = true;
+      icons = {
+        file = {
+          ".keep" = {
+            glyph = "󰊢";
+            hl = "MiniIconsGrey";
+          };
+          "devcontainer.json" = {
+            glyph = "";
+            hl = "MiniIconsAzure";
+          };
+        };
+        filetype = {
+          dotenv = {
+            glyph = "";
+            hl = "MiniIconsYellow";
+          };
+        };
+      };
 
       indentscope = {
         # symbol = "▏";
