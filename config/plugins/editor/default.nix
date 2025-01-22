@@ -14,6 +14,19 @@
     };
 
     mini.modules = {
+      ai = {
+        n_lines = 500;
+        # search_method = "cover_or_next";
+      };
+
+      pairs = {
+        modes = {
+          insert = true;
+          command = true;
+          terminal = false;
+        };
+      };
+
       surround = {
         # Module mappings. Use `""` (empty string) to disable one.
         mappings = {
