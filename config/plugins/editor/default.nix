@@ -3,8 +3,8 @@
   imports = [
     ./fold.nix
     ./move.nix
+    ./split-join.nix
     ./text-case.nix
-    ./treesj.nix
     ./vim-table-mode.nix
   ];
 

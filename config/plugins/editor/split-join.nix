@@ -1,17 +1,30 @@
-{ luaRaw, ... }:
+{
+  config,
+  lib,
+  luaRaw,
+  ...
+}:
 {
   plugins = {
     # join and split text line
     treesj = {
-      enable = true;
+      # enable = true;
       settings = {
         use_default_keymaps = false;
         max_join_length = 180;
       };
     };
+
+    mini.modules = {
+      splitjoin = {
+        mappings = {
+          toggle = "gS";
+        };
+      };
+    };
   };
 
-  keymaps = [
+  keymaps = lib.mkIf config.plugins.treesj.enable [
     {
       mode = "n";
       key = "<leader>cj";
