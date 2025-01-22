@@ -7,6 +7,7 @@
     ./flash.nix
     ./fzf.nix
     ./goto-linenumber.nix
+    ./harpoon.nix
     ./session.nix
     ./which-key.nix
     ./yanky.nix
