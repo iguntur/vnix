@@ -1,7 +1,7 @@
 {
   imports = [
+    ./base
     ./coding
-    ./core
     ./editor
     ./ui
   ];

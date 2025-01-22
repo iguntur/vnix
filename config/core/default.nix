@@ -1,5 +1,7 @@
 {
   imports = [
+    ./keymaps
+
     ./autocmd.nix
     ./colorschemes.nix
     ./extra-config.nix
@@ -15,7 +17,7 @@
   #   #   enable = true;
   #   #   standalonePlugins = [
   #   #     # "persistent-breakpoints"
-  #   #     # "dap" 
+  #   #     # "dap"
   #   #   ];
   #   # };
   # };
