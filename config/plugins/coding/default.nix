@@ -15,6 +15,7 @@
     ./neogen.nix
     ./nvim-context-vt.nix
     ./refactoring.nix
+    ./schemastore.nix
     ./sibling-swap.nix
     ./snippet.nix
     ./tailwind-tools.nix
