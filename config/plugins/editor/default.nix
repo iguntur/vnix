@@ -5,7 +5,7 @@
     ./move.nix
     ./split-join.nix
     ./text-case.nix
-    ./vim-table-mode.nix
+    # ./vim-table-mode.nix
   ];
 
   plugins = {
