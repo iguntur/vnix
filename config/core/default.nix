@@ -11,14 +11,12 @@
   editorconfig.enable = true;
   luaLoader.enable = true;
 
-  # performance = {
-  #   # byteCompileLua.enable = true;
-  #   # combinePlugins = {
-  #   #   enable = true;
-  #   #   standalonePlugins = [
-  #   #     # "persistent-breakpoints"
-  #   #     # "dap"
-  #   #   ];
-  #   # };
-  # };
+  performance = {
+    byteCompileLua.enable = true;
+    # combinePlugins = {
+    #   enable = true;
+    #   standalonePlugins = [
+    #   ];
+    # };
+  };
 }
