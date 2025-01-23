@@ -9,6 +9,7 @@
     ./goto-linenumber.nix
     ./harpoon.nix
     ./session.nix
+    ./undotree.nix
     ./which-key.nix
     ./yanky.nix
   ];

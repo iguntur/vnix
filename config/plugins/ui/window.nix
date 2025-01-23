@@ -14,7 +14,10 @@ let
     "Outline"
     "aerial"
     "dbui"
+    "undotree"
+    "diff"
   ];
+
   ignore-buftypes = [
     "nofile"
     "prompt"
