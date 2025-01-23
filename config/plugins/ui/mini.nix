@@ -6,6 +6,7 @@
     # --------------------------------------------------------------------------------
     mini.mockDevIcons = true;
     mini.modules = {
+      hipatterns = { };
       icons = {
         file = {
           ".keep" = {
