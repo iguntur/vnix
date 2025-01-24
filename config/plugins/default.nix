@@ -5,5 +5,6 @@
     ./editor
     ./ft
     ./ui
+    ./extra
   ];
 }

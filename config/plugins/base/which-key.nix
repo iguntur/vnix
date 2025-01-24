@@ -74,6 +74,11 @@
             icon = "󰿘 ";
           }
           {
+            __unkeyed-1 = "<leader>n";
+            group = "Neorg";
+            icon = " ";
+          }
+          {
             __unkeyed-1 = "<leader>q";
             group = "Quit";
             icon = "󱑜 ";
