@@ -43,5 +43,10 @@
         show_modified = true; # whether to replace file icon with the modified symbol when buffer is modified.
       };
     };
+
+    fidget = {
+      enable = true;
+      settings = { };
+    };
   };
 }
