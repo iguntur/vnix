@@ -78,6 +78,15 @@
               desc = "Restart Engine (LSP)";
             };
           }
+          {
+            mode = "n";
+            key = "<leader>lI";
+            action = "<cmd>LspInfo<cr>";
+            options = {
+              silent = true;
+              desc = "Info (LSP)";
+            };
+          }
 
           # --------------------------------------------------------------------------------
           # Diagnostics
