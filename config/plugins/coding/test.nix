@@ -26,21 +26,12 @@
       # ------------------------------------------------------------------------------
       # Test adapters
       # ------------------------------------------------------------------------------
-      adapters = {
-        golang = {
-          enable = true;
-          settings = {
-            # go_test_args = [ "-v" "-race" "-count=1" "-timeout=60s" ]; # default
-            dap_go_enabled = true;
-          };
-        };
-      };
+      # configured by per ft plugins
+      # adapters = {
+      #   golang = { }; # see: config/ft/go.nix
+      # };
     };
   };
-
-  # extraPlugins = with pkgs.vimPlugins; [ ];
-  # extraConfigLua = ''
-  # '';
 
   keymaps = [
     # ------------------------------------------------------------------------------

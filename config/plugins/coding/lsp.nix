@@ -1,10 +1,5 @@
 { lib, pkgs, ... }:
 {
-  extraPackages = with pkgs; [
-    golangci-lint
-    # golangci-lint-langserver
-  ];
-
   plugins = {
     # --------------------------------------------------------------------------------
     # LSP Core
@@ -65,11 +60,12 @@
       extra =
         let
           goto = direction: severity: {
-            __raw = ''
-              function()
-                vim.diagnostic.goto_${direction}({ severity = vim.diagnostic.severity.${severity} })
-              end
-            '';
+            __raw = # lua
+              ''
+                function()
+                  vim.diagnostic.goto_${direction}({ severity = vim.diagnostic.severity.${severity} })
+                end
+              '';
           };
         in
         [
@@ -190,8 +186,6 @@
       dockerls.enable = true;
       # earthlyls.enable = true;
       emmet_ls.enable = true;
-      golangci_lint_ls.enable = true;
-      gopls.enable = true;
       html.enable = true;
       htmx.enable = true;
       java_language_server.enable = false;
@@ -214,14 +208,6 @@
       helm_ls = {
         enable = true;
         filetypes = [ "helm" ];
-      };
-
-      nixd = {
-        enable = true;
-        settings = {
-          formatting.command = [ "nixpkgs-fmt" ];
-          nixpkgs.expr = "import <nixpkgs> {}";
-        };
       };
 
       yamlls = {

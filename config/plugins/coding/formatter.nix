@@ -49,11 +49,6 @@
             "rustywind"
           ];
           # cpp = [ "clang_format" ];
-          go = [
-            "gofumpt"
-            "goimports-reviser"
-            "golines"
-          ];
           javascript = {
             __unkeyed-1 = "biome";
             __unkeyed-2 = "prettierd";
@@ -76,7 +71,6 @@
             stop_after_first = true;
           };
           lua = [ "stylua" ];
-          nix = [ "nixfmt" ];
           php = [ "pint" ];
           python = [
             "isort"
@@ -103,9 +97,6 @@
             };
           };
           squeeze_blanks.command = lib.getExe' pkgs.coreutils "cat";
-          golines = {
-            prepend_args = [ "--max-len=120" ];
-          };
         };
         format_on_save = {
           timeout_ms = 500;
@@ -121,7 +112,6 @@
   extraPackages = with pkgs; [
     blade-formatter # Laravel Blade template formatter
     codespell # Fix common misspellings in source code
-    nixfmt-rfc-style # (nixfmt) Official formatter for Nix code
     rustywind # A tool for formatting Tailwind CSS classes.
     stylua # Opinionated Lua code formatter
     templ # Language for writing HTML user interfaces in Go
@@ -130,11 +120,6 @@
     shellcheck # Shell script analysis tool
     shellharden # Corrective bash syntax highlighter
     shfmt # Shell parser and formatter
-
-    # Golang
-    gofumpt # Stricter gofmt
-    goimports-reviser # Right imports sorting & code formatting tool (goimports alternative)
-    golines # Golang formatter that fixes long lines
 
     # Python
     black # Uncompromising Python code formatter

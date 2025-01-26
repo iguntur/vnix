@@ -1,13 +1,6 @@
-{
-  vnix,
-  lib,
-  pkgs,
-  luaRaw,
-  ...
-}:
+{ vnix, lib, pkgs, luaRaw, ... }:
 let
   inherit (vnix) icons;
-  inherit (lib.nixvim) toLuaObject;
 
   settings = {
     persistent-breakpoints = {
@@ -24,8 +17,6 @@ in
       extensions = {
         dap-ui.enable = true;
         dap-virtual-text.enable = true;
-        dap-go.enable = true;
-        # dap-python.enable = true;
       };
       signs = {
         dapBreakpoint.text = icons.dap.breakpoint;
@@ -51,25 +42,27 @@ in
     })
   ];
 
-  extraConfigLua = ''
-    require("persistent-breakpoints").setup(${toLuaObject settings.persistent-breakpoints})
+  extraConfigLua = lib.strings.concatStringsSep "\n" [
+    (vnix.lua.mkRequire' "persistent-breakpoints" "setup" settings.persistent-breakpoints)
+    #lua
+    ''
+      -- setup dap event listeners {{{
+      do
+        require("dap").listeners.after.event_initialized["dapui_config"] = function()
+          require("dapui").open({})
+        end
 
-    -- setup dap event listeners {{{
-    do
-      require("dap").listeners.after.event_initialized["dapui_config"] = function()
-        require("dapui").open({})
-      end
+        require("dap").listeners.before.event_terminated["dapui_config"] = function()
+          require("dapui").close({})
+        end
 
-      require("dap").listeners.before.event_terminated["dapui_config"] = function()
-        require("dapui").close({})
+        require("dap").listeners.before.event_exited["dapui_config"] = function()
+          require("dapui").close({})
+        end
       end
-
-      require("dap").listeners.before.event_exited["dapui_config"] = function()
-        require("dapui").close({})
-      end
-    end
-    -- }}}
-  '';
+      -- }}}
+    ''
+  ];
 
   keymaps = [
     # ------------------------------------------------------------------------------
