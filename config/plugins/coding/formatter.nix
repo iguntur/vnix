@@ -70,7 +70,6 @@
             timeout_ms = 2000;
             stop_after_first = true;
           };
-          lua = [ "stylua" ];
           php = [ "pint" ];
           python = [
             "isort"
@@ -113,7 +112,6 @@
     blade-formatter # Laravel Blade template formatter
     codespell # Fix common misspellings in source code
     rustywind # A tool for formatting Tailwind CSS classes.
-    stylua # Opinionated Lua code formatter
     templ # Language for writing HTML user interfaces in Go
 
     # shell
