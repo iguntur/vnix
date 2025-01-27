@@ -1,5 +1,9 @@
 { pkgs, lib, ... }:
 {
+  globals = {
+    slow_format.__raw = "{}";
+  };
+
   opts = {
     formatexpr = "v:lua.require('conform').formatexpr()";
   };
@@ -49,22 +53,8 @@
             "rustywind"
           ];
           # cpp = [ "clang_format" ];
-          javascript = {
-            __unkeyed-1 = "biome";
-            __unkeyed-2 = "prettierd";
-            __unkeyed-3 = "prettier";
-            timeout_ms = 2000;
-            stop_after_first = true;
-          };
-          typescript = {
-            __unkeyed-1 = "biome";
-            __unkeyed-2 = "prettierd";
-            __unkeyed-3 = "prettier";
-            timeout_ms = 2000;
-            stop_after_first = true;
-          };
           json = {
-            __unkeyed-1 = "biome";
+            __unkeyed-1 = "biome-check";
             __unkeyed-2 = "prettierd";
             __unkeyed-3 = "prettier";
             timeout_ms = 2000;
@@ -97,13 +87,38 @@
           };
           squeeze_blanks.command = lib.getExe' pkgs.coreutils "cat";
         };
-        format_on_save = {
-          timeout_ms = 500;
-          lsp_format = "fallback";
-        };
-        format_after_save = {
-          lsp_format = "fallback";
-        };
+        format_on_save = /* lua */ ''
+          function(bufnr)
+            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+              return
+            end
+
+            if vim.g.slow_format[bufnr] then
+              return
+            end
+
+            local function on_format(err)
+              if err and err:match("timeout$") then
+                vim.g.slow_format[bufnr] = true
+              end
+            end
+
+            return { timeout_ms = 500, lsp_fallback = true }, on_format
+          end
+        '';
+        format_after_save = /* lua */ ''
+          function(bufnr)
+            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+              return
+            end
+
+            if not vim.g.slow_format[bufnr] then
+              return
+            end
+
+            return { lsp_fallback = true }
+          end
+        '';
       };
     };
   };
@@ -123,7 +138,6 @@
     black # Uncompromising Python code formatter
     isort # Python utility / library to sort Python imports
 
-    # Typescript, Javascript, ...
     biome # Toolchain of the web
     nodePackages.prettier # Prettier is an opinionated code formatter
     prettierd # Prettier, as a daemon, for improved formatting speed

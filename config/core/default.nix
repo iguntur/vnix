@@ -12,7 +12,7 @@
   luaLoader.enable = true;
 
   performance = {
-    byteCompileLua.enable = true;
+    # byteCompileLua.enable = true;
     # combinePlugins = {
     #   enable = true;
     #   standalonePlugins = [

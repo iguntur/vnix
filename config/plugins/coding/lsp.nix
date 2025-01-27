@@ -209,7 +209,6 @@
       taplo.enable = true;
       templ.enable = true;
       terraformls.enable = true;
-      # ts_ls.enable = true;
       # veryl_ls.enable = true;
       zls.enable = false;
 
