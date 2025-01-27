@@ -61,10 +61,6 @@
             stop_after_first = true;
           };
           php = [ "pint" ];
-          python = [
-            "isort"
-            "black"
-          ];
           sh = [
             "shellcheck"
             "shellharden"
@@ -133,10 +129,6 @@
     shellcheck # Shell script analysis tool
     shellharden # Corrective bash syntax highlighter
     shfmt # Shell parser and formatter
-
-    # Python
-    black # Uncompromising Python code formatter
-    isort # Python utility / library to sort Python imports
 
     biome # Toolchain of the web
     nodePackages.prettier # Prettier is an opinionated code formatter

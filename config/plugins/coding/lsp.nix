@@ -201,8 +201,6 @@
       jdtls.enable = false;
       jsonls.enable = true;
       # nushell.enable = true;
-      # pylsp.enable = true;
-      # pylyzer.enable = false;
       ruff_lsp.enable = false;
       # superhtml.enable = true;
       tailwindcss.enable = true;
