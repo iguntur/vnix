@@ -9,6 +9,18 @@
     ./extra
   ];
 
+  editorconfig.enable = true;
+  luaLoader.enable = true;
+
+  performance = {
+    # byteCompileLua.enable = true;
+    # combinePlugins = {
+    #   enable = true;
+    #   standalonePlugins = [
+    #   ];
+    # };
+  };
+
   plugins = {
     mini = {
       enable = true;
