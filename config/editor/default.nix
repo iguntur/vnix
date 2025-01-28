@@ -1,11 +1,20 @@
 { config, pkgs, ... }:
 {
   imports = [
+    ./bookmarks.nix
+    ./cmp.nix
+    ./file-tree.nix
+    ./flash.nix
     ./fold.nix
+    ./fzf.nix
+    ./harpoon.nix
     ./move.nix
+    ./session.nix
     ./split-join.nix
     ./text-case.nix
+    ./undotree.nix
     # ./vim-table-mode.nix
+    ./yanky.nix
   ];
 
   plugins = {
