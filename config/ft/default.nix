@@ -6,6 +6,7 @@
     ./css.nix
     ./go.nix
     ./java.nix
+    ./javascript.nix
     ./lua.nix
     ./nix.nix
     ./php.nix
@@ -14,7 +15,6 @@
     ./shell.nix
     ./svelte.nix
     ./templ.nix
-    ./typescript.nix
     ./zig.nix
   ];
 }
