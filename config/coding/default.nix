@@ -2,6 +2,7 @@
 {
   imports = [
     ./aerial.nix
+    ./analysis.nix
     ./cloak.nix
     ./comments.nix
     ./database.nix
@@ -10,7 +11,6 @@
     ./formatter.nix
     ./git.nix
     ./lazydev.nix
-    ./linter.nix
     ./lsp.nix
     ./neogen.nix
     ./nvim-context-vt.nix
