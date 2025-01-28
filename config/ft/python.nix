@@ -1,6 +1,9 @@
 { lib, pkgs, ... }:
 {
   plugins = {
+    # ------------------------------------------------------------------------------
+    # LSP
+    # ------------------------------------------------------------------------------
     lsp.servers = {
       # A fast, feature-rich static code analyzer & language server for Python
       # pylyzer = {
@@ -23,15 +26,27 @@
       ruff.enable = true;
     };
 
+    # ------------------------------------------------------------------------------
+    # Formatter
+    # ------------------------------------------------------------------------------
     conform-nvim.settings.formatters_by_ft = {
       python = [
         "isort"
         # "black"
       ];
     };
+
+    # ------------------------------------------------------------------------------
+    # Debug
+    # ------------------------------------------------------------------------------
+    dap-python = {
+      enable = true;
+      settings = { };
+    };
   };
 
   extraPackages = with pkgs; [
+    # Formatters
     black # Uncompromising Python code formatter
     isort # Python utility / library to sort Python imports
   ];
