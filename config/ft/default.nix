@@ -1,5 +1,7 @@
 {
   imports = [
+    ./infra.nix
+
     ./go.nix
     ./lua.nix
     ./nix.nix

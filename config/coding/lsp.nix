@@ -187,12 +187,10 @@
     # LSP servers
     # --------------------------------------------------------------------------------
     lsp.servers = {
-      ansiblels.enable = true;
       bashls.enable = true;
       # ccls.enable = true;
       cssls.enable = true;
       clangd.enable = true;
-      dockerls.enable = true;
       # earthlyls.enable = true;
       emmet_ls.enable = true;
       html.enable = true;
@@ -206,14 +204,6 @@
       tailwindcss.enable = true;
       taplo.enable = true;
       templ.enable = true;
-      terraformls.enable = true;
-      # veryl_ls.enable = true;
-      zls.enable = false;
-
-      helm_ls = {
-        enable = true;
-        filetypes = [ "helm" ];
-      };
 
       yamlls = {
         enable = true;
