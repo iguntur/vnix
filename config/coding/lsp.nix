@@ -187,23 +187,12 @@
     # LSP servers
     # --------------------------------------------------------------------------------
     lsp.servers = {
-      bashls.enable = true;
-      # ccls.enable = true;
-      cssls.enable = true;
-      clangd.enable = true;
-      # earthlyls.enable = true;
       emmet_ls.enable = true;
       html.enable = true;
       htmx.enable = true;
-      java_language_server.enable = false;
-      jdtls.enable = false;
       jsonls.enable = true;
-      # nushell.enable = true;
-      ruff_lsp.enable = false;
       # superhtml.enable = true;
-      tailwindcss.enable = true;
       taplo.enable = true;
-      templ.enable = true;
 
       yamlls = {
         enable = true;

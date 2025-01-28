@@ -43,16 +43,6 @@
             "trim_whitespace"
             "trim_newlines"
           ];
-          bash = [
-            "shellcheck"
-            "shellharden"
-            "shfmt"
-          ];
-          blade = [
-            "blade-formatter"
-            "rustywind"
-          ];
-          # cpp = [ "clang_format" ];
           json = {
             __unkeyed-1 = "biome-check";
             __unkeyed-2 = "prettierd";
@@ -60,20 +50,6 @@
             timeout_ms = 2000;
             stop_after_first = true;
           };
-          php = [ "pint" ];
-          sh = [
-            "shellcheck"
-            "shellharden"
-            "shfmt"
-          ];
-          svelte = [
-            "prettierd"
-            "rustywind"
-          ];
-          templ = [
-            "templ"
-            "rustywind"
-          ];
         };
         formatters = {
           injected = {
@@ -120,16 +96,7 @@
   };
 
   extraPackages = with pkgs; [
-    blade-formatter # Laravel Blade template formatter
     codespell # Fix common misspellings in source code
-    rustywind # A tool for formatting Tailwind CSS classes.
-    templ # Language for writing HTML user interfaces in Go
-
-    # shell
-    shellcheck # Shell script analysis tool
-    shellharden # Corrective bash syntax highlighter
-    shfmt # Shell parser and formatter
-
     biome # Toolchain of the web
     nodePackages.prettier # Prettier is an opinionated code formatter
     prettierd # Prettier, as a daemon, for improved formatting speed
