@@ -96,12 +96,17 @@
     # ------------------------------------------------------------------------------
     # Debug
     # ------------------------------------------------------------------------------
-    dap.extensions = {
-      dap-go.enable = true;
+    dap-go = {
+      enable = true;
+      settings = {
+        # delve = { };
+      };
     };
   };
 
   extraPackages = with pkgs; [
+    delve # debugger for the Go programming language
+
     # Linter
     golangci-lint
     # golangci-lint-langserver

@@ -14,10 +14,6 @@ in
       enable = true;
       adapters = { };
       configurations = { };
-      extensions = {
-        dap-ui.enable = true;
-        dap-virtual-text.enable = true;
-      };
       signs = {
         dapBreakpoint.text = icons.dap.breakpoint;
         dapBreakpointCondition.text = icons.dap.breakpoint-condition;
@@ -25,8 +21,10 @@ in
         dapLogPoint.text = icons.dap.log-point;
         dapStopped.text = icons.dap.stopped;
       };
-      extraOptions = { };
+      settings = { };
     };
+    dap-ui.enable = true;
+    dap-virtual-text.enable = true;
   };
 
   extraPlugins = with pkgs.vimPlugins; [
