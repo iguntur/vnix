@@ -2,6 +2,8 @@
 {
   plugins.avante = {
     enable = true;
+    # https://github.com/nvim-neorocks/lz.n#user-events
+    lazyLoad.settings.event = [ "DeferredUIEnter" ];
     settings = {
       # auto_suggestions_frequency = "claude";
       # provider = "claude"; # The LLM provider ("claude", "openai", "azure", …)
