@@ -13,6 +13,7 @@
     ./git.nix
     ./lazydev.nix
     ./lsp.nix
+    ./lz-n.nix
     ./neogen.nix
     ./nvim-context-vt.nix
     ./refactoring.nix
