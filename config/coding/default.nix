@@ -3,6 +3,7 @@
   imports = [
     ./aerial.nix
     ./analysis.nix
+    ./avante.nix
     ./cloak.nix
     ./comments.nix
     ./database.nix
