@@ -33,6 +33,8 @@ in
           typescriptreact = tsls-options;
         };
       };
+
+      # eslint.enable = true;
     };
 
     conform-nvim.settings.formatters_by_ft = {
