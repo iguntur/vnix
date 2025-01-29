@@ -2,7 +2,6 @@
 {
   plugins.lazydev = {
     enable = true;
-    lazyLoad.settings.ft = "lua";
     settings = {
       library = [
         {
