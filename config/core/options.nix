@@ -43,8 +43,8 @@
     list = true; # show some invisible characters (tabs...
     listchars = {
       tab = "│ "; # "│·"; # "▸ ";
-      trail = "∙"; # "·";
-      nbsp = "∙";
+      # trail = "∙"; # "·";
+      # nbsp = "∙";
       # eol = "↴"; eol = '↲'; };
     };
     mouse = "a"; # enable mouse mode
