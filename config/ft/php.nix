@@ -1,18 +1,25 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, vnix, ... }:
 {
   plugins = {
-    lsp.servers = { };
+    lsp.servers = {
+      # intelephense = {
+      #   enable = true;
+      #   package = pkgs.intelephense;
+      # };
+      phpactor.enable = true;
+    };
 
     conform-nvim.settings.formatters_by_ft = {
-      blade = [
-        "blade-formatter"
+      php = [
+        "pint"
         "rustywind"
       ];
-      php = [ "pint" ];
     };
   };
 
   extraPackages = with pkgs; [
-    blade-formatter # Laravel Blade template formatter
+    php84 # HTML-embedded scripting language
+    # php84Packages.composer # Dependency Manager for PHP
+    # pint
   ];
 }

@@ -1,7 +1,5 @@
 {
   imports = [
-    ./infra.nix
-
     ./clang.nix
     ./css.nix
     ./go.nix
@@ -16,5 +14,8 @@
     ./svelte.nix
     ./templ.nix
     ./zig.nix
+
+    ./infra.nix
+    ./laravel.nix
   ];
 }
