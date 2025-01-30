@@ -8,6 +8,7 @@
           nixpkgs.expr = "import <nixpkgs> {}";
           diagnostic.suppress = [
             "sema-unused-def-lambda-noarg-formal"
+            "sema-extra-with"
           ];
           # formatting.command = [
           #   # "nixfmt"
