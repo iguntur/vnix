@@ -29,8 +29,7 @@
             module = import ./config; # import the module directly
             # You can use `extraSpecialArgs` to pass additional arguments to your module files
             extraSpecialArgs = {
-              vnix.icons = import ./lib/icons.nix;
-              vnix.lua = import ./lib/lua.nix { inherit lib; };
+              vnix = import ./lib/vnix.nix { inherit lib pkgs; };
               luaRaw = import ./lib/fn.nix { inherit lib; };
             };
           };
