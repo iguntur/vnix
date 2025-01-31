@@ -9,6 +9,7 @@
     ./fzf.nix
     ./harpoon.nix
     ./move.nix
+    ./neoclip.nix
     ./session.nix
     ./split-join.nix
     ./text-case.nix
