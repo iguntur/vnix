@@ -57,30 +57,20 @@
           "path"
           "snippets"
           "buffer"
-
           # community
-          "lazydev"
           "emoji"
           "ripgrep"
-        ];
+        ]
+        ++ lib.optionals config.plugins.render-markdown.enable [ "markdown" ]
+        ++ lib.optionals config.plugins.lazydev.enable [ "lazydev" ];
         # ++ lib.optionals config.plugins.avante.enable [
         #   "avante_commands"
         #   "avante_files"
         #   "avante_mentions"
-        # ];
+        # ]
         providers = {
-          lazydev = {
-            name = "LazyDev";
-            module = "lazydev.integrations.blink";
-            # make lazydev completions top priority (see `:h blink.cmp`)
-            score_offset = 100;
-          };
           buffer = {
             score_offset = -7;
-          };
-          lsp = {
-            fallbacks = [ ];
-            # score_offset = 4;
           };
           emoji = {
             name = "Emoji";
@@ -91,6 +81,21 @@
             name = "Ripgrep";
             module = "blink-ripgrep";
             score_offset = 1;
+          };
+          lsp = {
+            fallbacks = [ ];
+            # score_offset = 4;
+          };
+          lazydev = lib.mkIf config.plugins.lazydev.enable {
+            name = "LazyDev";
+            module = "lazydev.integrations.blink";
+            # make lazydev completions top priority (see `:h blink.cmp`)
+            score_offset = 100;
+          };
+          markdown = lib.mkIf config.plugins.render-markdown.enable {
+            name = "RenderMarkdown";
+            module = "render-markdown.integ.blink";
+            fallbacks = [ "lsp" ];
           };
         };
       };

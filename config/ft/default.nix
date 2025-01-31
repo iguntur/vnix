@@ -6,6 +6,7 @@
     ./java.nix
     ./javascript.nix
     ./lua.nix
+    ./markdown.nix
     ./nix.nix
     ./php.nix
     ./python.nix
