@@ -1,6 +1,8 @@
 { lib, pkgs, ... }:
 {
   plugins = {
+    lsp.servers.marksman.enable = true;
+
     markdown-preview = {
       enable = true; # command: MarkdownPreview
       settings = { };
