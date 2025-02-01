@@ -1,7 +1,9 @@
 { lib, pkgs, ... }:
 {
   plugins = {
-    lsp.servers = { };
+    lsp.servers.svelte = {
+      enable = true;
+    };
 
     conform-nvim.settings.formatters_by_ft = {
       svelte = [
