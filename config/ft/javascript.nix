@@ -1,47 +1,98 @@
-{ lib, pkgs, ... }:
-let
-  formatter = {
-    __unkeyed-1 = "biome-check";
-    __unkeyed-2 = "prettierd";
-    __unkeyed-3 = "prettier";
-    timeout_ms = 2000;
-    stop_after_first = true;
-  };
-
-  tsls-options = {
-    inlayHints = {
-      includeInlayParameterNameHints = "all"; # 'none' | 'literals' | 'all'
-      includeInlayParameterNameHintsWhenArgumentMatchesName = true;
-      includeInlayVariableTypeHints = true;
-      includeInlayFunctionParameterTypeHints = true;
-      includeInlayVariableTypeHintsWhenTypeMatchesName = true;
-      includeInlayPropertyDeclarationTypeHints = true;
-      includeInlayFunctionLikeReturnTypeHints = true;
-      includeInlayEnumMemberValueHints = true;
-    };
-  };
-in
+{ config, lib, pkgs, vnix, ... }:
 {
   plugins = {
     lsp.servers = {
+      # eslint.enable = true;
       ts_ls = {
         enable = true;
-        settings = {
-          javascript = tsls-options;
-          typescript = tsls-options;
-          javascriptreact = tsls-options;
-          typescriptreact = tsls-options;
+        settings = rec {
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all"; # 'none' | 'literals' | 'all'
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true;
+              includeInlayVariableTypeHints = true;
+              includeInlayFunctionParameterTypeHints = true;
+              includeInlayVariableTypeHintsWhenTypeMatchesName = true;
+              includeInlayPropertyDeclarationTypeHints = true;
+              includeInlayFunctionLikeReturnTypeHints = true;
+              includeInlayEnumMemberValueHints = true;
+            };
+          };
+          javascript = typescript;
+          typescriptreact = typescript;
+          javascriptreact = typescript;
         };
       };
 
-      # eslint.enable = true;
+      # LSP wrapper for typescript extension of vscode
+      vtsls = {
+        enable = true;
+        filetypes = [
+          "javascript"
+          "javascriptreact"
+          "javascript.jsx"
+          "typescript"
+          "typescriptreact"
+          "typescript.tsx"
+        ];
+        settings = rec {
+          complete_function_calls = true;
+          typescript = {
+            updateImportsOnFileMove.enabled = "always";
+            suggest = {
+              completeFunctionCalls = true;
+            };
+            inlayHints = {
+              enumMemberValues.enabled = true;
+              functionLikeReturnTypes.enabled = true;
+              parameterNames.enabled = "literals";
+              parameterTypes.enabled = true;
+              propertyDeclarationTypes.enabled = true;
+              variableTypes.enabled = false;
+            };
+          };
+          javascript = typescript;
+          vtsls = {
+            enableMoveToFileCodeAction = true;
+            autoUseWorkspaceTsdk = true;
+            experimental = {
+              maxInlayHintLength = 30;
+              completion = {
+                enableServerSideFuzzyMatch = true;
+              };
+            };
+          };
+        };
+        onAttach.function = /* lua */ ''
+          if client.name ~= "vtsls" then return end
+
+          vim.keymap.set("n", "<leader>co", function() ${vnix.lsp.buf.action "source.organizeImports"} end, {buffer = bufnr, silent = true, desc = "Organize Imports"})
+          vim.keymap.set("n", "<leader>cM", function() ${vnix.lsp.buf.action "source.addMissingImports.ts"} end, {buffer = bufnr, silent = true, desc = "Add Missing Imports"})
+        '';
+      };
     };
 
-    conform-nvim.settings.formatters_by_ft = {
-      javascript = formatter;
-      typescript = formatter;
-      javascriptreact = formatter;
-      typescriptreact = formatter;
+    # lsp.keymaps.extra = lib.optionals config.plugins.lsp.servers.vtsls.enable [
+    #   {
+    #     mode = "n";
+    #     key = "";
+    #     action = "";
+    #     options.silent = true;
+    #     options.desc = "";
+    #   }
+    # ];
+
+    conform-nvim.settings.formatters_by_ft = rec {
+      typescript = {
+        __unkeyed-1 = "biome-check";
+        __unkeyed-2 = "prettierd";
+        __unkeyed-3 = "prettier";
+        timeout_ms = 2000;
+        stop_after_first = true;
+      };
+      javascript = typescript;
+      javascriptreact = typescript;
+      typescriptreact = typescript;
     };
   };
 
