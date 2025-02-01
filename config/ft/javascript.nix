@@ -37,6 +37,7 @@
         ];
         settings = rec {
           complete_function_calls = true;
+          javascript = typescript;
           typescript = {
             updateImportsOnFileMove.enabled = "always";
             suggest = {
@@ -51,7 +52,6 @@
               variableTypes.enabled = false;
             };
           };
-          javascript = typescript;
           vtsls = {
             enableMoveToFileCodeAction = true;
             autoUseWorkspaceTsdk = true;
@@ -63,24 +63,41 @@
             };
           };
         };
-        onAttach.function = /* lua */ ''
-          if client.name ~= "vtsls" then return end
-
-          vim.keymap.set("n", "<leader>co", function() ${vnix.lsp.buf.action "source.organizeImports"} end, {buffer = bufnr, silent = true, desc = "Organize Imports"})
-          vim.keymap.set("n", "<leader>cM", function() ${vnix.lsp.buf.action "source.addMissingImports.ts"} end, {buffer = bufnr, silent = true, desc = "Add Missing Imports"})
-        '';
+        onAttach.function = vnix.lsp.onAttach_keymaps [
+          {
+            key = "<leader>co";
+            action = vnix.lsp.buf.action_fn "source.organizeImports";
+            options.desc = "Organize Imports";
+          }
+          {
+            key = "<leader>cM";
+            action = vnix.lsp.buf.action_fn "source.addMissingImports";
+            options.desc = "Add Missing Imports";
+          }
+          {
+            key = "gD";
+            action = vnix.lsp.buf.execute_fn {
+              command = "typescript.goToSourceDefinition";
+              arguments = {
+                __unkeyed-1.__raw = "vim.lsp.util.make_position_params().textDocument.uri";
+                __unkeyed-2.__raw = "vim.lsp.util.make_position_params().position";
+              };
+            };
+            options.desc = "Goto Source Definitions";
+          }
+          {
+            key = "gR";
+            action = vnix.lsp.buf.execute_fn {
+              command = "typescript.findAllFileReferences";
+              arguments = {
+                __unkeyed-1.__raw = "vim.uri_from_bufnr(0)";
+              };
+            };
+            options.desc = "Find All References";
+          }
+        ];
       };
     };
-
-    # lsp.keymaps.extra = lib.optionals config.plugins.lsp.servers.vtsls.enable [
-    #   {
-    #     mode = "n";
-    #     key = "";
-    #     action = "";
-    #     options.silent = true;
-    #     options.desc = "";
-    #   }
-    # ];
 
     conform-nvim.settings.formatters_by_ft = rec {
       typescript = {
