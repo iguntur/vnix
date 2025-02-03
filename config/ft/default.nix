@@ -2,6 +2,7 @@
   imports = [
     ./clang.nix
     ./css.nix
+    ./elixir.nix
     ./go.nix
     ./java.nix
     ./javascript.nix
