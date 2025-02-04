@@ -187,6 +187,7 @@
     # LSP servers
     # --------------------------------------------------------------------------------
     lsp.servers = {
+      cmake.enable = true;
       emmet_ls.enable = true;
       html.enable = true;
       htmx.enable = true;
