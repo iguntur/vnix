@@ -4,6 +4,7 @@
     ./css.nix
     ./elixir.nix
     ./go.nix
+    ./html.nix
     ./java.nix
     ./javascript.nix
     ./lua.nix
