@@ -42,6 +42,19 @@ in
         end
       '';
     };
+
+    lz-n.plugins = [
+      {
+        __unkeyed-1 = "blade-nav";
+        ft = [ "php" "blade" ];
+        after = # lua
+          ''
+            function()
+              require("blade-nav").setup()
+            end
+          '';
+      }
+    ];
   };
 
   extraPlugins = [
@@ -62,7 +75,7 @@ in
     })
   ];
 
-  extraConfigLua = vnix.lua.mkRequire "blade-nav" "setup";
+  # extraConfigLua = vnix.lua.mkRequire "blade-nav" "setup";
 
   extraPackages = with pkgs; [
     blade-formatter # Laravel Blade template formatter
