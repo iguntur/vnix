@@ -42,6 +42,12 @@
       options.desc = "Execute current line and put the results below";
       options.silent = true;
     }
-
+    {
+      mode = "n";
+      key = "<localleader><localleader>s";
+      action = "<cmd>source %<cr>";
+      options.desc = "Source the current file";
+      options.silent = true;
+    }
   ];
 }
