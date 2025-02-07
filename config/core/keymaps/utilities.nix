@@ -49,5 +49,12 @@
       options.desc = "Source the current file";
       options.silent = true;
     }
+    {
+      mode = "n";
+      key = "<localleader><localleader>h";
+      action = "<cmd>checkhealth<cr>";
+      options.desc = "Health Check";
+      options.silent = true;
+    }
   ];
 }
