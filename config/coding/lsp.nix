@@ -189,7 +189,6 @@
     lsp.servers = {
       cmake.enable = true;
       emmet_ls.enable = true;
-      htmx.enable = true;
       jsonls.enable = true;
       # superhtml.enable = true;
       taplo.enable = true;
