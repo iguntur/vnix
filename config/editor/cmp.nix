@@ -1,13 +1,6 @@
 { config, pkgs, lib, ... }:
 {
   plugins = {
-    # cmp = {
-    #   enable = true;
-    #   lazyLoad.settings.event = [ "InsertEnter" ];
-    #   settings = { };
-    # };
-    # cmp-nvim-lsp.enable = true;
-
     blink-compat = {
       enable = true;
       lazyLoad.settings.lazy = true;
@@ -20,10 +13,10 @@
 
     blink-cmp = {
       enable = true;
-      lazyLoad.settings.event = [ "InsertEnter" ];
+      lazyLoad.settings.event = [ "LspAttach" ];
       settings = {
         appearance = {
-          use_nvim_cmp_as_default = false;
+          use_nvim_cmp_as_default = true;
           nerd_font_variant = "mono";
         };
 
@@ -36,26 +29,31 @@
               };
             };
           };
-          menu = {
-            draw = {
-              columns = [
-                {
-                  __unkeyed-1 = "label";
-                }
-                {
-                  __unkeyed-1 = "kind_icon";
-                  __unkeyed-2 = "kind";
-                  gap = 1;
-                }
-                { __unkeyed-1 = "source_name"; }
-              ];
-              # treesitter = [ "lsp" ];
-            };
-          };
+
           documentation = {
             auto_show = true;
             auto_show_delay_ms = 200;
           };
+
+          menu = {
+            draw = {
+              treesitter = [ "lsp" ];
+              columns = [
+                { __unkeyed-1 = "source_name"; }
+                {
+                  __unkeyed-1 = "kind";
+                  __unkeyed-2 = "kind_icon";
+                  gap = 1;
+                }
+                {
+                  __unkeyed-1 = "label";
+                  # __unkeyed-2 = "label_description";
+                  # gap = 1;
+                }
+              ];
+            };
+          };
+
           ghost_text = {
             enabled = true;
           };
@@ -65,11 +63,9 @@
           enabled = true; # Experimental signature help support
         };
 
-        # snippets.preset = "mini_snippets";
-        snippets.preset = "luasnip";
+        snippets.preset = lib.optionals config.plugins.luasnip.enable "luasnip";
 
         sources = rec {
-          # compat.__empty = null;
           cmdline.__raw = ''
             function()
               local type = vim.fn.getcmdtype()
@@ -87,20 +83,12 @@
               return {}
             end
           '';
-          # cmdline.__empty = null;
-          default = [
-            # built-in
-            "lsp"
-            "path"
-            "snippets"
-            "buffer"
-          ]
-          # community
-          ++ lib.optionals config.plugins.blink-emoji.enable [ "emoji" ]
-          ++ lib.optionals config.plugins.blink-ripgrep.enable [ "ripgrep" ]
-          # compat
-          ++ lib.optionals config.plugins.blink-cmp-git.enable [ "git" ]
-          ++ lib.optionals config.plugins.blink-cmp-spell.enable [ "spell" ];
+          default = [ "lsp" "path" "snippets" "buffer" ] # built-in
+            # community
+            ++ lib.optionals config.plugins.blink-emoji.enable [ "emoji" ]
+            ++ lib.optionals config.plugins.blink-ripgrep.enable [ "ripgrep" ]
+            ++ lib.optionals config.plugins.blink-cmp-git.enable [ "git" ]
+            ++ lib.optionals config.plugins.blink-cmp-spell.enable [ "spell" ];
           # ++ lib.optionals config.plugins.avante.enable [
           #   "avante_commands"
           #   "avante_files"
@@ -111,13 +99,6 @@
             markdown = if config.plugins.render-markdown.enable then default ++ [ "markdown" ] else default;
           };
           providers = {
-            lsp = {
-              fallbacks = [ ];
-              # score_offset = 4;
-            };
-            buffer = {
-              score_offset = -7;
-            };
             emoji = lib.mkIf config.plugins.blink-emoji.enable {
               name = "Emoji";
               module = "blink-emoji";
@@ -134,13 +115,8 @@
               # make lazydev completions top priority (see `:h blink.cmp`)
               score_offset = 100;
             };
-            markdown = lib.mkIf config.plugins.render-markdown.enable {
-              name = "RenderMarkdown";
-              module = "render-markdown.integ.blink";
-              fallbacks = [ "lsp" ];
-            };
             git = lib.mkIf config.plugins.blink-cmp-git.enable {
-              name = "git";
+              name = "Git";
               module = "blink-cmp-git";
               score_offset = 100;
             };
@@ -149,19 +125,18 @@
               module = "blink-cmp-spell";
               score_offset = 100;
             };
+            markdown = lib.mkIf config.plugins.render-markdown.enable {
+              name = "RenderMarkdown";
+              module = "render-markdown.integ.blink";
+              fallbacks = [ "lsp" ];
+            };
           };
         };
 
         keymap = {
           preset = "default";
-          "<Down>" = [
-            "select_next"
-            "fallback"
-          ];
-          "<Up>" = [
-            "select_prev"
-            "fallback"
-          ];
+          "<Down>" = [ "select_next" "fallback" ];
+          "<Up>" = [ "select_prev" "fallback" ];
         };
       };
     };
