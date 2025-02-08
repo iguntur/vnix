@@ -7,5 +7,6 @@
     ./utilities.nix
     ./tab.nix
     ./window.nix
+    ./buffer.nix
   ];
 }
