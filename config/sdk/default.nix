@@ -11,6 +11,7 @@
     ./lua.nix
     ./markdown.nix
     ./nix.nix
+    ./nodejs.nix
     ./php.nix
     ./python.nix
     ./rust.nix
