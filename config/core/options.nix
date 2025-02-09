@@ -11,7 +11,6 @@
     # shortmess:append("I") -- Disable Neovim welcome page
     # shortmess:append("Ws") -- Disable Neovim welcome page
     # wildcharm      = 4
-    autoindent = true;
     background = "dark";
     backspace = [
       "indent"
@@ -19,7 +18,6 @@
       "start"
     ];
     backup = false; # create backup file
-    cindent = true;
     # cino = ":0"; # (C Lang) No indent for case:/default:
     clipboard = "";
     colorcolumn = "80,110,120";
@@ -31,7 +29,6 @@
     confirm = true; # confirm to save changes before exiting modified buffer
     cursorline = true; # enable highlighting of the current line
     encoding = "utf-8";
-    expandtab = false; # use tabs instead
     fileencoding = "utf-8";
     hlsearch = true; # highlight search result
     ignorecase = true; # ignore case
@@ -65,22 +62,16 @@
       "skiprtp"
       "folds"
     ];
-    shiftround = true; # round indent
-    shiftwidth = 4; # size of an indent
     showmatch = true;
     # showmode = false; # dont show mode since we have a statusline
     sidescrolloff = 10; # columns of context
     signcolumn = "auto:3";
     smartcase = true; # don't ignore case with capitals
-    smartindent = true; # add indent automatically
-    smarttab = true;
     smoothscroll = true; # optional but improves reproducibility
-    softtabstop = 4;
     splitbelow = true; # make all horizontal split to go below window
     # splitkeep = "screen";
     splitright = true; # make all vertical split to go to the right
     swapfile = false;
-    tabstop = 4; # number of spaces tabs count for
     termguicolors = true; # true color support
     textwidth = 110;
     title = true;
@@ -90,6 +81,18 @@
     virtualedit = "block"; # allow cursor to move where there is no text in visual block mode
     wildmode = "longest:full,full"; # command-line completion mode
     wrap = false; # disable line wrap
+
+    # indent
+    autoindent = true;
+    cindent = true;
+    expandtab = false; # use tabs instead
+    shiftround = true; # round indent
+    shiftwidth = 2; # size of an indent
+    smartindent = true; # add indent automatically
+    smarttab = true;
+    softtabstop = 2;
+    tabstop = 2; # number of spaces tabs count for
+
     # wildignore:append({
     #     "*/node_modules/*",
     #     "*/vendor/*",
