@@ -5,7 +5,7 @@
       enable = true;
       settings = { };
       lazyLoad.settings = {
-        event = [ "DeferredUIEnter package.json" ];
+        event = [ "BufEnter package.json" ];
       };
     };
 
