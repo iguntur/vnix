@@ -4,7 +4,7 @@
     ./core
     ./coding
     ./editor
-    ./ft
+    ./sdk
     ./ui
     ./extra
   ];
