@@ -5,7 +5,10 @@
       enable = true;
       settings = { };
       lazyLoad.settings = {
-        event = [ "BufEnter package.json" ];
+        event = [
+          "LspAttach"
+          # "BufEnter package.json"
+        ];
       };
     };
 
