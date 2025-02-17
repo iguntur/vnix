@@ -1,10 +1,88 @@
 { config, lib, pkgs, vnix, ... }:
 {
   plugins = {
+    typescript-tools = {
+      enable = true;
+      settings = {
+        handlers = { };
+        settings = {
+          # https://github.com/microsoft/TypeScript/blob/v5.0.4/src/server/protocol.ts#L3439
+          tsserver_file_preferences = {
+            includeInlayParameterNameHints = "all"; # 'none' | 'literals' | 'all'
+            includeInlayParameterNameHintsWhenArgumentMatchesName = true;
+            includeInlayVariableTypeHints = true;
+            includeInlayFunctionParameterTypeHints = true;
+            includeInlayVariableTypeHintsWhenTypeMatchesName = true;
+            includeInlayPropertyDeclarationTypeHints = true;
+            includeInlayFunctionLikeReturnTypeHints = true;
+            includeInlayEnumMemberValueHints = true;
+            includeCompletionsForModuleExports = true;
+            quotePreference = "auto";
+          };
+          # tsserver_format_options = {
+          #   allowIncompleteCompletions = false;
+          #   allowRenameOfImportPath = false;
+          # };
+        };
+        on_attach.__raw = # lua
+          ''
+            function(client, bufnr)
+              if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+                vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+              end
+
+              ${vnix.lsp.onAttach_keymaps [
+                {
+                  key = "gD";
+                  action = vnix.keymap.action_cmd "TSToolsGoToSourceDefinition";
+                  options.desc = "Goto Source Definitions";
+                }
+                {
+                  key = "gR";
+                  action = vnix.keymap.action_cmd "TSToolsFileReferences";
+                  options.desc = "Find All References";
+                }
+
+                {
+                  key = "<leader>co";
+                  action = vnix.keymap.action_cmd "TSToolsOrganizeImports";
+                  options.desc = "Organize Imports";
+                }
+                {
+                  key = "<leader>ci";
+                  action = vnix.keymap.action_cmd "TSToolsAddMissingImports";
+                  options.desc = "Add Missing Imports";
+                }
+                {
+                  key = "<leader>cF";
+                  action = vnix.keymap.action_cmd "TSToolsFixAll";
+                  options.desc = "Fixes all fixable errors";
+                }
+                {
+                  key = "<leader>cdd";
+                  action = vnix.keymap.action_cmd "TSToolsRemoveUnused";
+                  options.desc = "Remove all unused statements";
+                }
+                {
+                  key = "<leader>cdi";
+                  action = vnix.keymap.action_cmd "TSToolsRemoveUnusedImports";
+                  options.desc = "Remove all unused imports";
+                }
+                {
+                  key = "<leader>fR";
+                  action = vnix.keymap.action_cmd "TSToolsRenameFile";
+                  options.desc = "Rename file";
+                }
+              ]}
+            end
+          '';
+      };
+    };
+
     lsp.servers = {
       # eslint.enable = true;
       ts_ls = {
-        enable = true;
+        enable = !config.plugins.typescript-tools.enable;
         settings = rec {
           typescript = {
             inlayHints = {
@@ -26,7 +104,7 @@
 
       # LSP wrapper for typescript extension of vscode
       vtsls = {
-        enable = true;
+        enable = config.plugins.lsp.servers.ts_ls.enable;
         filetypes = [
           "javascript"
           "javascriptreact"
@@ -111,6 +189,13 @@
       javascriptreact = typescript;
       typescriptreact = typescript;
     };
+
+    which-key.settings.spec = lib.optionals config.plugins.typescript-tools.enable [
+      {
+        __unkeyed-1 = "<leader>cd";
+        group = "Delete/Remove Unused";
+      }
+    ];
   };
 
   extraPackages = with pkgs; [
