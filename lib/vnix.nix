@@ -6,6 +6,10 @@ in
   icons = import ./icons.nix;
   lua = import ./lua.nix { inherit lib; };
 
+  keymap = {
+    action_cmd = cmd: "<cmd>${cmd}<cr>";
+  };
+
   lsp = rec {
     onAttach_keymaps = keymaps: # lua
       ''
