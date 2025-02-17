@@ -427,7 +427,7 @@
           desc = "Code Action";
         };
       };
-      "<leader>cd" = {
+      "<leader>cs" = {
         action = "lsp_document_symbols";
         settings = {
           prompt = "❯ ";
@@ -437,7 +437,7 @@
           desc = "Document Symbol";
         };
       };
-      "<leader>cw" = {
+      "<leader>cS" = {
         action = "lsp_live_workspace_symbols";
         settings = {
           prompt = "❯ ";
