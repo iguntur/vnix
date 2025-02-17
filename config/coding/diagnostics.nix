@@ -17,6 +17,10 @@ let
   };
 in
 {
+  opts = {
+    signcolumn = "auto:1";
+  };
+
   diagnostics = {
     underline = true;
     update_in_insert = false;

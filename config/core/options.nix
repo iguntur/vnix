@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   # global options
   globals = {
@@ -65,7 +65,6 @@
     showmatch = true;
     # showmode = false; # dont show mode since we have a statusline
     sidescrolloff = 10; # columns of context
-    signcolumn = "auto:3";
     smartcase = true; # don't ignore case with capitals
     smoothscroll = true; # optional but improves reproducibility
     splitbelow = true; # make all horizontal split to go below window
@@ -81,6 +80,9 @@
     virtualedit = "block"; # allow cursor to move where there is no text in visual block mode
     wildmode = "longest:full,full"; # command-line completion mode
     wrap = false; # disable line wrap
+
+    # status column
+    signcolumn = lib.mkDefault "auto:3";
 
     # indent
     autoindent = true;
