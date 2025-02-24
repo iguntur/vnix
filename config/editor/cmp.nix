@@ -65,8 +65,9 @@
 
         snippets.preset = lib.optionals config.plugins.luasnip.enable "luasnip";
 
-        sources = rec {
-          cmdline.__raw = ''
+        cmdline = {
+          enabled = true;
+          sources.__raw = ''
             function()
               local type = vim.fn.getcmdtype()
 
@@ -83,6 +84,9 @@
               return {}
             end
           '';
+        };
+
+        sources = rec {
           default = [ "lsp" "path" "snippets" "buffer" ] # built-in
             # community
             ++ lib.optionals config.plugins.blink-emoji.enable [ "emoji" ]
