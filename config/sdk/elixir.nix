@@ -3,12 +3,13 @@
   plugins = {
     lsp.servers.elixirls = {
       enable = true;
+      package = pkgs.beam27Packages.elixir-ls;
     };
 
     conform-nvim.settings.formatters_by_ft = {
-      elixir = [ "rustywind" ];
-      eelixir = [ "rustywind" ];
-      heex = [ "rustywind" ];
+      elixir = [ "rustywind" "mix" ];
+      eelixir = [ "rustywind" "mix" ];
+      heex = [ "rustywind" "mix" ];
     };
   };
 
