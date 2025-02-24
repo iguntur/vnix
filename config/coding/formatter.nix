@@ -97,7 +97,7 @@
 
   extraPackages = with pkgs; [
     codespell # Fix common misspellings in source code
-    biome # Toolchain of the web
+    # biome # Toolchain of the web
     nodePackages.prettier # Prettier is an opinionated code formatter
     prettierd # Prettier, as a daemon, for improved formatting speed
   ];
