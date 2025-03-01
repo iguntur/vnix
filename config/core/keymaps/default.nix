@@ -8,5 +8,6 @@
     ./tab.nix
     ./window.nix
     ./buffer.nix
+    ./quickfix.nix
   ];
 }
