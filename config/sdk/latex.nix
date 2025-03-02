@@ -1,0 +1,36 @@
+{ config, pkgs, lib, ... }:
+{
+  plugins.texpresso.enable = true;
+
+  plugins.vimtex = {
+    enable = true;
+    settings = {
+      imaps_enabled = 0; # i.e., disable them
+      # view_method = "general"; # change this, depending on what you want to use..sumatraPDF, or skim, or zathura, or...
+      view_general_options = "-reuse-instance -forward-search @tex @line @pdf";
+      quickfix_open_on_warning = 0; # don't open quickfix if there are only warnings
+      quickfix_ignore_filters = [
+        "Underfull"
+        "Overfull"
+        "LaTeX Warning: .\\+ float specifier changedto"
+        "Package hyperref Warning: Token not allowed in a PDF string"
+      ];
+    };
+  };
+
+  plugins.lsp.servers = {
+    texlab = {
+      enable = true;
+      settings = { };
+    };
+  };
+
+  plugins.conform-nvim.settings.formatters_by_ft = {
+    texplain = [ "tex-fmt" ];
+    tex = [ "tex-fmt" ];
+  };
+
+  extraPackages = with pkgs; [
+    tex-fmt
+  ];
+}
