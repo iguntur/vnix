@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 let
+  inherit (lib.nixvim) toLuaObject;
   tailwindcssRootPatterns = [
     "tailwind.config.js"
     "tailwind.config.cjs"
@@ -9,12 +10,8 @@ let
     "postcss.config.cjs"
     "postcss.config.mjs"
     "postcss.config.ts"
-    "package.json"
   ];
   withPrefix = prefix: map (p: prefix + "/${p}") tailwindcssRootPatterns;
-  allRootPatterns = [ ]
-    ++ tailwindcssRootPatterns
-    ++ (withPrefix "assets"); # phoenixframework uses assets
 in
 {
   plugins = {
@@ -23,15 +20,22 @@ in
       tailwindcss = {
         enable = true;
         # https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/tailwindcss.lua
-        rootDir.__raw = ''
-          function(fname)
-            return require("lspconfig.util").root_pattern(${
-              lib.nixvim.toLuaObject allRootPatterns
-            })(fname) or vim.fs.dirname(vim.fs.find('package.json', { path = fname, upward = true })[1]) or vim.fs.dirname(
-              vim.fs.find('node_modules', { path = fname, upward = true })[1]
-            ) or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
-          end
-        '';
+        # rootDir.__raw = ''
+        #   function(fname)
+        #     if vim.loop.fs_stat("mix.exs") or vim.loop.fs_stat("mix.lock") then
+        #       local patterns = ${toLuaObject (withPrefix "assets")}
+        #       local cwd = vim.uv.cwd()
+        #
+        #       for _, fp in ipairs(patterns) do
+        #         if vim.loop.fs_stat(cwd .. "/" .. fp) then
+        #           return vim.fn.fnamemodify(cwd .. "/" .. fp, ":h")
+        #         end
+        #       end
+        #     end
+        #
+        #     return require("lspconfig.config.tailwindcss").default_config.root_dir(fname)
+        #   end
+        # '';
         settings = {
           tailwindCSS = {
             includeLanguages = {
