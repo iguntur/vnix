@@ -17,6 +17,7 @@
     ./rust.nix
     ./shell.nix
     ./svelte.nix
+    ./sql.nix
     ./templ.nix
     ./zig.nix
 

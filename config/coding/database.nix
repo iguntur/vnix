@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   dataPath = "$HOME/.local/share/dadbod_ui";
 in
@@ -9,11 +9,11 @@ in
     };
 
     vim-dadbod-ui = {
-      enable = true;
+      enable = config.plugins.vim-dadbod.enable;
     };
 
     vim-dadbod-completion = {
-      enable = true;
+      enable = config.plugins.vim-dadbod.enable;
     };
   };
 
@@ -27,22 +27,28 @@ in
     db_ui_tmp_query_location.__raw = "vim.fn.expand('${dataPath}/tmp')";
   };
 
-  # extraConfigLua = ''
-  #   -- dadbod-ui {{{
-  #   do
-  #   end
-  #   -- }}}
-  # '';
+  keymaps = lib.optionals config.plugins.vim-dadbod.enable [
+    {
+      mode = "n";
+      key = "<localleader>db";
+      action = "<cmd>DBUIToggle<cr>";
+      options = {
+        silent = true;
+        desc = "DBUI Toggle";
+      };
+    }
+    {
+      mode = "n";
+      key = "<localleader>dh";
+      action = "<cmd>DBUIHideNotifications<cr>";
+      options = {
+        silent = true;
+        desc = "DBUI Hide Notifications";
+      };
+    }
+  ];
 
-  # keymaps = [
-  #   {
-  #     mode = "n";
-  #     key = "<leader>...";
-  #     action = "<cmd>...<cr>";
-  #     options = {
-  #       silent = true;
-  #       desc = "...";
-  #     };
-  #   }
-  # ];
+  extraPackages = lib.optionals config.plugins.vim-dadbod.enable (with pkgs; [
+    postgresql_17
+  ]);
 }
