@@ -8,6 +8,7 @@ in
 
   keymap = {
     action_cmd = cmd: "<cmd>${cmd}<cr>";
+    action_fn = action: mkRaw "function() ${action} end";
   };
 
   lsp = rec {
