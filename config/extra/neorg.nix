@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, vnix, ... }:
 let
   workspaces = {
     # Format: <name_of_workspace> = <path_to_workspace_root>
@@ -55,6 +55,17 @@ in
         options = {
           silent = true;
           desc = "Neorg notes";
+        };
+      };
+      "<leader>fj" = {
+        action = "files";
+        settings = {
+          prompt = "❯ ";
+          cwd.__raw = ''vim.fn.expand("$HOME/dev/journals")'';
+        };
+        options = {
+          silent = true;
+          desc = "Journal files";
         };
       };
     };
