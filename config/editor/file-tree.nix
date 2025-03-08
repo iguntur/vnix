@@ -32,8 +32,8 @@
       settings = {
         columns = [
           # "type"
-          "permissions"
-          "size"
+          # "permissions"
+          # "size"
           "icon"
         ];
         keymaps = {
@@ -42,11 +42,11 @@
           "<C-h>" = false;
           "<C-r>" = "actions.refresh";
           "y." = "actions.copy_entry_path";
-          "<localleader>|" = {
+          "<leader>v" = {
             __unkeyed-1 = "actions.select";
             opts.vertical = true;
           };
-          "<localleader>-" = {
+          "<leader>h" = {
             __unkeyed-1 = "actions.select";
             opts.horizontal = true;
           };
