@@ -2,11 +2,12 @@
 let
   workspaces = {
     # Format: <name_of_workspace> = <path_to_workspace_root>
-    personal = "~/dev/notes/guntur";
-    efishery = "~/dev/notes/efishery";
-    ruangguru = "~/dev/notes/ruangguru";
-    tictag = "~/dev/notes/tictag";
+    personal = "~/dev/journals/guntur";
+    efishery = "~/dev/journals/efishery";
+    ruangguru = "~/dev/journals/ruangguru";
+    tictag = "~/dev/journals/tictag";
   };
+  workspaceNames = builtins.attrNames workspaces;
 in
 {
   plugins = {
@@ -46,17 +47,6 @@ in
     };
 
     fzf-lua.keymaps = {
-      "<leader>fn" = {
-        action = "files";
-        settings = {
-          prompt = "❯ ";
-          cwd.__raw = ''vim.fn.expand("$HOME/dev/notes")'';
-        };
-        options = {
-          silent = true;
-          desc = "Neorg notes";
-        };
-      };
       "<leader>fj" = {
         action = "files";
         settings = {
@@ -72,6 +62,30 @@ in
   };
 
   keymaps = lib.optionals config.plugins.neorg.enable [
+    {
+      mode = "n";
+      key = "<leader>nw";
+      action = vnix.keymap.action_fn # lua 
+        ''
+          require("fzf-lua").fzf_exec(${lib.nixvim.toLuaObject workspaceNames}, {
+            winopts = {
+              fullscreen = false,
+              width = 0.5,
+              height = 0.5,
+              backgrop = 100,
+            },
+            fn_selected = function(selected)
+              if selected[1] == "enter" then
+                vim.cmd([[silent! Neorg workspace ]] .. selected[2])
+              end
+            end,
+          })
+        '';
+      options = {
+        silent = true;
+        desc = "Select Neorg workspace";
+      };
+    }
     {
       mode = "n";
       key = "<leader>nr";
