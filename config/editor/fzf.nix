@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, vnix, ... }:
 {
   extraPackages = with pkgs; [
     bat
@@ -496,6 +496,26 @@
         options = {
           silent = true;
           desc = "Goto Type Definitions";
+        };
+      };
+
+      # --------------------------------------------------------------------------------
+      # path
+      # --------------------------------------------------------------------------------
+      "<C-x><C-f>" = {
+        mode = [ "n" "v" "i" ];
+        action = "complete_path";
+        settings = {
+          prompt = "❯ ";
+          winopts = {
+            fullscreen = false;
+            width = 0.9;
+            height = 0.5;
+          };
+        };
+        options = {
+          silent = true;
+          desc = "Fuzzy complete path";
         };
       };
 
