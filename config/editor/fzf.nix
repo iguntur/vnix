@@ -10,10 +10,11 @@
     enable = true;
     settings = {
       winopts = {
-        fullscreen = true;
+        # fullscreen = true;
         # preview = { default = "bat"; };
-        # width = 1;
-        # height = 1;
+        width = 0.9;
+        height = 0.9;
+        backdrop = 100; # Backdrop opacity, 0 is fully opaque, 100 is fully transparent (i.e. disabled)
       };
       previewers = {
         bat = {
