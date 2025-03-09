@@ -30,7 +30,7 @@
 
     {
       mode = "n";
-      key = "<localleader><localleader>x";
+      key = "<localleader><localleader>X";
       action = "<cmd>!chmod +x %<cr>";
       options.desc = "Set the current file into executable";
       options.silent = true;
@@ -39,7 +39,7 @@
       mode = "n";
       key = "<localleader><localleader>$";
       action = "<cmd>put=system(getline('.'))<cr>";
-      options.desc = "Execute current line and put the results below";
+      options.desc = "Execute current line to the system and put the results below";
       options.silent = true;
     }
     {
@@ -54,6 +54,13 @@
       key = "<localleader><localleader>h";
       action = "<cmd>checkhealth<cr>";
       options.desc = "Health Check";
+      options.silent = true;
+    }
+    {
+      mode = "n";
+      key = "<localleader><localleader>x";
+      action = "<cmd>lua assert(load(vim.api.nvim_get_current_line()))()<cr>";
+      options.desc = "Execute as :lua ... code";
       options.silent = true;
     }
   ];
