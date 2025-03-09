@@ -114,6 +114,17 @@
 
     treesitter-context = {
       enable = true;
+      settings = {
+        multiwindow = true;
+        # separator = "-";
+      };
+      luaConfig.post = ''
+        vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "None" })
+        vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { bg = "None", fg = "#9f9f9f" })
+        vim.api.nvim_set_hl(0, "TreesitterContextBottom", { bg = "#2f2f2f" })
+        -- vim.api.nvim_set_hl(0, "TreesitterContextLineNumberBottom", { bg = "#2f2f2f" })
+        -- vim.api.nvim_set_hl(0, "TreesitterContextSeparator", { bg = "None", fg = "#2f2f2f" })
+      '';
     };
 
     # Use treesitter to autoclose and autorename html tag
