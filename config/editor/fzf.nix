@@ -9,6 +9,16 @@
   plugins.fzf-lua = {
     enable = true;
     settings = {
+      hls = {
+        border = "None";
+        normal = "None";
+        backdrop = "None";
+        title = "None";
+        title_flags = "None";
+        preview_title = "None";
+        preview_normal = "None";
+        preview_border = "None";
+      };
       winopts = {
         # fullscreen = true;
         # preview = { default = "bat"; };
