@@ -70,19 +70,21 @@
         open_for_directories = true;
         # yazi_floating_window_border = "single";
         # yazi_floating_window_winblend = 50;
-        hooks = {
-          yazi_opened.__raw = ''
-            function(preselected_path, yazi_buffer_id, config)
-              if vim.g.yazi_cache_yazi_float_border ~= true then
-                vim.api.nvim_set_hl(0, "YaziFloatBorder", { bg = "None" })
-                vim.g.yazi_cache_yazi_float_border = true
-              end
-            end
-          '';
-        };
       };
     };
   };
+
+  autoCmd = [
+    {
+      event = [ "ColorScheme" ];
+      pattern = [ "*" ];
+      callback.__raw = ''
+        function()
+          vim.api.nvim_set_hl(0, "YaziFloatBorder", { bg = "None" })
+        end
+      '';
+    }
+  ];
 
   keymaps = [
     # Mini files

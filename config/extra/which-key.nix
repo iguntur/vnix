@@ -110,11 +110,20 @@
           }
         ];
       };
-      luaConfig.post = ''
-        vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "None" })
-      '';
     };
   };
+
+  autoCmd = [
+    {
+      event = [ "ColorScheme" ];
+      pattern = [ "*" ];
+      callback.__raw = ''
+        function()
+          vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "None" })
+        end
+      '';
+    }
+  ];
 
   keymaps = lib.optionals config.plugins.which-key.enable [
     {
