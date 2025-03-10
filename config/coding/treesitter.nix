@@ -115,7 +115,7 @@
     treesitter-context = {
       enable = true;
       settings = {
-        multiwindow = true;
+        # multiwindow = true;
         # separator = "-";
       };
       luaConfig.post = ''
