@@ -1,4 +1,4 @@
-{ luaRaw, ... }:
+{ config, lib, luaRaw, ... }:
 {
   plugins = {
     which-key = {
@@ -110,10 +110,13 @@
           }
         ];
       };
+      luaConfig.post = ''
+        vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "None" })
+      '';
     };
   };
 
-  keymaps = [
+  keymaps = lib.optionals config.plugins.which-key.enable [
     {
       mode = "n";
       key = "<leader><leader>?";

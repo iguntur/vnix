@@ -1,4 +1,4 @@
-{ vnix, pkgs, ... }:
+{ config, lib, pkgs, vnix, ... }:
 {
   extraPackages = with pkgs; [
     delta
@@ -77,20 +77,13 @@
     };
 
     which-key.luaConfig.post = vnix.lua.mkRequire' "which-key" "add" [
-      {
-        __unkeyed-1 = "<leader>gh";
-        group = "Hunk";
-        icon = " ";
-      }
-      {
-        __unkeyed-1 = "<leader>ga";
-        group = "Add";
-        icon = " ";
-      }
+      { __unkeyed-1 = "<leader>gh"; group = "Hunk"; icon = " "; }
+      { __unkeyed-1 = "<leader>ga"; group = "Add"; icon = " "; }
+      { __unkeyed-1 = "<leader>gc"; group = "Commit"; icon = " "; }
     ];
   };
 
-  keymaps = [
+  keymaps = lib.optionals config.plugins.lazygit.enable [
     {
       mode = "n";
       key = "<C-g>";
@@ -105,6 +98,8 @@
       options.silent = true;
       options.desc = "Lazygit";
     }
+  ]
+  ++ lib.optionals config.plugins.fugitive.enable [
     {
       mode = "n";
       key = "<leader>gaa";
@@ -118,6 +113,20 @@
       action = "<cmd>Git add %<cr>";
       options.silent = true;
       options.desc = "Git add current file";
+    }
+    {
+      mode = "n";
+      key = "<leader>gcc";
+      action = "<cmd>Git commit<cr>";
+      options.silent = true;
+      options.desc = "Git commit";
+    }
+    {
+      mode = "n";
+      key = "<leader>gca";
+      action = "<cmd>Git commit --amend<cr>";
+      options.silent = true;
+      options.desc = "Git commit --ammend";
     }
   ];
 }
