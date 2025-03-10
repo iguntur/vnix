@@ -80,6 +80,7 @@
       { __unkeyed-1 = "<leader>gh"; group = "Hunk"; icon = " "; }
       { __unkeyed-1 = "<leader>ga"; group = "Add"; icon = " "; }
       { __unkeyed-1 = "<leader>gc"; group = "Commit"; icon = " "; }
+      { __unkeyed-1 = "<leader>gp"; group = "Push"; icon = " "; }
     ];
   };
 
@@ -127,6 +128,20 @@
       action = "<cmd>Git commit --amend<cr>";
       options.silent = true;
       options.desc = "Git commit --ammend";
+    }
+    {
+      mode = "n";
+      key = "<leader>gpp";
+      action = "<cmd>Git push<cr>";
+      options.silent = true;
+      options.desc = "Git push";
+    }
+    {
+      mode = "n";
+      key = "<leader>gpP";
+      action = "<cmd>Git push --force<cr>";
+      options.silent = true;
+      options.desc = "Git push --force";
     }
   ];
 }
