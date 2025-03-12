@@ -22,6 +22,15 @@
       enable = true;
       settings = {
         options = {
+          extensions = [
+            "aerial"
+            "fzf"
+            "nvim-dap-ui"
+            "oil"
+            "overseer"
+            "quickfix"
+            "trouble"
+          ];
           section_separators = {
             left = "";
             right = "";
