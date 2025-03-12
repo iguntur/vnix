@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  vnix,
-  ...
-}:
+{ pkgs, lib, vnix, ... }:
 let
   inherit (lib.nixvim) toLuaObject;
 
@@ -22,6 +17,7 @@ let
     "nofile"
     "prompt"
     "popup"
+    "terminal"
   ];
 
   focus-settings = {
