@@ -23,7 +23,7 @@
     }
     {
       mode = "n";
-      key = "<C-x><C-s>"; # ctrl-x ctrl-s
+      key = "<C-c><C-s>"; # ctrl-c ctrl-s
       action = "<esc>:wa<cr><esc>";
       options.desc = "Write or saving all buffers";
       options.silent = true;
