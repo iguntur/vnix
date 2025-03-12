@@ -5,6 +5,7 @@
     vnix_conceal.clear = true;
     vnix_spell.clear = true;
     vnix_highlight_yank.clear = true;
+    vnix_terminal.clear = true;
   };
 
   autoCmd = [
@@ -53,6 +54,19 @@
       callback.__raw = ''
         function()
           (vim.hl or vim.highlight).on_yank()
+        end
+      '';
+    }
+    {
+      # Terminal
+      event = "TermOpen";
+      group = "vnix_terminal";
+      callback.__raw = ''
+        function()
+          vim.opt.number = false
+          vim.opt.relativenumber = false
+          vim.opt.laststatus = 3
+          vim.opt.statuscolumn = ""
         end
       '';
     }

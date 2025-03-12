@@ -9,5 +9,6 @@
     ./window.nix
     ./buffer.nix
     ./quickfix.nix
+    ./terminal.nix
   ];
 }
