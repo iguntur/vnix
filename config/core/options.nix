@@ -20,7 +20,7 @@
     backup = false; # create backup file
     # cino = ":0"; # (C Lang) No indent for case:/default:
     clipboard = "";
-    colorcolumn = "80,110,120";
+    # colorcolumn = "80,110,120";
     completeopt = [
       "menu"
       "menuone"
