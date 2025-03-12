@@ -17,7 +17,7 @@
       # enable = true;
       settings = {
         dark_variant = "moon";
-        dim_inactive_windows = true;
+        dim_inactive_windows = false;
         styles = {
           # bold = false;
           italic = true;
@@ -30,7 +30,7 @@
     tokyonight = {
       # enable = true;
       settings = {
-        dim_inactive = true;
+        dim_inactive = false;
         terminal_colors = true;
         transparent = true;
         style = "storm"; # "storm" | "night"
