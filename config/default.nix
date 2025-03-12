@@ -7,6 +7,7 @@
     ./sdk
     ./ui
     ./extra
+    ./terminal
   ];
 
   editorconfig.enable = true;
