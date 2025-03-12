@@ -8,22 +8,17 @@
 
   plugins.fzf-lua = {
     enable = true;
+    luaConfig.post = ''
+      vim.api.nvim_set_hl(0, "FzfLuaNormal", { bg = "None" })
+      vim.api.nvim_set_hl(0, "FzfLuaBorder", { bg = "None" })
+    '';
     settings = {
-      hls = {
-        border = "None";
-        normal = "None";
-        backdrop = "None";
-        title = "None";
-        title_flags = "None";
-        preview_title = "None";
-        preview_normal = "None";
-        preview_border = "None";
-      };
       winopts = {
         # fullscreen = true;
         # preview = { default = "bat"; };
-        width = 0.9;
-        height = 0.9;
+        width = 1;
+        height = 0.6;
+        row = 1; # window row position (0=top, 1=bottom)
         backdrop = 100; # Backdrop opacity, 0 is fully opaque, 100 is fully transparent (i.e. disabled)
       };
       previewers = {
