@@ -103,5 +103,16 @@
       options.silent = true;
       options.desc = "Decrease window width";
     }
-  ];
+  ]
+  ++ (builtins.map
+    (n: {
+      # --------------------------------------------------------------------------------
+      # Window: Movement
+      # --------------------------------------------------------------------------------
+      mode = "n";
+      key = "<C-w>${toString n}";
+      action = "<cmd>wincmd ${toString n}w<cr>";
+      options.desc = "Go to window ${toString n}";
+      options.silent = true;
+    }) [ 1 2 3 4 5 6 7 8 9 ]);
 }
