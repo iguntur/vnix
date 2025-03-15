@@ -20,6 +20,16 @@
           nerd_font_variant = "mono";
         };
 
+        fuzzy = {
+          implementation = "prefer_rust_with_warning";
+          # sorts = [
+          #   # "exact"
+          #   "score"
+          #   "sort_text"
+          #   # "kind"
+          # ];
+        };
+
         completion = {
           accept = {
             auto_brackets = {
@@ -89,20 +99,31 @@
         sources = rec {
           default = [ "lsp" "path" "snippets" "buffer" ] # built-in
             # community
+            ++ lib.optionals config.plugins.blink-cmp-spell.enable [ "spell" ]
             ++ lib.optionals config.plugins.blink-emoji.enable [ "emoji" ]
-            ++ lib.optionals config.plugins.blink-ripgrep.enable [ "ripgrep" ]
             ++ lib.optionals config.plugins.blink-cmp-git.enable [ "git" ]
-            ++ lib.optionals config.plugins.blink-cmp-spell.enable [ "spell" ];
-          # ++ lib.optionals config.plugins.avante.enable [
-          #   "avante_commands"
-          #   "avante_files"
-          #   "avante_mentions"
-          # ]
+            ++ lib.optionals config.plugins.blink-ripgrep.enable [ "ripgrep" ]
+            # ++ lib.optionals config.plugins.avante.enable [
+            #   "avante_commands"
+            #   "avante_files"
+            #   "avante_mentions"
+            # ]
+            ++ [ ];
           per_filetype = {
             lua = if config.plugins.lazydev.enable then [ "lazydev" ] ++ default else default;
             markdown = if config.plugins.render-markdown.enable then default ++ [ "markdown" ] else default;
+            sql = if config.plugins.vim-dadbod.enable then default ++ [ "dadbod" ] else default;
+            mysql = if config.plugins.vim-dadbod.enable then default ++ [ "dadbod" ] else default;
+            plsql = if config.plugins.vim-dadbod.enable then default ++ [ "dadbod" ] else default;
           };
           providers = {
+            lsp = {
+              fallbacks = [ "ripgrep" "buffer" ];
+              score_offset = 0;
+            };
+            # path = { score_offset = 1; };
+            # snippets = { score_offset = 2; };
+            # buffer = { score_offset = 3; };
             emoji = lib.mkIf config.plugins.blink-emoji.enable {
               name = "Emoji";
               module = "blink-emoji";
@@ -133,6 +154,10 @@
               name = "RenderMarkdown";
               module = "render-markdown.integ.blink";
               fallbacks = [ "lsp" ];
+            };
+            dadbod = lib.mkIf config.plugins.vim-dadbod.enable {
+              name = "Dadbod";
+              module = "vim_dadbod_completion.blink";
             };
           };
         };
