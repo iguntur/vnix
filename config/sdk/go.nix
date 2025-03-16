@@ -65,10 +65,14 @@ in
           };
         };
         onAttach.function =
-          # TODO: workaround: https://github.com/golang/go/issues/54531#issuecomment-1464982242
           # lua
           ''
-            if client.name == 'gopls' and not client.server_capabilities.semanticTokensProvider then
+            if client.name ~= 'gopls' then
+              return
+            end
+
+            -- TODO: workaround: https://github.com/golang/go/issues/54531#issuecomment-1464982242
+            if not client.server_capabilities.semanticTokensProvider then
               local semantic = client.config.capabilities.textDocument.semanticTokens
               client.server_capabilities.semanticTokensProvider = {
                 full = true,

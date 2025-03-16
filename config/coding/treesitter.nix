@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   extraFiles = {
     "queries/lua/highlights.scm" = {
@@ -134,7 +134,7 @@
     };
   };
 
-  keymaps = [
+  keymaps = lib.optionals config.plugins.treesitter-context.enable [
     # --------------------------------------------------------------------------------
     # treesitter-context keymaps
     # --------------------------------------------------------------------------------
