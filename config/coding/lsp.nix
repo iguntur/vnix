@@ -7,6 +7,14 @@
     lsp = {
       enable = true;
       inlayHints = true;
+      luaConfig.post = ''
+        do
+          local opts = { bg = "None", bold = true }
+          vim.api.nvim_set_hl(0, "LspReferenceText", opts)
+          vim.api.nvim_set_hl(0, "LspReferenceRead", opts)
+          vim.api.nvim_set_hl(0, "LspReferenceWrite", opts)
+        end
+      '';
     };
 
     # lsp.capabilities = "";
