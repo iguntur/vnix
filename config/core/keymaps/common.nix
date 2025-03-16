@@ -243,7 +243,6 @@
     {
       mode = "n";
       key = "<M-C-K>"; # Control-Alt-k
-      # action = ''<S-o><esc>"_cc<esc>'';
       action = "<S-o><esc>";
       options = {
         desc = "Insert empty line on the above of cursor and up";
@@ -252,8 +251,7 @@
     }
     {
       mode = "n";
-      key = "<M-NL>"; # Control-Alt-j
-      # action = ''o<esc>"_cc<esc>'';
+      key = "<M-C-J>"; # Control-Alt-j
       action = "o<esc>";
       options = {
         desc = "Insert empty line on the below of cursor and down";
