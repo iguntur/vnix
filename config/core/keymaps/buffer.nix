@@ -59,14 +59,14 @@
     }
     {
       mode = "n";
-      key = "<C-M-l>";
+      key = "<C-M-]>";
       action = "<cmd>bnext<cr>";
       options.desc = "Next Buffer";
       options.silent = true;
     }
     {
       mode = "n";
-      key = "<C-M-h>";
+      key = "<C-M-[>";
       action = "<cmd>bprevious<cr>";
       options.desc = "Previous Buffer";
       options.silent = true;
