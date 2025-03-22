@@ -13,6 +13,18 @@
     }
 
     # --------------------------------------------------------------------------------
+    # Scratch RAW plugin
+    # --------------------------------------------------------------------------------
+    {
+      mode = "n";
+      key = "<localleader><localleader>e";
+      # action = "<cmd>edit ~/.config/nvim-plugin/init.lua<cr>";
+      action = "<cmd>edit ~/dev/neovim-plugin/plugins.lua<cr>";
+      options.desc = "Temporary write config plugins";
+      options.silent = true;
+    }
+
+    # --------------------------------------------------------------------------------
     # Sort Lines
     # --------------------------------------------------------------------------------
     {
