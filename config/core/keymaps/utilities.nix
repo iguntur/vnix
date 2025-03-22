@@ -7,9 +7,9 @@
     {
       mode = "n";
       key = "<localleader>rw";
-      action = '':%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<left><left><left>'';
+      action = ":%s/<C-r><C-w>/<C-r><C-w>/gI<left><left><left>";
       options.desc = "Replace word under cursor in entire buffer";
-      options.silent = true;
+      # options.silent = true;
     }
 
     # --------------------------------------------------------------------------------
