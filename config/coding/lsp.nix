@@ -173,6 +173,7 @@
             action.__raw = ''
               function()
                 Snacks.words.jump(vim.v.count1, true)
+                vim.cmd.normal({ "zz", bang = true })
               end
             '';
             options = {
@@ -189,6 +190,7 @@
             action.__raw = ''
               function()
                 Snacks.words.jump(-vim.v.count1, true)
+                vim.cmd.normal({ "zz", bang = true })
               end
             '';
             options = {
