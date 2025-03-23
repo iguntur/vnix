@@ -2,18 +2,20 @@
 let
   inherit (lib.nixvim) toLuaObject;
   icons = vnix.icons.diagnostics;
-  virtual_text = {
-    spacing = 4;
-    source = "if_many";
-    prefix = lib.nixvim.mkRaw ''
-      function(diagnostic)
-        for severity, icon in pairs(${toLuaObject icons}) do
-          if diagnostic.severity == vim.diagnostic.severity[severity:upper()] then
-            return icon
+  lsplines-options = {
+    virtual_text = {
+      spacing = 4;
+      source = "if_many";
+      prefix = lib.nixvim.mkRaw ''
+        function(diagnostic)
+          for severity, icon in pairs(${toLuaObject icons}) do
+            if diagnostic.severity == vim.diagnostic.severity[severity:upper()] then
+              return icon
+            end
           end
         end
-      end
-    '';
+      '';
+    };
   };
 in
 {
@@ -42,6 +44,13 @@ in
     # --------------------------------------------------------------------------------
     lsp-lines = {
       enable = true;
+      luaConfig.post = ''
+        vim.diagnostic.config({
+          virtual_text = true,
+          virtual_lines = false,
+          -- virtual_lines = { only_current_line = true }
+        })
+      '';
     };
   };
 
@@ -55,9 +64,7 @@ in
           if v then
             vim.diagnostic.config({ virtual_text = false })
           else
-            vim.diagnostic.config({
-              virtual_text = ${toLuaObject virtual_text}
-            })
+            vim.diagnostic.config(${toLuaObject lsplines-options})
           end
         end
       '';
