@@ -116,10 +116,7 @@
 
   keymaps = [
     {
-      mode = [
-        "n"
-        "v"
-      ];
+      mode = [ "n" "v" ];
       key = "<leader>cf";
       action.__raw = # lua
         ''
@@ -131,6 +128,27 @@
       options = {
         silent = true;
         desc = "Format";
+      };
+    }
+    {
+      mode = [ "n" "v" "i" ];
+      key = "<C-c><C-w>";
+      action.__raw = # lua
+        ''
+          function()
+            local bufnr = vim.api.nvim_get_current_buf()
+
+            vim.b[bufnr].disable_autoformat = true
+            vim.cmd.write()
+
+            vim.schedule(function()
+              vim.b[bufnr].disable_autoformat = false
+            end)
+          end
+        '';
+      options = {
+        silent = true;
+        desc = "Save without format";
       };
     }
   ];
