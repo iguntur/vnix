@@ -27,6 +27,10 @@ in
     db_ui_tmp_query_location.__raw = "vim.fn.expand('${dataPath}/tmp')";
   };
 
+  extraConfigLuaPost = ''
+    vim.api.nvim_set_hl(0, "NotificationInfo", { bg = "None" }) -- DBUI Notifications
+  '';
+
   keymaps = lib.optionals config.plugins.vim-dadbod.enable [
     {
       mode = "n";
@@ -45,6 +49,30 @@ in
         silent = true;
         desc = "DBUI Hide Notifications";
       };
+    }
+  ];
+
+  autoGroups = lib.optionals config.plugins.vim-dadbod.enable {
+    vnix_database.clear = true;
+  };
+
+  autoCmd = lib.optionals config.plugins.vim-dadbod.enable [
+    {
+      event = "FileType";
+      group = "vnix_database";
+      pattern = [ "sql" "plsql" "mysql" ];
+      callback.__raw = ''
+        function()
+          local map = function(mode, lhs, rhs, opts)
+            local bufnr = vim.api.nvim_get_current_buf()
+            opts = opts or {}
+            opts = vim.tbl_deep_extend("force", { silent = true }, opts, { buffer = bufnr })
+            vim.keymap.set(mode, lhs, rhs, opts)
+          end
+
+          map({ "n", "v" }, "<CR>", "<Plug>(DBUI_ExecuteQuery)", { desc = "Execute query" })
+        end
+      '';
     }
   ];
 
