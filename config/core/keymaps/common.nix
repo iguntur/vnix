@@ -386,5 +386,13 @@
         silent = true;
       };
     }
+
+    # --------------------------------------------------------------------------------
+    # Integrations
+    # --------------------------------------------------------------------------------
+    { mode = "n"; key = "<C-t>"; action = "<C-t>zz"; options.silent = true; }
+    { mode = "n"; key = "<C-i>"; action = "<C-i>zz"; options.silent = true; }
+    { mode = "n"; key = "<C-o>"; action = "<C-o>zz"; options.silent = true; }
+    { mode = "n"; key = "<C-]>"; action = "<C-]>zz"; options.silent = true; }
   ];
 }
