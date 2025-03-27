@@ -37,7 +37,6 @@
       event = [ "User" ];
       callback.__raw = ''
         function()
-          Snacks.toggle.inlay_hints():map("<leader>uh", { silent = true, desc = "Toggle Inlay Hints" })
           Snacks.toggle.diagnostics():map("<leader>ud")
           Snacks.toggle.dim():map("<leader>uf", { silent = true, desc = "Toggle Focus Dim" })
           Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")

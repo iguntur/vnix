@@ -6,8 +6,8 @@
     # --------------------------------------------------------------------------------
     lsp = {
       enable = true;
-      inlayHints = true;
-      luaConfig.post = ''
+      # inlayHints = true;
+      postConfig = ''
         do
           local opts = { bg = "None", bold = true }
           vim.api.nvim_set_hl(0, "LspReferenceText", opts)
@@ -196,6 +196,40 @@
             options = {
               silent = true;
               desc = "Previous Reference";
+            };
+          }
+
+          # --------------------------------------------------------------------------------
+          # LSP inlay hints
+          # --------------------------------------------------------------------------------
+          {
+            mode = [ "n" ];
+            key = "<leader>uH";
+            action.__raw = ''
+              function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+              end
+            '';
+            options = {
+              silent = true;
+              desc = "Toggle inlay hints (global)";
+            };
+          }
+          {
+            mode = [ "n" ];
+            key = "<leader>uh";
+            action.__raw = ''
+              function()
+                local buffer = vim.api.nvim_get_current_buf()
+                vim.lsp.inlay_hint.enable(
+                  not vim.lsp.inlay_hint.is_enabled({ bufnr = buffer }),
+                  { bufnr = buffer }
+                )
+              end
+            '';
+            options = {
+              silent = true;
+              desc = "Toggle inlay hints current buffer";
             };
           }
         ];
