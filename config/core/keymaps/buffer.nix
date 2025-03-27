@@ -5,10 +5,7 @@
     # Buffer: write or save
     # --------------------------------------------------------------------------------
     {
-      mode = [
-        "n"
-        "v"
-      ];
+      mode = [ "n" "v" ];
       key = "<C-s>";
       action = "<esc>:w<cr><esc>";
       options.desc = "Write or saving current buffer";
@@ -41,7 +38,7 @@
     # }
     {
       mode = "n";
-      key = "<leader>bd"; # Alt-w
+      key = "<leader>bd";
       action = ":bdelete<cr>";
       options.desc = "Close current buffer and window";
       options.silent = true;
