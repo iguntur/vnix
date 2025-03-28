@@ -1,4 +1,4 @@
-{ ... }:
+{ config, lib, pkgs, ... }:
 {
   imports = [
     ./core
@@ -61,5 +61,15 @@
         end
       '';
     }
+  ];
+
+  extraPlugins = [
+    (pkgs.vimUtils.buildVimPlugin {
+      name = "vnix-plugins";
+      src = ./vnix-plugins;
+      dependencies = with pkgs.vimPlugins; [
+        nvim-treesitter
+      ];
+    })
   ];
 }

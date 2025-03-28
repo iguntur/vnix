@@ -92,31 +92,14 @@ in
       pattern = [ "sql" "plsql" "mysql" ];
       callback.__raw = ''
         function()
-          local map = function(mode, lhs, rhs, opts)
-            local bufnr = vim.api.nvim_get_current_buf()
-            opts = opts or {}
-            opts = vim.tbl_deep_extend("force", { silent = true }, opts, { buffer = bufnr })
-            vim.keymap.set(mode, lhs, rhs, opts)
-          end
+          local sql = require("dadbod-simple-exec")
+          local bufnr = vim.api.nvim_get_current_buf()
 
-          map({ "n", "v" }, "<CR>", "<Plug>(DBUI_ExecuteQuery)", { desc = "Execute query" })
-        end
-      '';
-    }
-    {
-      event = "FileType";
-      group = "vnix_database";
-      pattern = [ "dbout" ];
-      callback.__raw = ''
-        function()
-          local map = function(mode, lhs, rhs, opts)
-            local bufnr = vim.api.nvim_get_current_buf()
-            opts = opts or {}
-            opts = vim.tbl_deep_extend("force", { silent = true }, opts, { buffer = bufnr })
-            vim.keymap.set(mode, lhs, rhs, opts)
-          end
-
-          map({ "n", "v" }, "q", ":bdelete<cr>", { desc = "Close buffer (dbout)" })
+          vim.keymap.set({ "n", "v" }, "<CR>", sql.exec, {
+            silent = true,
+            buffer = bufnr,
+            desc = "Execute query"
+          })
         end
       '';
     }
