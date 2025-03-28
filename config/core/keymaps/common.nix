@@ -395,4 +395,29 @@
     { mode = "n"; key = "<C-o>"; action = "<C-o>zz"; options.silent = true; }
     { mode = "n"; key = "<C-]>"; action = "<C-]>zz"; options.silent = true; }
   ];
+
+  # --------------------------------------------------------------------------------
+  # Quit by filetype
+  # --------------------------------------------------------------------------------
+  autoGroups.vnix_quit_filetype.clear = true;
+  autoCmd = [
+    {
+      event = "FileType";
+      group = "vnix_quit_filetype";
+      pattern = [
+        "dbout" # DBUI (dadbod-ui)
+        "query" # InspectTree
+      ];
+      callback.__raw = ''
+        function()
+          local bufnr = vim.api.nvim_get_current_buf()
+          vim.keymap.set({ "n", "v" }, "q", ":bdelete<cr>", {
+            silent = true,
+            buffer = bufnr,
+            desc = "Close buffer",
+          })
+        end
+      '';
+    }
+  ];
 }
