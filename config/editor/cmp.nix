@@ -158,6 +158,7 @@
             dadbod = lib.mkIf config.plugins.vim-dadbod.enable {
               name = "Dadbod";
               module = "vim_dadbod_completion.blink";
+              score_offset = 10;
             };
           };
         };
