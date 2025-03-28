@@ -32,7 +32,7 @@ in
   };
 
   globals = {
-    db_ui_auto_execute_table_helpers = true;
+    db_ui_auto_execute_table_helpers = false;
     db_ui_execute_on_save = false;
     db_ui_disable_info_notifications = true;
     db_ui_show_database_icon = true;
@@ -100,6 +100,23 @@ in
           end
 
           map({ "n", "v" }, "<CR>", "<Plug>(DBUI_ExecuteQuery)", { desc = "Execute query" })
+        end
+      '';
+    }
+    {
+      event = "FileType";
+      group = "vnix_database";
+      pattern = [ "dbout" ];
+      callback.__raw = ''
+        function()
+          local map = function(mode, lhs, rhs, opts)
+            local bufnr = vim.api.nvim_get_current_buf()
+            opts = opts or {}
+            opts = vim.tbl_deep_extend("force", { silent = true }, opts, { buffer = bufnr })
+            vim.keymap.set(mode, lhs, rhs, opts)
+          end
+
+          map({ "n", "v" }, "q", ":bdelete<cr>", { desc = "Close buffer (dbout)" })
         end
       '';
     }
