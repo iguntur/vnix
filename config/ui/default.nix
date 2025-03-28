@@ -5,6 +5,7 @@
     ./snacks.nix
     ./statuscolumn.nix
     ./window.nix
+    ./tab.nix
   ];
 
   plugins = {
