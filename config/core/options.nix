@@ -28,6 +28,7 @@
     ];
     confirm = true; # confirm to save changes before exiting modified buffer
     cursorline = true; # enable highlighting of the current line
+    cursorcolumn = true; # enable highlighting of the current column
     encoding = "utf-8";
     fileencoding = "utf-8";
     hlsearch = true; # highlight search result

@@ -8,6 +8,12 @@
     ./tab.nix
   ];
 
+  extraConfigLuaPost = ''
+    vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#181910" })
+    vim.api.nvim_set_hl(0, "CursorLine", { link = "CursorColumn" })
+    vim.api.nvim_set_hl(0, "Visual", { bg = "#181835" })
+  '';
+
   plugins = {
     # web-devicons.enable = true;
 
