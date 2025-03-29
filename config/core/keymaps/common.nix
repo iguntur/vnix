@@ -407,6 +407,7 @@
       pattern = [
         "dbout" # DBUI (dadbod-ui)
         "query" # InspectTree
+        "gitsigns-blame" # Gitsigns blame
       ];
       callback.__raw = ''
         function()

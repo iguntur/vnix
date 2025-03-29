@@ -30,7 +30,17 @@
     gitsigns = {
       enable = true;
       settings = {
-        current_line_blame = true;
+        numhl = false; # Toggle with `:Gitsigns toggle_numhl`
+        current_line_blame = true; # Toggle with `:Gitsigns toggle_current_line_blame`
+        current_line_blame_opts = {
+          virt_text = true;
+          virt_text_pos = "right_align"; # 'eol' | 'overlay' | 'right_align'
+          delay = 1000;
+          ignore_whitespace = false;
+          virt_text_priority = 100;
+          use_focus = true;
+        };
+        current_line_blame_formatter = "<author>, <author_time:%R> - <summary>  ";
         signs = {
           add.text = "┃";
           change.text = "┃";
@@ -46,31 +56,62 @@
           topdelete.text = "";
           changedelete.text = "┃";
         };
-        on_attach = # lua
+        on_attach.__raw = # lua
           ''
             function(bufnr)
-              local gs = package.loaded.gitsigns
+              local gs = require('gitsigns')
+              local map = function(mode, lhs, rhs, opts)
+                opts = vim.tbl_deep_extend("force", opts or {}, { silent = true, buffer = bufnr })
+                vim.keymap.set(mode, lhs, rhs, opts)
+              end
 
-              vim.keymap.set({ "n", "v" }, "<leader>ghs", "<cmd>Gitsigns stage_hunk<cr>", { buffer = bufnr, silent = true, desc = "Stage Hunk" })
-              vim.keymap.set({ "n", "v" }, "<leader>ghr", "<cmd>Gitsigns reset_hunk<cr>", { buffer = bufnr, silent = true, desc = "Reset Hunk" })
-              vim.keymap.set("n", "<leader>ghu", "<cmd>Gitsigns undo_stage_hunk<cr>", { buffer = bufnr, silent = true, desc = "Undo Stage Hunk" })
-              vim.keymap.set("n", "<leader>ghp", "<cmd>Gitsigns preview_hunk_inline<cr>", { buffer = bufnr, silent = true, desc = "Preview Hunk Inline" })
-              vim.keymap.set("n", "<leader>ghP", "<cmd>Gitsigns preview_hunk<cr>", { buffer = bufnr, silent = true, desc = "Preview Hunk" })
-              vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns refresh<cr>", { buffer = bufnr, silent = true, desc = "Gitsigns Refresh" })
-              vim.keymap.set("n", "[h", "<cmd>Gitsigns prev_hunk<cr>zz", { buffer = bufnr, silent = true, desc = "Prev Hunk" })
-              vim.keymap.set("n", "]h", "<cmd>Gitsigns next_hunk<cr>zz", { buffer = bufnr, silent = true, desc = "Next Hunk" })
-              vim.keymap.set("n", "<M-.>", "<cmd>Gitsigns prev_hunk<cr>zz", { buffer = bufnr, silent = true, desc = "Prev Hunk" })
-              vim.keymap.set("n", "<M-,>", "<cmd>Gitsigns next_hunk<cr>zz", { buffer = bufnr, silent = true, desc = "Next Hunk" })
+              map({ "n", "v" }, "<leader>ghs", "<cmd>Gitsigns stage_hunk<cr>", { desc = "Stage Hunk" })
+              map({ "n", "v" }, "<leader>ghr", "<cmd>Gitsigns reset_hunk<cr>", { desc = "Reset Hunk" })
+              map("n", "<leader>ghu", "<cmd>Gitsigns undo_stage_hunk<cr>", { desc = "Undo Stage Hunk" })
 
-              vim.keymap.set("n", "[H", function()
-                gs.nav_hunk("first")
-                vim.cmd.normal({ "zz", bang = true })
-              end, { buffer = bufnr, silent = true, desc = "First Hunk" })
+              map("n", "<leader>ghp", "<cmd>Gitsigns preview_hunk_inline<cr>", { desc = "Preview Hunk Inline" })
+              map("n", "<leader>ghP", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview Hunk" })
+              map("n", "<leader>gr", "<cmd>Gitsigns refresh<cr>", { desc = "Gitsigns Refresh" })
 
-              vim.keymap.set("n", "]H", function()
-                gs.nav_hunk("last")
-                vim.cmd.normal({ "zz", bang = true })
-              end, { buffer = bufnr, silent = true, desc = "Last Hunk" })
+              -- blame
+              map("n", "<leader>gB", "<cmd>Gitsigns blame<cr>", { desc = "Blame" })
+              map("n", "<leader>gb", "<cmd>Gitsigns blame_line<cr>", { desc = "Blame line" })
+
+              -- toggles
+              map("n", "<leader>gts", "<cmd>Gitsigns toggle_signs<cr>", { desc = "Toggle signs" })
+              map("n", "<leader>gtw", "<cmd>Gitsigns toggle_word_diff<cr>", { desc = "Toggle word diff" })
+              map("n", "<leader>gtl", "<cmd>Gitsigns toggle_linehl<cr>", { desc = "Toggle linehl" })
+              map("n", "<leader>gtn", "<cmd>Gitsigns toggle_numhl<cr>", { desc = "Toggle numhl" })
+              map("n", "<leader>gtb", "<cmd>Gitsigns toggle_current_line_blame<cr>", { desc = "Toggle current blame line" })
+
+              for _, key in ipairs({ "[h", "<M-.>" }) do
+                map("n", key, function() 
+                  gs.nav_hunk("prev", nil, function()
+                    vim.api.nvim_feedkeys("zz", "n", false)
+                  end)
+                end, { desc = "Prev Hunk" })
+              end
+
+              for _, key in ipairs({ "]h", "<M-,>" }) do
+                map("n", key, function()
+                  gs.nav_hunk("next", nil, function()
+                    vim.api.nvim_feedkeys("zz", "n", false)
+                  end)
+                end, { desc = "Next Hunk" })
+              end
+
+              map("n", "[H", function()
+                  gs.nav_hunk("first", nil, function()
+                    vim.api.nvim_feedkeys("zz", "n", false)
+                  end)
+              end, { desc = "First Hunk" })
+
+              map("n", "]H", function()
+                  gs.nav_hunk("last", nil, function()
+                    vim.api.nvim_feedkeys("zz", "n", false)
+                  end)
+              end, { desc = "Last Hunk" })
+
             end
           '';
       };
@@ -81,6 +122,7 @@
       { __unkeyed-1 = "<leader>ga"; group = "Add"; icon = " "; }
       { __unkeyed-1 = "<leader>gc"; group = "Commit"; icon = " "; }
       { __unkeyed-1 = "<leader>gp"; group = "Push"; icon = " "; }
+      { __unkeyed-1 = "<leader>gt"; group = "Toggle"; icon = " "; }
     ];
   };
 
