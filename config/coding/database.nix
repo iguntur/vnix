@@ -34,7 +34,7 @@ in
   globals = {
     db_ui_auto_execute_table_helpers = false;
     db_ui_execute_on_save = false;
-    db_ui_disable_info_notifications = true;
+    db_ui_disable_info_notifications = false;
     db_ui_show_database_icon = true;
     db_ui_use_nerd_fonts = true;
     db_ui_use_nvim_notify = true;
