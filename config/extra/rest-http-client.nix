@@ -1,4 +1,7 @@
 { config, lib, pkgs, ... }:
+let
+  dataPath = "$HOME/.local/resources/kulala/.http";
+in
 {
   plugins.kulala = {
     enable = true;
@@ -11,6 +14,20 @@
       additional_curl_options = [
         "-L" # --location => (HTTP) If the server reports that the requested page has moved to a different location
       ];
+    };
+  };
+
+  plugins.fzf-lua.keymaps = {
+    "<leader>fh" = {
+      action = "files";
+      settings = {
+        prompt = "❯ ";
+        cwd.__raw = ''vim.fn.expand("${dataPath}")'';
+      };
+      options = {
+        silent = true;
+        desc = "HTTP rest files (kulala)";
+      };
     };
   };
 
