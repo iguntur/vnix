@@ -40,7 +40,7 @@
           virt_text_priority = 100;
           use_focus = true;
         };
-        current_line_blame_formatter = "<author>, <author_time:%R> - <summary>  ";
+        current_line_blame_formatter = " <author>, 󰚭 <author_time:%R>  <summary>  ";
         signs = {
           add.text = "┃";
           change.text = "┃";
@@ -112,6 +112,9 @@
                   end)
               end, { desc = "Last Hunk" })
 
+              -- vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { bg = "none", fg = "#45475a" })
+              -- vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { bg = "none", fg = "#2079b1" })
+              vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { bg = "none", fg = "#8d4797" })
             end
           '';
       };
