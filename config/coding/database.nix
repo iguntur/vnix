@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  dataPath = "$HOME/.local/share/dadbod_ui";
+  dataPath = "$HOME/.local/resources/dadbod_ui";
 in
 {
   plugins = {
