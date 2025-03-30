@@ -17,7 +17,7 @@ in
     };
 
     fzf-lua.keymaps = {
-      "<localleader>df" = {
+      "<leader>fd" = {
         action = "files";
         settings = {
           prompt = "❯ ";
