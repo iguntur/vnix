@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   autoGroups = {
     vnix_nopaste.clear = true;
@@ -74,22 +74,32 @@
     {
       event = [ "WinEnter" "BufEnter" ];
       group = "vnix_window";
-      callback.__raw = ''
+      callback = lib.nixvim.mkRaw ''
         function()
           vim.opt.cursorline = true; -- enable highlighting of the current line
           vim.opt.cursorcolumn = true; -- enable highlighting of the current column
-          vim.api.nvim_feedkeys("zz", "n", false)
+
+          vim.schedule(function()
+            if (vim.fn.mode() == "n") then 
+              vim.api.nvim_feedkeys("zz", "n", false)
+            end
+          end)
         end
       '';
     }
     {
       event = [ "WinLeave" "BufLeave" ];
       group = "vnix_window";
-      callback.__raw = ''
+      callback = lib.nixvim.mkRaw ''
         function()
           vim.opt.cursorline = false;
           vim.opt.cursorcolumn = false;
-          vim.api.nvim_feedkeys("zz", "n", false)
+
+          vim.schedule(function()
+            if (vim.fn.mode() == "n") then 
+              vim.api.nvim_feedkeys("zz", "n", false)
+            end
+          end)
         end
       '';
     }
