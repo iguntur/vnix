@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 {
   plugins = {
+    hmts.enable = true;
     lsp.servers = {
       nixd = {
         enable = true;
