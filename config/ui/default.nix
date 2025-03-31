@@ -6,6 +6,7 @@
     ./statuscolumn.nix
     ./window.nix
     ./tab.nix
+    ./statusline.nix
   ];
 
   extraConfigLuaPost = ''
@@ -21,34 +22,6 @@
     #   enable = true;
     #   backgroundColour = "#000000";
     # };
-
-    # --------------------------------------------------------------------------------
-    # statusline
-    # --------------------------------------------------------------------------------
-    lualine = {
-      enable = true;
-      settings = {
-        options = {
-          extensions = [
-            "aerial"
-            "fzf"
-            "nvim-dap-ui"
-            "oil"
-            "overseer"
-            "quickfix"
-            "trouble"
-          ];
-          section_separators = {
-            left = "";
-            right = "";
-          };
-          component_separators = {
-            left = "";
-            right = "";
-          };
-        };
-      };
-    };
 
     # --------------------------------------------------------------------------------
     # winbar
