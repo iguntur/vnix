@@ -26,4 +26,11 @@
     ./treesitter.nix
     ./trouble.nix
   ];
+
+  extraConfigLua = ''
+    vim.keymap.set("n", "<M-b>", require("boolean-swap").toggle, {
+    	silent = true,
+    	desc = "Toggle swap boolean value",
+    })
+  '';
 }
