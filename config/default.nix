@@ -65,11 +65,16 @@
 
   extraPlugins = [
     (pkgs.vimUtils.buildVimPlugin {
-      name = "vnix-plugins";
-      src = ./vnix-plugins;
+      name = "dadbod-simple-exec";
+      src = ./vnix-plugins/dadbod-simple-exec;
       dependencies = with pkgs.vimPlugins; [
         nvim-treesitter
       ];
+    })
+
+    (pkgs.vimUtils.buildVimPlugin {
+      name = "boolean-swap";
+      src = ./vnix-plugins/boolean-swap;
     })
   ];
 }
