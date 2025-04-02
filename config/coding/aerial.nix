@@ -23,8 +23,8 @@
         };
         on_attach.__raw = ''
           function(bufnr)
-            vim.keymap.set("n", "(", "<cmd>AerialPrev<cr>", { buffer = bufnr, silent = true, desc = "Prev Symbol" })
-            vim.keymap.set("n", ")", "<cmd>AerialNext<cr>", { buffer = bufnr, silent = true, desc = "Next Symbol" })
+            vim.keymap.set("n", "(", "<cmd>AerialPrev<cr>zz", { buffer = bufnr, silent = true, desc = "Prev Symbol" })
+            vim.keymap.set("n", ")", "<cmd>AerialNext<cr>zz", { buffer = bufnr, silent = true, desc = "Next Symbol" })
           end
         '';
       };
