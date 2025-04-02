@@ -27,6 +27,69 @@
           args = "--color=always --style=numbers,changes";
         };
       };
+      lsp = {
+        jump1_action.__raw = ''
+          function(selected, opts)
+            local fzf = require("fzf-lua")
+
+            local get_window_id_by_buffer = function(buf_nr)
+              -- Ensure the buffer is valid and loaded
+              if buf_nr == -1 or not vim.api.nvim_buf_is_loaded(buf_nr) then
+                return nil -- Return nil if the buffer isn’t valid or loaded
+              end
+
+              local win_ids = {} -- To store matching window IDs
+              local all_win_ids = vim.api.nvim_list_wins() -- Get all window IDs
+
+              for _, win_id in ipairs(all_win_ids) do
+                if vim.api.nvim_win_get_buf(win_id) == buf_nr then
+                  table.insert(win_ids, win_id) -- Collect the window ID
+                end
+              end
+
+              return win_ids -- Return list of window IDs
+            end
+
+            local is_current_buf_has_multiple_window = function()
+              local current_bufnr = vim.api.nvim_get_current_buf()
+              local win_ids = get_window_id_by_buffer(current_bufnr)
+
+              if win_ids == nil then
+                return false
+              end
+
+              return #win_ids > 1
+            end
+
+            local filepath = vim.split(selected[1], ":")[1]
+            local buf_nr = vim.fn.bufnr(filepath, false)
+            local win_ids = get_window_id_by_buffer(buf_nr)
+            local buf_is_loaded = (buf_nr ~= -1 and vim.api.nvim_buf_is_loaded(buf_nr))
+            local buf_is_displayed = (buf_nr ~= -1 and (win_ids and #win_ids > 0))
+            local win_id = vim.api.nvim_get_current_win()
+
+            if win_ids and #win_ids == 1 then
+              win_id = win_ids[1]
+            end
+
+            if not buf_is_loaded or not buf_is_displayed then
+              if not is_current_buf_has_multiple_window() then
+                vim.cmd.vsplit()
+              end
+            end
+
+            if buf_is_displayed then
+              if not vim.api.nvim_win_is_valid(win_id) then
+                return
+              end
+
+              vim.api.nvim_set_current_win(win_id)
+            end
+
+            return fzf.actions.file_edit(selected, opts)
+          end
+        '';
+      };
       # files = {
       #   fd_opts = lib.strings.concatStringsSep " " [
       #     "--color=never"
