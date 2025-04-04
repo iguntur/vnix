@@ -11,8 +11,8 @@ let
   part = {
     diagnostic = "";
     # fold = "%C";
-    # fold.__raw = "require('statuscol.builtin').foldfunc";
-    fold = "%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? '' : '󰡍') : ' '}";
+    fold.__raw = "require('statuscol.builtin').foldfunc";
+    # fold = "%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? '' : '󰡍') : ' '}";
     linenumber = "%{v:lnum}";
     rel_linenumber = "%{v:relnum}";
     align_right = "%=";
