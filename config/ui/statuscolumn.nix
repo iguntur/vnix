@@ -11,7 +11,8 @@ let
   part = {
     diagnostic = "";
     # fold = "%C";
-    fold.__raw = "require('statuscol.builtin').foldfunc";
+    # fold.__raw = "require('statuscol.builtin').foldfunc";
+    fold = "%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? '' : '󰡍') : ' '}";
     linenumber = "%{v:lnum}";
     rel_linenumber = "%{v:relnum}";
     align_right = "%=";
@@ -20,39 +21,28 @@ let
     T = "%T";
     sign_or_pipe.__raw = ''
       function(args)
-        local str_start_with = function(start_with, value)
-          return value:sub(1, #start_with) == start_with
-        end
+        local function get_sign(pattern, opts)
+          opts = opts or {}
+          local lnum = opts.lnum or vim.v.lnum
 
-        local get_sign = function(args)
           local bufnr = vim.api.nvim_get_current_buf()
           local signs = vim.fn.sign_getplaced(bufnr, {
             group = "*",
-            lnum = args.lnum,
-          })[1].signs
-
-          local is_git_sign, is_diag_sign, is_mark_sign = false, false, false
+            lnum = lnum,
+          })[1].signs or {}
 
           for _, sign in ipairs(signs) do
-            local group = sign.group
-
-            if str_start_with("gitsigns_", group) then
-              is_git_sign = true
-            elseif str_start_with("DiagnosticSign_", group) then
-              is_diag_sign = true
-            elseif str_start_with("MarkSign_", group) then
-              is_mark_sign = true
+            -- Match group or name against the pattern
+            if sign.group:match(pattern) then
+              return sign
             end
           end
 
-          return {
-            is_git_sign = is_git_sign,
-            is_diag_sign = is_diag_sign,
-            is_mark_sign = is_mark_sign,
-          }
+          return nil
         end
 
-        if get_sign(args).is_git_sign then
+        local sign = get_sign("^[a-zA-Z]")
+        if sign then
           return "%s"
         end
 
