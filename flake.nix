@@ -7,8 +7,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs =
-    { nixvim, flake-parts, ... }@inputs:
+  outputs = { nixvim, flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       # System types to support.
       systems = [
@@ -18,8 +17,7 @@
         "aarch64-darwin"
       ];
 
-      perSystem =
-        { pkgs, system, ... }:
+      perSystem = { pkgs, system, ... }:
         let
           nixvimLib = nixvim.lib.${system};
           lib = nixvim.lib;
