@@ -408,6 +408,7 @@
         "dbout" # DBUI (dadbod-ui)
         "query" # InspectTree
         "gitsigns-blame" # Gitsigns blame
+        "help" # help
       ];
       callback.__raw = ''
         function()
