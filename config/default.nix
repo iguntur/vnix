@@ -46,6 +46,13 @@
         debounce = 100;
         enabled = true;
       };
+      input = {
+        enabled = true;
+      };
+      picker = {
+        enabled = true;
+        ui_select = true; # replace `vim.ui.select` with the snacks picker
+      };
     };
   };
 
