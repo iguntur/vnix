@@ -57,7 +57,8 @@ local function toggle_window_terminal()
 
 	-- attach to terminal mode
 	if vim.bo[state.buffer].buftype ~= "terminal" then
-		vim.cmd.terminal()
+		vim.cmd.edit("term://fish")
+		-- vim.cmd.terminal()
 	end
 
 	vim.b[state.buffer].focus_disable = true
