@@ -1,11 +1,10 @@
 { config, lib, vnix, ... }:
 let
+  journal-path = "$HOME/dev/github.com/iguntur/journal";
   workspaces = {
     # Format: <name_of_workspace> = <path_to_workspace_root>
-    personal = "~/dev/journals/guntur";
-    efishery = "~/dev/journals/efishery";
-    ruangguru = "~/dev/journals/ruangguru";
-    tictag = "~/dev/journals/tictag";
+    coding = "${journal-path}/coding";
+    personal = "${journal-path}/home";
   };
   workspaceNames = builtins.attrNames workspaces;
 in
@@ -51,7 +50,7 @@ in
         action = "files";
         settings = {
           prompt = "❯ ";
-          cwd.__raw = ''vim.fn.expand("$HOME/dev/journals")'';
+          cwd.__raw = ''vim.fn.expand("${journal-path}")'';
         };
         options = {
           silent = true;
