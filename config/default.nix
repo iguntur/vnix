@@ -72,16 +72,26 @@
 
   extraPlugins = [
     (pkgs.vimUtils.buildVimPlugin {
+      name = "boolean-swap";
+      src = ./vnix-plugins/boolean-swap;
+    })
+  ]
+  ++ lib.optionals config.plugins.vim-dadbod.enable [
+    (pkgs.vimUtils.buildVimPlugin {
       name = "dadbod-simple-exec";
       src = ./vnix-plugins/dadbod-simple-exec;
       dependencies = with pkgs.vimPlugins; [
         nvim-treesitter
       ];
     })
-
+  ]
+  ++ lib.optionals config.plugins.lsp.servers.sqls.enable [
     (pkgs.vimUtils.buildVimPlugin {
-      name = "boolean-swap";
-      src = ./vnix-plugins/boolean-swap;
+      name = "sqls-simple-exec";
+      src = ./vnix-plugins/sqls-simple-exec;
+      dependencies = with pkgs.vimPlugins; [
+        nvim-treesitter
+      ];
     })
   ];
 }

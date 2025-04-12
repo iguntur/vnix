@@ -16,6 +16,14 @@ in
       enable = config.plugins.vim-dadbod.enable;
     };
 
+    conform-nvim.settings = {
+      formatters_by_ft = {
+        sql = [ "sqruff" ];
+        mysql = [ "sqruff" ];
+        plsql = [ "sqruff" ];
+      };
+    };
+
     fzf-lua.keymaps = {
       "<leader>fd" = {
         action = "files";
@@ -81,18 +89,19 @@ in
     }
   ];
 
-  autoGroups = lib.optionals config.plugins.vim-dadbod.enable {
-    vnix_database.clear = true;
-  };
+  autoGroups =
+    if config.plugins.vim-dadbod.enable then {
+      vnix_database.clear = true;
+    } else { };
 
-  autoCmd = lib.optionals config.plugins.vim-dadbod.enable [
+  autoCmd = [
     {
       event = "FileType";
       group = "vnix_database";
       pattern = [ "sql" "plsql" "mysql" ];
       callback.__raw = ''
         function()
-          local sql = require("dadbod-simple-exec")
+          local sql = require("sqls-simple-exec")
           local bufnr = vim.api.nvim_get_current_buf()
 
           vim.keymap.set({ "n", "v" }, "<CR>", sql.exec, {
@@ -103,9 +112,31 @@ in
         end
       '';
     }
+  ]
+  ++ lib.optionals config.plugins.vim-dadbod.enable [
+    {
+      event = "FileType";
+      group = "vnix_database";
+      pattern = [ "sql" "plsql" "mysql" ];
+      callback.__raw = ''
+        function()
+          local sql = require("dadbod-simple-exec")
+          local bufnr = vim.api.nvim_get_current_buf()
+
+          vim.keymap.set({ "n", "v" }, "<localleader>d<CR>", sql.exec, {
+            silent = true,
+            buffer = bufnr,
+            desc = "Execute query"
+          })
+        end
+      '';
+    }
   ];
 
-  extraPackages = lib.optionals config.plugins.vim-dadbod.enable (with pkgs; [
+  extraPackages = with pkgs; [
+    sqruff
+  ]
+  ++ lib.optionals config.plugins.vim-dadbod.enable (with pkgs; [
     postgresql_17
   ]);
 }

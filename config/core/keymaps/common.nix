@@ -409,6 +409,7 @@
         "query" # InspectTree
         "gitsigns-blame" # Gitsigns blame
         "help" # help
+        "sqls_output" # sqls
       ];
       callback.__raw = ''
         function()
