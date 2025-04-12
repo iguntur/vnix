@@ -29,12 +29,13 @@
     # ------------------------------------------------------------------------------
     # Formatter
     # ------------------------------------------------------------------------------
-    conform-nvim.settings.formatters_by_ft = {
-      python = [
-        "isort"
-        # "black"
-      ];
-    };
+    # conform-nvim.settings.formatters_by_ft = {
+    #   python = [
+    #     "ruff_organize_imports"
+    #     # "isort"
+    #     # "black"
+    #   ];
+    # };
 
     # ------------------------------------------------------------------------------
     # Debug
@@ -47,7 +48,8 @@
 
   extraPackages = with pkgs; [
     # Formatters
-    black # Uncompromising Python code formatter
-    isort # Python utility / library to sort Python imports
+    # ruff # Extremely fast Python linter and code formatter
+    # black # Uncompromising Python code formatter
+    # isort # Python utility / library to sort Python imports
   ];
 }
