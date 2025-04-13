@@ -6,7 +6,6 @@
     ./avante.nix
     ./cloak.nix
     ./comments.nix
-    ./database.nix
     ./debug.nix
     ./diagnostics.nix
     ./formatter.nix
