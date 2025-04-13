@@ -1,8 +1,8 @@
 {
   imports = [
     ./keymaps
+    ./autocmd
 
-    ./autocmd.nix
     ./colorschemes.nix
     ./extra-config.nix
     ./options.nix
