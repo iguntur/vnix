@@ -1,6 +1,6 @@
 { config, lib, vnix, ... }:
 let
-  journal-path = "$HOME/dev/github.com/iguntur/journal";
+  journal-path = "$GUN_JOURNAL_PATH";
   workspaces = {
     # Format: <name_of_workspace> = <path_to_workspace_root>
     coding = "${journal-path}/coding";

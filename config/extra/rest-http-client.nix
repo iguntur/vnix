@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  dataPath = "$HOME/.local/resources/kulala/.http";
+  dataPath = "$GUN_HTTP_PATH";
 in
 {
   plugins.kulala = {

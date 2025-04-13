@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  dataPath = "$HOME/.local/resources/dadbod_ui";
+  dataPath = "$GUN_QUERY_PATH";
 in
 {
   plugins = {
