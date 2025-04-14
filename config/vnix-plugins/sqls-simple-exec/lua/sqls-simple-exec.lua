@@ -44,9 +44,13 @@ local function execute_query(start_line, end_line)
 end
 
 local function visual_selected_line(start_row, start_col, end_row, end_col)
-	vim.api.nvim_win_set_cursor(0, { start_row, start_col })
-	vim.cmd("normal! V")
-	vim.api.nvim_win_set_cursor(0, { end_row, end_col })
+	local bufnr = vim.api.nvim_get_current_buf()
+	local higroup = "IncSearch"
+	local start = { start_row, start_col or 0 }
+	local finish = { end_row, end_col or -1 }
+	local opts = { timeout = 150 }
+	local ns_id = 1
+	vim.hl.range(bufnr, ns_id, higroup, start, finish, opts)
 end
 
 local function exec_current_statement()
@@ -65,7 +69,7 @@ local function exec_current_statement()
 	end_row = end_row + 1
 
 	-- Visually select the statement
-	visual_selected_line(start_row, start_col, end_row, end_col)
+	visual_selected_line(start_row - 1, start_col, end_row, end_col)
 
 	-- Execute the statement with the custom command
 	execute_query(start_row, end_row)
