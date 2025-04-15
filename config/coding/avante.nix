@@ -33,7 +33,7 @@ in
         };
       };
       rag_service = {
-        enabled = true; # Enables the RAG service
+        enabled = false; # Enables the RAG service
         host_mount.__raw = ''vim.fn.expand("$HOME/dev")''; # Host mount path for the rag service
         provider = "ollama"; # The provider to use for RAG service (e.g. openai or ollama)
         llm_model = model; # The LLM model to use for RAG service
