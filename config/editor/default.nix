@@ -29,6 +29,8 @@
         # search_method = "cover_or_next";
       };
 
+      align = { };
+
       pairs = {
         modes = {
           insert = true;
