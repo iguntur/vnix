@@ -7,7 +7,8 @@
     lsp.servers = {
       # A fast, feature-rich static code analyzer & language server for Python
       # pylyzer = {
-      #   enable = false;
+      #   enable = true;
+      #   settings = { };
       # };
 
       # Static Type Checker for Python
@@ -17,13 +18,20 @@
       # };
 
       # Fork of the python-language-server project, maintained by the Spyder IDE team and the community
-      # pylsp = {
-      #   enable = true;
-      #   settings = { };
-      # };
+      pylsp = {
+        enable = true;
+        settings = { };
+      };
 
       # An extremely fast Python linter and code formatter, written in Rust.
-      ruff.enable = true;
+      ruff = {
+        enable = true;
+        settings = {
+          # init_options.settings = {
+          #   logLevel = "debug";
+          # };
+        };
+      };
     };
 
     # ------------------------------------------------------------------------------
