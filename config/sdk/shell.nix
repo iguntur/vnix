@@ -2,7 +2,17 @@
 {
   plugins = {
     lsp.servers = {
-      bashls.enable = true;
+      bashls = {
+        enable = true;
+        settings = {
+          filetypes = [ "sh" "bash" ];
+          bashIde = {
+            shellcheckArguments = [
+              "--exclude=SC2034"
+            ];
+          };
+        };
+      };
       # nushell.enable = true;
     };
 
@@ -16,6 +26,5 @@
     shellcheck # Shell script analysis tool
     shellharden # Corrective bash syntax highlighter
     shfmt # Shell parser and formatter
-
   ];
 }
