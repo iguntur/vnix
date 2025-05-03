@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
-  dataPath = "$GUN_QUERY_PATH";
+  dbQueryPath = "$GUN_QUERY_PATH";
+  dbResourcePath = "$GUN_DB_PATH";
 in
 {
   globals = lib.mkIf config.plugins.vim-dadbod-ui.enable {
@@ -10,8 +11,8 @@ in
     db_ui_show_database_icon = true;
     db_ui_use_nerd_fonts = true;
     db_ui_use_nvim_notify = true;
-    db_ui_save_location.__raw = "vim.fn.expand('${dataPath}')";
-    db_ui_tmp_query_location.__raw = "vim.fn.expand('${dataPath}/tmp')";
+    db_ui_save_location.__raw = "vim.fn.expand('${dbQueryPath}')";
+    db_ui_tmp_query_location.__raw = "vim.fn.expand('${dbQueryPath}/tmp')";
   };
 
   plugins = {
@@ -36,15 +37,26 @@ in
     };
 
     fzf-lua.keymaps = {
-      "<leader>fd" = {
+      "<leader>fq" = {
         action = "files";
         settings = {
           prompt = "❯ ";
-          cwd.__raw = ''vim.fn.expand("${dataPath}")'';
+          cwd.__raw = ''vim.fn.expand("${dbQueryPath}")'';
         };
         options = {
           silent = true;
           desc = "Database queries files";
+        };
+      };
+      "<leader>fd" = {
+        action = "files";
+        settings = {
+          prompt = "❯ ";
+          cwd.__raw = "vim.fn.expand('${dbResourcePath}')";
+        };
+        options = {
+          silent = true;
+          desc = "Resources database files";
         };
       };
     };
