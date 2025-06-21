@@ -29,7 +29,7 @@ in
       gopls = {
         enable = true;
         filetypes = [ "go" "gomod" "gowork" "gosum" "gotmpl" ];
-        goPackage = pkgs.go_1_24;
+        # goPackage = pkgs.go_1_24;
         settings.gopls = {
           gofumpt = true;
           completeUnimported = true;
@@ -163,7 +163,7 @@ in
   ];
 
   extraPackages = with pkgs; [
-    go_1_24 # Go Programming language
+    # go_1_24 # Go Programming language
     delve # debugger for the Go programming language
 
     # Linter
