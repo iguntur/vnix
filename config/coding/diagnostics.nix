@@ -23,7 +23,7 @@ in
     signcolumn = "auto:1";
   };
 
-  diagnostics = {
+  diagnostic.settings = {
     underline = true;
     update_in_insert = false;
     severity_sort = true;
