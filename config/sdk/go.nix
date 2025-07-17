@@ -35,7 +35,7 @@ in
           completeUnimported = true;
           directoryFilters = [ "-.git" "-.vscode" "-.idea" "-.vscode-test" "-node_modules" ];
           semanticTokens = true;
-          staticcheck = true;
+          staticcheck = false;
           usePlaceholders = true;
           analyses = {
             # fieldalignment = true;
