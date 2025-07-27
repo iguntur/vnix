@@ -33,7 +33,14 @@ in
         settings.gopls = {
           gofumpt = true;
           completeUnimported = true;
-          directoryFilters = [ "-.git" "-.vscode" "-.idea" "-.vscode-test" "-node_modules" ];
+          directoryFilters = [
+            "-.git"
+            "-.direnv"
+            "-.vscode"
+            "-.idea"
+            "-.vscode-test"
+            "-node_modules"
+          ];
           semanticTokens = true;
           staticcheck = false;
           usePlaceholders = true;
@@ -42,7 +49,8 @@ in
             nilness = true;
             unusedparams = true;
             unusedwrite = true;
-            useany = true;
+            useany = false;
+            efaceany = false;
           };
           codelenses = {
             gc_details = false;
@@ -100,7 +108,7 @@ in
       };
       formatters = {
         golines = {
-          prepend_args = [ "--max-len=120" ];
+          prepend_args = [ "--max-len=160" ];
         };
       };
     };
