@@ -1,4 +1,17 @@
 { config, lib, pkgs, ... }:
+let
+  treesitter-kulala-http-grammar = pkgs.tree-sitter.buildGrammar {
+    language = "kulala_http";
+    version = "5.3.1";
+    src = pkgs.fetchFromGitHub {
+      owner = "mistweaverco";
+      repo = "kulala.nvim";
+      rev = "902fc21e8a3fee7ccace37784879327baa6d1ece";
+      hash = "sha256-whQpwZMEvD62lgCrnNryrEvfSwLJJ+IqVCywTq78Vf8=";
+    };
+    location = "lua/tree-sitter";
+  };
+in
 {
   extraFiles = {
     "queries/lua/highlights.scm" = {
@@ -15,7 +28,27 @@
   plugins = {
     treesitter = {
       enable = true;
-      grammarPackages = pkgs.vimPlugins.nvim-treesitter.passthru.allGrammars;
+      grammarPackages = pkgs.vimPlugins.nvim-treesitter.passthru.allGrammars ++ [
+        treesitter-kulala-http-grammar
+      ];
+      luaConfig.post = # lua
+        ''
+          do
+            local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+            -- change the following as needed
+            parser_config.kulala_http = {
+              install_info = {
+                url = "${treesitter-kulala-http-grammar}", -- local path or git repo
+                files = {"src/parser.c"}, -- note that some parsers also require src/scanner.c or src/scanner.cc
+                -- optional entries:
+                --  branch = "main", -- default branch in case of git repo if different from master
+                -- generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+                -- requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+              },
+              filetype = "kulala_http", -- if filetype does not match the parser name
+            }
+          end
+        '';
       settings = {
         indent.enable = true;
         highlight.enable = true;
@@ -133,6 +166,10 @@
       # settings = { };
     };
   };
+
+  # extraPlugins = [
+  #   treesitter-kulala-http-grammar
+  # ];
 
   keymaps = lib.optionals config.plugins.treesitter-context.enable [
     # --------------------------------------------------------------------------------

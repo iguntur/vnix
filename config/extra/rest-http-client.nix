@@ -5,9 +5,9 @@ in
 {
   plugins.kulala = {
     enable = true;
-    lazyLoad.settings = {
-      ft = [ "http" "rest" ];
-    };
+    # lazyLoad.settings = {
+    #   ft = [ "http" "rest" "kulala_http" ];
+    # };
     settings = {
       global_keymaps = false;
       # additional cURL options. see: https://curl.se/docs/manpage.html
@@ -46,7 +46,7 @@ in
     {
       event = "FileType";
       group = "vnix_kulala";
-      pattern = [ "http" "rest" ];
+      pattern = [ "http" "rest" "kulala_http" ];
       callback.__raw = ''
         function()
           local k = require("kulala")
