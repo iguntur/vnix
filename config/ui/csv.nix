@@ -10,6 +10,7 @@
         view = {
           display_mode = "border";
           spacing = 4;
+          header_lnum = 1; # Auto-detect header (default)
         };
       };
     };
