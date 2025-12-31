@@ -2,7 +2,7 @@
 {
   plugins = {
     lsp.servers = {
-      ansiblels.enable = true;
+      # ansiblels.enable = true; TODO: re-enable
       dockerls.enable = true;
       terraformls.enable = true;
       nginx_language_server.enable = true;

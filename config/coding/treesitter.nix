@@ -75,71 +75,75 @@ in
 
     treesitter-textobjects = {
       enable = true;
-
-      move = {
-        enable = true;
-        # gotoNext = { };
-        # gotoPrevious = { };
-        gotoNextStart = {
-          "]a" = "@parameter.inner";
-          "]c" = "@class.outer";
-          "]f" = "@function.outer";
-          "]i" = "@conditional.outer";
-          "]l" = "@loop.outer";
-        };
-        gotoNextEnd = {
-          "]A" = "@parameter.inner";
-          "]C" = "@class.outer";
-          "]F" = "@function.outer";
-          "]I" = "@conditional.outer";
-          "]L" = "@loop.outer";
-        };
-        gotoPreviousStart = {
-          "[a" = "@parameter.inner";
-          "[c" = "@class.outer";
-          "[f" = "@function.outer";
-          "[i" = "@conditional.outer";
-          "[l" = "@loop.outer";
-        };
-        gotoPreviousEnd = {
-          "[A" = "@parameter.inner";
-          "[C" = "@class.outer";
-          "[F" = "@function.outer";
-          "[I" = "@conditional.outer";
-          "[L" = "@loop.outer";
-        };
-      };
-
-      select = {
-        enable = true;
-        lookahead = true; # Automatically jump forward to textobj, similar to targets.vim
-        keymaps = {
-          # You can use the capture groups defined in textobjects.scm
-          "aa" = "@parameter.outer";
-          "ia" = "@parameter.inner";
-          "af" = "@function.outer";
-          "if" = "@function.inner";
-          "ac" = "@class.outer";
-          "ic" = "@class.inner";
-          "ii" = "@conditional.inner";
-          "ai" = "@conditional.outer";
-          "il" = "@loop.inner";
-          "al" = "@loop.outer";
-          "at" = "@comment.outer";
-        };
-      };
-      swap = {
-        enable = true;
-        swapNext = {
-          "<localleader>a" = {
-            query = "@parameter.inner";
-            desc = "Move parameter to the right";
+      settings = {
+        move = {
+          enable = true;
+          # gotoNext = { };
+          # gotoPrevious = { };
+          gotoNextStart = {
+            "]a" = "@parameter.inner";
+            "]c" = "@class.outer";
+            "]f" = "@function.outer";
+            "]i" = "@conditional.outer";
+            "]l" = "@loop.outer";
+          };
+          gotoNextEnd = {
+            "]A" = "@parameter.inner";
+            "]C" = "@class.outer";
+            "]F" = "@function.outer";
+            "]I" = "@conditional.outer";
+            "]L" = "@loop.outer";
+          };
+          gotoPreviousStart = {
+            "[a" = "@parameter.inner";
+            "[c" = "@class.outer";
+            "[f" = "@function.outer";
+            "[i" = "@conditional.outer";
+            "[l" = "@loop.outer";
+          };
+          gotoPreviousEnd = {
+            "[A" = "@parameter.inner";
+            "[C" = "@class.outer";
+            "[F" = "@function.outer";
+            "[I" = "@conditional.outer";
+            "[L" = "@loop.outer";
           };
         };
-        swapPrevious = {
-          "<localleader>A" = {
-            query = "@parameter.inner";
-            desc = "Move parameter to the left";
+
+        select = {
+          enable = true;
+          lookahead = true; # Automatically jump forward to textobj, similar to targets.vim
+          keymaps = {
+            # You can use the capture groups defined in textobjects.scm
+            "aa" = "@parameter.outer";
+            "ia" = "@parameter.inner";
+            "af" = "@function.outer";
+            "if" = "@function.inner";
+            "ac" = "@class.outer";
+            "ic" = "@class.inner";
+            "ii" = "@conditional.inner";
+            "ai" = "@conditional.outer";
+            "il" = "@loop.inner";
+            "al" = "@loop.outer";
+            "at" = "@comment.outer";
+          };
+        };
+
+        swap = {
+          enable = true;
+          swapNext = {
+            "<localleader>a" = {
+              query = "@parameter.inner";
+              query_group = "locals";
+              desc = "Move parameter to the right";
+            };
+          };
+          swapPrevious = {
+            "<localleader>A" = {
+              query = "@parameter.inner";
+              query_group = "locals";
+              desc = "Move parameter to the left";
+            };
           };
         };
       };

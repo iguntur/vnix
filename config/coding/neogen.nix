@@ -3,7 +3,9 @@
   plugins = {
     neogen = {
       enable = true;
-      snippetEngine = lib.optionals config.plugins.luasnip.enable "luasnip";
+      settings = {
+        snippetEngine = lib.optionals config.plugins.luasnip.enable "luasnip";
+      };
     };
   };
 }

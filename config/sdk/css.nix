@@ -49,10 +49,6 @@ in
       };
     };
 
-    tailwind-tools = {
-      enable = config.plugins.lsp.servers.tailwindcss.enable;
-    };
-
     conform-nvim.settings.formatters_by_ft = {
       # ...
     };

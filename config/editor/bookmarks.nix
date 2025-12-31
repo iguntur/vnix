@@ -3,7 +3,7 @@
   plugins = {
     marks = {
       enable = true;
-      mappings = {
+      settings.mappings = {
         next = "<M-L>"; # (Alt-Shift-L) Goes to next mark in buffer.
         prev = "<M-H>"; # (Alt-Shift-H) Goes to previous mark in buffer.
       };
