@@ -8,6 +8,7 @@
     ./htmx.nix
     ./java.nix
     ./javascript.nix
+    ./kotlin.nix
     ./lua.nix
     ./markdown.nix
     ./nix.nix

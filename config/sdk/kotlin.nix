@@ -1,13 +1,12 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   plugins = {
     lsp.servers = {
-      # java_language_server.enable = false;
-      jdtls.enable = true;
+      kotlin_language_server = {
+        enable = true;
+        # config = { };
+      };
     };
-
-    # java = { enable = true; };
-    jdtls = { enable = true; };
 
     conform-nvim.settings.formatters_by_ft = {
       # ...
