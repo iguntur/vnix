@@ -23,7 +23,7 @@ let
   focus-settings = {
     autoresize = {
       enable = true; # Enable or disable auto-resizing of splits
-      width = 140; # Force width for the focused window
+      width = 180; # Force width for the focused window
       # height = 0; # Force height for the focused window
       # minwidth = 0; # Force minimum width for the unfocused window
       # minheight = 0; # Force minimum height for the unfocused window
