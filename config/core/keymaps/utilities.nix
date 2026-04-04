@@ -65,7 +65,7 @@
       mode = "n";
       key = "<localleader><localleader>h";
       action = "<cmd>checkhealth<cr>";
-      options.desc = "Health Check";
+      options.desc = "Health Check All";
       options.silent = true;
     }
     {
@@ -73,6 +73,13 @@
       key = "<localleader><localleader>x";
       action = "<cmd>lua assert(load(vim.api.nvim_get_current_line()))()<cr>";
       options.desc = "Execute as :lua ... code";
+      options.silent = true;
+    }
+    {
+      mode = "n";
+      key = "<localleader><localleader>d";
+      action = "<cmd>checkhealth vim.deprecated<cr>";
+      options.desc = "Check deprecated";
       options.silent = true;
     }
   ];
