@@ -80,7 +80,7 @@
           {
             mode = "n";
             key = "<leader>lr";
-            action = "<cmd>LspRestart<cr>";
+            action = "<cmd>lsp restart<cr>";
             options = {
               silent = true;
               desc = "Restart Engine (LSP)";
@@ -89,21 +89,21 @@
           {
             mode = "n";
             key = "<leader>lI";
-            action = "<cmd>LspInfo<cr>";
+            action = "<cmd>checkhealth vim.lsp<cr>";
             options = {
               silent = true;
               desc = "Info (LSP)";
             };
           }
-          {
-            mode = "n";
-            key = "<leader>ll";
-            action = "<cmd>LspLog<cr>";
-            options = {
-              silent = true;
-              desc = "Log (LSP)";
-            };
-          }
+          # {
+          #   mode = "n";
+          #   key = "<leader>ll";
+          #   action = "<cmd>LspLog<cr>";
+          #   options = {
+          #     silent = true;
+          #     desc = "Log (LSP)";
+          #   };
+          # }
           # --------------------------------------------------------------------------------
           # Diagnostics
           # --------------------------------------------------------------------------------
@@ -268,8 +268,8 @@
       src = pkgs.fetchFromGitHub {
         owner = "Wansmer";
         repo = "symbol-usage.nvim";
-        rev = "main";
-        hash = "sha256-VzliC8LARRXt/5yJN28K7UcM7sP7RQWW5CLw+a0mv0Q=";
+        rev = "e07c07dfe7504295a369281e95a24e1afa14b243";
+        hash = "sha256-zWT6ZGYGpWLwuUrMlmyTIE5UZtPLX2FnywhycTxUaRQ=";
       };
       dependencies = with pkgs.vimPlugins; [
         # ... 
