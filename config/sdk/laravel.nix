@@ -31,48 +31,48 @@ in
       grammarPackages = [ treesitter-blade-grammar ];
       luaConfig.post = ''
         do
-          local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-          parser_config.blade = ${lib.nixvim.toLuaObject {
+          -- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+          vim.treesitter.language.register('blade', ${lib.nixvim.toLuaObject {
             filetype = "blade";
             install_info = {
               files = [ "src/parser.c" ];
               url = treesitter-blade-grammar;
             };
-          }}
+          }})
         end
       '';
     };
 
-    lz-n.plugins = [
-      {
-        __unkeyed-1 = "blade-nav";
-        ft = [ "php" "blade" ];
-        after = # lua
-          ''
-            function()
-              require("blade-nav").setup()
-            end
-          '';
-      }
-    ];
+    # lz-n.plugins = [
+    #   {
+    #     __unkeyed-1 = "blade-nav";
+    #     ft = [ "php" "blade" ];
+    #     after = # lua
+    #       ''
+    #         function()
+    #           require("blade-nav").setup()
+    #         end
+    #       '';
+    #   }
+    # ];
   };
 
   extraPlugins = [
     treesitter-blade-grammar
 
     # Laravel Blade Nav: Goto File (gf)
-    (pkgs.vimUtils.buildVimPlugin {
-      name = "blade-nav";
-      src = pkgs.fetchFromGitHub {
-        owner = "RicardoRamirezR";
-        repo = "blade-nav.nvim";
-        rev = "56601aaf230698388ed687d1d9d468599d277ac2";
-        hash = "sha256-JMRASTwennR0ZgT/DSfA5YTrkgdYjynM21c1zZfYSW4=";
-      };
-      dependencies = with pkgs.vimPlugins; [
-        nvim-treesitter
-      ];
-    })
+    # (pkgs.vimUtils.buildVimPlugin {
+    #   name = "blade-nav";
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "RicardoRamirezR";
+    #     repo = "blade-nav.nvim";
+    #     rev = "56601aaf230698388ed687d1d9d468599d277ac2";
+    #     hash = "sha256-JMRASTwennR0ZgT/DSfA5YTrkgdYjynM21c1zZfYSW4=";
+    #   };
+    #   dependencies = with pkgs.vimPlugins; [
+    #     nvim-treesitter
+    #   ];
+    # })
   ];
 
   # extraConfigLua = vnix.lua.mkRequire "blade-nav" "setup";

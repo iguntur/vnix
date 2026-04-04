@@ -7,9 +7,10 @@ let
       owner = "yudppp";
       repo = pname;
       rev = "v${version}";
-      hash = "sha256-bg1uyt2hhKOHQe/AZCLPauA5AhyvsPZv6l6zpWc7Pco=";
+      hash = "sha256-nr6+31jrvut0UZPRjjgsvwEEtZ8vH6LB1Qp4sr60fMc=";
     };
-    vendorHash = "sha256-haaVGKax8K+jMbSi9WYI7eKy0qAbRVS3XpftQ7UhuQk=";
+    # vendorHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    vendorHash = "sha256-puoVTqIRrWfIKqs/cJWto+opu889CVTlfAEOFfDlsj4=";
     subPackages = [ "cmd/json2struct" ];
     meta = {
       description = "Translate to Golang struct from json";
@@ -72,8 +73,7 @@ in
             rangeVariableTypes = true;
           };
         };
-        onAttach.function =
-          # lua
+        onAttach.function = # lua
           ''
             if client.name ~= 'gopls' then
               return
@@ -143,8 +143,8 @@ in
       src = pkgs.fetchFromGitHub {
         owner = "olexsmir";
         repo = "gopher.nvim";
-        rev = "0ed14a40d9799ac8d92aaf9eb1cd9be22ffd6b14";
-        hash = "sha256-5UpNPRh4YdAtpiFTazqCSLeJ0TMmPCm8lVyNFsIJ3lE=";
+        rev = "27ba078f14dd39fcd5e8a57d7009cdd77450ebbb";
+        hash = "sha256-tfagWNHlfCRQ0BMihFCubKgMUpp5QtFl91ja4/Y2/gI=";
       };
       dependencies = with pkgs.vimPlugins; [
         plenary-nvim
@@ -158,8 +158,8 @@ in
       src = pkgs.fetchFromGitHub {
         owner = "triarius";
         repo = "json2struct.nvim";
-        rev = "f3d99ab6e02772bcdeb5c1097f75e0d5814bf28b";
-        hash = "sha256-pOebbEOkoQb0QuaOP6kKuY5F5YVbyncUCM20JXoqsMI=";
+        rev = "969fd2506ada5eb1942130e307e73818eea4b6fd";
+        hash = "sha256-XEMQdOxV3d/1xxgBH+AAdO5BJoFFsP+/IY06UfbGvbA=";
       };
       dependencies = with pkgs.vimPlugins; [ plenary-nvim ];
     })
