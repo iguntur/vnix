@@ -27,7 +27,5 @@
 
   extraPackages = with pkgs; [
     # markdownlint-cli2 # Fast, flexible, configuration-based command-line interface for linting Markdown/CommonMark files with the markdownlint library
-    nodePackages.prettier # Prettier is an opinionated code formatter
-    prettierd # Prettier, as a daemon, for improved formatting speed
   ];
 }

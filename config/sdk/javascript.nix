@@ -200,7 +200,7 @@
 
   extraPackages = with pkgs; [
     # biome # Toolchain of the web
-    nodePackages.prettier # Prettier is an opinionated code formatter
+    prettier # Prettier is an opinionated code formatter
     prettierd # Prettier, as a daemon, for improved formatting speed
     typescript # Superset of JavaScript that compiles to clean JavaScript output
   ];
