@@ -8,6 +8,7 @@
       enable = true;
       settings = {
         options = {
+          theme = "powerline_dark"; # auto, nord, powerline, powerline_dark
           extensions = [
             "aerial"
             "fzf"
@@ -18,13 +19,13 @@
             "trouble"
           ];
           section_separators = {
-            left = "";
-            right = "";
+            # left = "";
+            # right = "";
+            left = "";
+            right = "";
           };
-          component_separators = {
-            left = "";
-            right = "";
-          };
+          component_separators = "";
+          # component_separators = { left = ""; right = ""; };
         };
       };
     };
