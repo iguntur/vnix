@@ -81,7 +81,7 @@
       name = "dadbod-simple-exec";
       src = ./vnix-plugins/dadbod-simple-exec;
       dependencies = with pkgs.vimPlugins; [
-        nvim-treesitter
+        # nvim-treesitter
       ];
     })
   ]

@@ -1,5 +1,3 @@
-local ts_utils = require("nvim-treesitter.ts_utils")
-
 local M = {}
 
 M.supported_ft = {
@@ -9,7 +7,7 @@ M.supported_ft = {
 }
 
 local function get_statement_range()
-	local node = ts_utils.get_node_at_cursor()
+	local node = vim.treesitter.get_node()
 
 	while node do
 		if node:type() == "statement" then
