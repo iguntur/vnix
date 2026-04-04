@@ -14,10 +14,10 @@
     '';
     settings = {
       winopts = {
-        # fullscreen = true;
+        fullscreen = true;
         # preview = { default = "bat"; };
-        width = 1;
-        height = 0.6;
+        # width = 1;
+        # height = 0.8;
         row = 1; # window row position (0=top, 1=bottom)
         backdrop = 100; # Backdrop opacity, 0 is fully opaque, 100 is fully transparent (i.e. disabled)
       };
