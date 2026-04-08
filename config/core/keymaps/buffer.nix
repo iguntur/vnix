@@ -29,16 +29,16 @@
     # --------------------------------------------------------------------------------
     # Buffer: exit or close buffer
     # --------------------------------------------------------------------------------
-    # {
-    #   mode = "n";
-    #   key = "<M-w>"; # Alt-w
-    #   action = ":bdelete<cr>";
-    #   options.desc = "Close current buffer and window";
-    #   options.silent = true;
-    # }
     {
       mode = "n";
-      key = "<leader>bd";
+      key = "<M-w>"; # Alt-w
+      action = ":bdelete<cr>";
+      options.desc = "Close current buffer and window";
+      options.silent = true;
+    }
+    {
+      mode = "n";
+      key = "<leader>bw";
       action = ":bdelete<cr>";
       options.desc = "Close current buffer and window";
       options.silent = true;

@@ -52,7 +52,7 @@
     # --------------------------------------------------------------------------------
     {
       mode = "n";
-      key = "<M-w>"; # Alt-w
+      key = "<leader>bd";
       action = lib.nixvim.mkRaw "function() Snacks.bufdelete() end";
       options.desc = "Close current buffer";
       options.silent = true;
