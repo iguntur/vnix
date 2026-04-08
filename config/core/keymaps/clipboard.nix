@@ -16,10 +16,7 @@
     # System register
     # --------------------------------------------------------------------------------
     {
-      mode = [
-        "n"
-        "v"
-      ];
+      mode = [ "n" "v" ];
       key = "<localleader>y";
       action = ''"+y'';
       options.desc = "Copy into system clipboard";
