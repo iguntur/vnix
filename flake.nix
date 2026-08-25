@@ -17,11 +17,19 @@
         "aarch64-darwin"
       ];
 
-      perSystem = { pkgs, system, ... }:
+      perSystem = { system, ... }:
         let
           nixvimLib = nixvim.lib.${system};
           lib = nixvim.lib;
           nixvimLegacy = nixvim.legacyPackages.${system};
+          pkgs = import inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            # config.allowUnfreePredicate = pkg: builtins.elem (inputs.nixpkgs.lib.getName pkg) [
+            #   "tree-sitter-http"
+            #   "text-case.nvim"
+            # ];
+          };
           nixvimModule = {
             inherit pkgs;
             module = import ./config; # import the module directly
