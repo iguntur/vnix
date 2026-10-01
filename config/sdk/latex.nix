@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }:
 {
-  plugins.texpresso.enable = true;
+  # plugins.texpresso.enable = true;
 
   plugins.vimtex = {
     enable = true;
-    texlivePackage = pkgs.texlivePackages.scheme-full; # Default: pkgs.texlive.combined.scheme-medium
+    texlivePackage = pkgs.texliveFull; # Default: pkgs.texliveMedium
     settings = {
       imaps_enabled = 0; # i.e., disable them
       view_enabled = true;
@@ -20,6 +20,15 @@
         "LaTeX Warning: .\\+ float specifier changedto"
         "Package hyperref Warning: Token not allowed in a PDF string"
       ];
+      compiler_latexmk = {
+        options = [
+          "-verbose"
+          "-file-line-error"
+          "-synctex=1"
+          "-interaction=nonstopmode"
+          "-shell-escape"
+        ];
+      };
     };
   };
 
