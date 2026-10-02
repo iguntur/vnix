@@ -1,4 +1,8 @@
 { config, pkgs, lib, ... }:
+let
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
+in
 {
   plugins.vimtex = {
     enable = true;
@@ -15,7 +19,7 @@
       # Zathura sebagai viewer.
       # "zathura"        -> butuh xdotool/D-Bus untuk fokus window (Linux/X11)
       # "zathura_simple" -> versi sederhana, lebih cocok di macOS / Wayland
-      view_method = if pkgs.stdenv.isDarwin then "skim" else "zathura";
+      view_method = if isDarwin then "skim" else "zathura";
       # view_general_viewer = "zathura";
       # view_general_options = "--synctex-forward @line:@col:@tex @pdf";
 
@@ -60,10 +64,10 @@
   extraPackages = with pkgs; [
     tex-fmt
   ]
-  ++ lib.optionals pkgs.stdenv.isDarwin [
+  ++ lib.optionals isDarwin [
     # ...
   ]
-  ++ lib.optionals pkgs.stdenv.isLinux [
+  ++ lib.optionals isLinux [
     zathura
   ];
 }
