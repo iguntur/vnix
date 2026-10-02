@@ -4,7 +4,8 @@ let
 in
 {
   plugins.kulala = {
-    enable = true;
+    # TODO: need to fix. currently broken when using neovim v0.12.5
+    # enable = true;
     # lazyLoad.settings = {
     #   ft = [ "http" "rest" "kulala_http" ];
     # };
@@ -31,7 +32,7 @@ in
     };
   };
 
-  plugins.which-key.settings.spec = lib.optionals config.plugins.kulala.enable [
+  plugins.which-key.settings.spec = [
     {
       __unkeyed-1 = "<leader>h";
       group = "HTTP Client (Kulala)";
@@ -39,9 +40,10 @@ in
     }
   ];
 
-  autoGroups.vnix_kulala = lib.optionals config.plugins.kulala.enable {
+  autoGroups.vnix_kulala = {
     clear = true;
   };
+
   autoCmd = lib.optionals config.plugins.kulala.enable [
     {
       event = "FileType";
@@ -89,7 +91,7 @@ in
   ];
 
   plugins.rest = {
-    enable = true;
+    # enable = true;
     settings = { };
   };
 }

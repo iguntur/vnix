@@ -15,24 +15,22 @@
     };
   };
 
-  plugins = {
-    nvim-ufo = {
-      enable = true;
-      settings = {
-        open_fold_hl_timeout = 150;
-        # close_fold_kinds_for_ft = { };
-        provider_selector = # lua
-          ''
-            function(bufnr, filetype, buftype)
-              return {
-                "lsp",
-                "indent",
-                -- "treesitter",
-              }
-            end
-          '';
-
-      };
+  plugins.nvim-ufo = {
+    # TODO: need to fix. currently broken when using neovim v0.12.5
+    # enable = true;
+    settings = {
+      # open_fold_hl_timeout = 150;
+      # close_fold_kinds_for_ft = { };
+      provider_selector = # lua
+        ''
+          function(bufnr, filetype, buftype)
+            return {
+              "lsp",
+              "treesitter",
+              "indent",
+            }
+          end
+        '';
     };
   };
 }
