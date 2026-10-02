@@ -25,5 +25,6 @@
     ./infra.nix
     ./laravel.nix
     ./latex.nix
+    ./typst.nix
   ];
 }
