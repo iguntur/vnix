@@ -1,4 +1,8 @@
 { config, pkgs, lib, ... }:
+let
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
+in
 {
   plugins.typst-preview = {
     enable = true;
@@ -15,10 +19,10 @@
   extraPackages = with pkgs; [
     # ...
   ]
-  ++ lib.optionals pkgs.stdenv.isDarwin [
+  ++ lib.optionals isDarwin [
     # ...
   ]
-  ++ lib.optionals pkgs.stdenv.isLinux [
+  ++ lib.optionals isLinux [
     # ...
   ];
 }
