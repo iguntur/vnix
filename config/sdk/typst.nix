@@ -11,9 +11,12 @@ in
 
   plugins.lsp.servers.tinymist = {
     enable = true;
-    # config = {
-    #   settings = { };
-    # };
+    # see: https://github.com/Myriad-Dreamin/tinymist/blob/main/editors/neovim/Configuration.md
+    settings = {
+      formatterMode = "typstyle";
+      # exportPdf = "onSave";
+      # formatterProseWrap = true;
+    };
   };
 
   extraPackages = with pkgs; [
