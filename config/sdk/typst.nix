@@ -20,6 +20,7 @@ in
   };
 
   extraPackages = with pkgs; [
+    typstyle
     # ...
   ]
   ++ lib.optionals isDarwin [
