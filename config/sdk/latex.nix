@@ -39,6 +39,7 @@ in
         # build_dir = "build";
         options = [
           "-verbose"
+          "-gg"
           "-file-line-error"
           "-synctex=1"
           "-interaction=nonstopmode"
@@ -63,6 +64,7 @@ in
 
   extraPackages = with pkgs; [
     tex-fmt
+    latexminted
   ]
   ++ lib.optionals isDarwin [
     # ...
