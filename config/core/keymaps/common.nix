@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   keymaps = [
     # --------------------------------------------------------------------------------
@@ -397,7 +397,14 @@
     {
       mode = "n";
       key = "J";
-      action = "mzJ`z";
+      # action = "mzJ`z";
+      action = lib.nixvim.mkRaw ''
+        function()
+          local cursor = vim.api.nvim_win_get_cursor(0)
+          vim.cmd("normal! J")
+          vim.api.nvim_win_set_cursor(0, cursor)
+        end
+      '';
       options = { silent = true; desc = "Join lines without moving cursor"; };
     }
 
