@@ -36,7 +36,6 @@
             # You can use `extraSpecialArgs` to pass additional arguments to your module files
             extraSpecialArgs = {
               vnix = import ./lib/vnix.nix { inherit lib pkgs; };
-              luaRaw = import ./lib/fn.nix { inherit lib; };
             };
           };
           nvim = nixvimLegacy.makeNixvimWithModule nixvimModule;
