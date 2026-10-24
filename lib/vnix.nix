@@ -9,6 +9,15 @@ in
   keymap = {
     action_cmd = cmd: "<cmd>${cmd}<cr>";
     action_fn = action: mkRaw "function() ${action} end";
+    make = keymaps: # lua
+      ''
+        local __keymaps = ${toLuaObject keymaps}
+        for i, v in ipairs(__keymaps) do
+          local default = { silent = true }
+          local options = vim.tbl_deep_extend("force", default, v.options or {})
+          vim.keymap.set(v.mode or "n", v.key, v.action, options)
+        end
+      '';
   };
 
   lsp = rec {

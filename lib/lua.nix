@@ -1,4 +1,7 @@
 { lib, ... }:
+let
+  inherit (lib.nixvim) mkRaw;
+in
 {
   mkRequire = modName: method: ''
     do
@@ -15,6 +18,13 @@
     ''
       do
         require("${modName}").${method}(${params})
+      end
+    '';
+
+  fnRaw = body: mkRaw # lua
+    ''
+      function()
+        ${body}
       end
     '';
 }
