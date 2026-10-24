@@ -304,11 +304,15 @@
       action = ''"_x'';
       options.silent = true;
     }
+    # {
+    #   mode = "n"; key = "D"; action = ''"_D''; options.silent = true;
+    # }
     {
       mode = "n";
-      key = "D";
+      key = "<M-D>";
       action = ''"_D'';
       options.silent = true;
+      options.desc = "Delete to the end of line (skip register)";
     }
     {
       mode = "n";
