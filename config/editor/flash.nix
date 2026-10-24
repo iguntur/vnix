@@ -1,4 +1,8 @@
-{ luaRaw, ... }:
+{ vnix, ... }:
+let
+  inherit (vnix.lua) fnRaw mkRequire;
+  setup = a: b: fnRaw (mkRequire a b);
+in
 {
   plugins = {
     flash = {
@@ -10,7 +14,7 @@
     {
       mode = "c";
       key = "<c-s>";
-      action = luaRaw.keymapRequire "flash" "toggle";
+      action = setup "flash" "toggle";
       options = {
         silent = true;
         desc = "Toggle Flash Search";
@@ -19,7 +23,7 @@
     {
       mode = "o";
       key = "r";
-      action = luaRaw.keymapRequire "flash" "remote";
+      action = setup "flash" "remote";
       options = {
         silent = true;
         desc = "Flash Remote";
@@ -31,7 +35,7 @@
         "x"
       ];
       key = "R";
-      action = luaRaw.keymapRequire "flash" "treesitter_search";
+      action = setup "flash" "treesitter_search";
       options = {
         silent = true;
         desc = "Flash Treesitter Search";
@@ -44,7 +48,7 @@
         "o"
       ];
       key = "S";
-      action = luaRaw.keymapRequire "flash" "treesitter";
+      action = setup "flash" "treesitter";
       options = {
         silent = true;
         desc = "Flash Treesitter";
@@ -57,7 +61,7 @@
         "o"
       ];
       key = "s";
-      action = luaRaw.keymapRequire "flash" "jump";
+      action = setup "flash" "jump";
       options = {
         silent = true;
         desc = "Flash";

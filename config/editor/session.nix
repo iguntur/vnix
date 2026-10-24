@@ -1,9 +1,9 @@
-{
-  lib,
-  luaRaw,
-  pkgs,
-  ...
-}:
+{ lib, pkgs, vnix, ... }:
+let
+  inherit (vnix.lua) fnRaw mkRequire mkRequire';
+  setup = a: b: fnRaw (mkRequire a b);
+  setup' = a: b: c: fnRaw (mkRequire' a b c);
+in
 {
   plugins = {
     persistence = {
@@ -14,8 +14,8 @@
 
   keymaps =
     let
-      persistence = luaRaw.keymapRequire "persistence";
-      persistence' = luaRaw.keymapRequire' "persistence";
+      persistence = setup "persistence";
+      persistence' = setup' "persistence";
     in
     [
       {

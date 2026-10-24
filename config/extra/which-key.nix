@@ -1,4 +1,9 @@
-{ config, lib, luaRaw, ... }:
+{ config, lib, vnix, ... }:
+let
+  inherit (vnix.lua) fnRaw mkRequire';
+  # setup = a: b: fnRaw (mkRequire a b);
+  setup' = a: b: c: fnRaw (mkRequire' a b c);
+in
 {
   plugins = {
     which-key = {
@@ -129,7 +134,7 @@
     {
       mode = "n";
       key = "<leader><leader>?";
-      action = luaRaw.keymapRequire' "which-key" "show" { global = false; };
+      action = setup' "which-key" "show" { global = false; };
       options = {
         silent = true;
         desc = "Buffer Local Keymaps (which-key)";

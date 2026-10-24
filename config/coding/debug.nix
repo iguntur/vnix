@@ -1,4 +1,9 @@
-{ vnix, lib, pkgs, luaRaw, ... }:
+{ vnix, lib, pkgs, ... }:
+let
+  inherit (vnix.lua) fnRaw mkRequire;
+  setup = a: b: fnRaw (mkRequire a b);
+  # setup' = a: b: c: fnRaw (mkRequire a b c);
+in
 let
   inherit (vnix) icons;
 
@@ -69,7 +74,7 @@ in
     {
       mode = "n";
       key = "<leader>dc";
-      action = luaRaw.keymapRequire "dap" "continue";
+      action = setup "dap" "continue";
       options = {
         silent = true;
         desc = "Run or Continue";
@@ -78,7 +83,7 @@ in
     # {
     #   mode = "n";
     #   key = "<leader>dC";
-    #   action = luaRaw.keymapRequire' "dap" "run_to_cursor" {...};
+    #   action = setup' "dap" "run_to_cursor" {...};
     #   options = {
     #     silent = true;
     #     desc = "Run to cursor";
@@ -87,7 +92,7 @@ in
     {
       mode = "n";
       key = "<leader>dg";
-      action = luaRaw.keymapRequire "dap" "goto_";
+      action = setup "dap" "goto_";
       options = {
         silent = true;
         desc = "Go to line (No Execute)";
@@ -96,7 +101,7 @@ in
     {
       mode = "n";
       key = "<leader>di";
-      action = luaRaw.keymapRequire "dap" "step_into";
+      action = setup "dap" "step_into";
       options = {
         silent = true;
         desc = "Step Into";
@@ -105,7 +110,7 @@ in
     {
       mode = "n";
       key = "<leader>dj";
-      action = luaRaw.keymapRequire "dap" "down";
+      action = setup "dap" "down";
       options = {
         silent = true;
         desc = "Down";
@@ -114,7 +119,7 @@ in
     {
       mode = "n";
       key = "<leader>dk";
-      action = luaRaw.keymapRequire "dap" "up";
+      action = setup "dap" "up";
       options = {
         silent = true;
         desc = "Up";
@@ -123,7 +128,7 @@ in
     {
       mode = "n";
       key = "<leader>dl";
-      action = luaRaw.keymapRequire "dap" "run_last";
+      action = setup "dap" "run_last";
       options = {
         silent = true;
         desc = "Run Last";
@@ -132,7 +137,7 @@ in
     {
       mode = "n";
       key = "<leader>do";
-      action = luaRaw.keymapRequire "dap" "step_out";
+      action = setup "dap" "step_out";
       options = {
         silent = true;
         desc = "Step Out";
@@ -141,7 +146,7 @@ in
     {
       mode = "n";
       key = "<leader>dO";
-      action = luaRaw.keymapRequire "dap" "step_over";
+      action = setup "dap" "step_over";
       options = {
         silent = true;
         desc = "Step Over";
@@ -150,7 +155,7 @@ in
     {
       mode = "n";
       key = "<leader>dp";
-      action = luaRaw.keymapRequire "dap" "pause";
+      action = setup "dap" "pause";
       options = {
         silent = true;
         desc = "Pause";
@@ -159,7 +164,7 @@ in
     {
       mode = "n";
       key = "<leader>dr";
-      action = luaRaw.keymapRequire "dap" "repl.toggle";
+      action = setup "dap" "repl.toggle";
       options = {
         silent = true;
         desc = "Toggle REPL";
@@ -168,7 +173,7 @@ in
     {
       mode = "n";
       key = "<leader>ds";
-      action = luaRaw.keymapRequire "dap" "session";
+      action = setup "dap" "session";
       options = {
         silent = true;
         desc = "Session";
@@ -177,7 +182,7 @@ in
     {
       mode = "n";
       key = "<leader>dt";
-      action = luaRaw.keymapRequire "dap" "terminate";
+      action = setup "dap" "terminate";
       options = {
         silent = true;
         desc = "Terminate";
@@ -186,7 +191,7 @@ in
     {
       mode = "n";
       key = "<leader>dw";
-      action = luaRaw.keymapRequire "dap.ui.widgets" "hover";
+      action = setup "dap.ui.widgets" "hover";
       options = {
         silent = true;
         desc = "Widgets";
@@ -199,7 +204,7 @@ in
     {
       mode = "n";
       key = "<leader>du";
-      action = luaRaw.keymapRequire "dapui" "toggle";
+      action = setup "dapui" "toggle";
       options = {
         silent = true;
         desc = "DAP UI";
@@ -211,7 +216,7 @@ in
         "v"
       ];
       key = "<leader>de";
-      action = luaRaw.keymapRequire "dapui" "eval";
+      action = setup "dapui" "eval";
       options = {
         silent = true;
         desc = "DAP UI Eval";
@@ -224,7 +229,7 @@ in
     {
       mode = "n";
       key = "<leader>db";
-      action = luaRaw.keymapRequire "persistent-breakpoints.api" "toggle_breakpoint";
+      action = setup "persistent-breakpoints.api" "toggle_breakpoint";
       options = {
         silent = true;
         desc = "Toggle Breakpoint";
@@ -233,7 +238,7 @@ in
     {
       mode = "n";
       key = "<leader>dB";
-      action = luaRaw.keymapRequire "persistent-breakpoints.api" "set_conditional_breakpoint";
+      action = setup "persistent-breakpoints.api" "set_conditional_breakpoint";
       options = {
         silent = true;
         desc = "Breakpoint With Condition";
@@ -242,7 +247,7 @@ in
     {
       mode = "n";
       key = "<leader>dX";
-      action = luaRaw.keymapRequire "persistent-breakpoints.api" "clear_all_breakpoints";
+      action = setup "persistent-breakpoints.api" "clear_all_breakpoints";
       options = {
         silent = true;
         desc = "Clear All Debug Breakpoints";
