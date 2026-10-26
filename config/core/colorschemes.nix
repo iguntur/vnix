@@ -3,6 +3,23 @@
   # colorscheme = "habamax";
 
   colorschemes = {
+    ayu = {
+      enable = true;
+      settings = {
+        overrides = {
+          Normal = { bg = "None"; };
+          NormalFloat = { bg = "None"; };
+          # ColorColumn = { bg = "None"; };
+          # SignColumn = { bg = "None"; };
+          # Folded = { bg = "None"; };
+          # FoldColumn = { bg = "None"; };
+          # CursorLine = { bg = "None"; };
+          # CursorColumn = { bg = "None"; };
+          # VertSplit = { bg = "None"; };
+        };
+      };
+    };
+
     catppuccin = {
       # enable = true;
       settings = {
@@ -29,7 +46,7 @@
     };
 
     nightfox = {
-      enable = true;
+      # enable = true;
       flavor = "carbonfox"; # Type: one of “carbonfox”, “dawnfox”, “dayfox”, “duskfox”, “nightfox”, “nordfox”, “terafox”
       settings = {
         options = {
@@ -46,7 +63,7 @@
     };
 
     rose-pine = {
-      # enable = true;
+      # enable = false;
       settings = {
         variant = "main"; # auto, main, moon, dawn
         dark_variant = "main"; # auto, main, moon, dawn

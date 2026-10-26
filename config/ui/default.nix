@@ -12,9 +12,16 @@
   ];
 
   extraConfigLuaPost = ''
-    vim.api.nvim_set_hl(0, "CursorColumn", { bg = "#181910" })
-    vim.api.nvim_set_hl(0, "CursorLine", { link = "CursorColumn" })
-    vim.api.nvim_set_hl(0, "Visual", { bg = "#181835" })
+    vim.api.nvim_set_hl(0, "CursorColumn", {
+      -- bg = "#101B17",
+      bg = "None",
+    })
+    vim.api.nvim_set_hl(0, "CursorLine", {
+      -- link = "CursorColumn",
+      -- bg = "#181910",
+      bg = "#101B17",
+    })
+    vim.api.nvim_set_hl(0, "Visual", { bg = "#F21F99" })
   '';
 
   plugins = {

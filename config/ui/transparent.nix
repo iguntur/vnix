@@ -8,12 +8,12 @@ in
   #   require("...").setup(${toLuaObject settings.xxx})
   # '';
 
-  plugins = {
-    transparent = {
-      enable = true;
-      # settings = { };
-    };
-  };
+  # plugins = {
+  #   transparent = {
+  #     enable = true;
+  #     # settings = { };
+  #   };
+  # };
 
   # keymaps = [
   #   {
