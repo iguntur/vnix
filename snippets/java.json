@@ -1,4 +1,15 @@
 {
+  "Java Eclipe Settings Project": {
+    "desc": "<project-root>/.settings/org.eclipse.jdt.core.prefs",
+    "prefix": "eclipse-prefs",
+    "body": [
+      "eclipse.preferences.version=1",
+      "org.eclipse.jdt.core.compiler.source=${1:21}",
+      "org.eclipse.jdt.core.compiler.compliance=${1:21}",
+      "org.eclipse.jdt.core.compiler.codegen.targetPlatform=${1:21}",
+      ""
+    ]
+  },
   "Java Basic Project": {
     "desc": "Java base .project on the project root",
     "prefix": "project-base",
