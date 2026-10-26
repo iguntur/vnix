@@ -8,6 +8,7 @@
     ./tab.nix
     ./statusline.nix
     ./csv.nix
+    ./transparent.nix
   ];
 
   extraConfigLuaPost = ''
