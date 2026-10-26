@@ -73,7 +73,9 @@
           enabled = true; # Experimental signature help support
         };
 
-        snippets.preset = lib.optionals config.plugins.luasnip.enable "luasnip";
+        # snippets.preset = lib.optionals config.plugins.luasnip.enable "luasnip";
+        # snippets.preset = lib.optionals config.plugins.mini.enable "mini_snippets";
+        snippets.preset = "mini_snippets";
 
         cmdline = {
           enabled = true;
