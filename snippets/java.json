@@ -3,6 +3,7 @@
     "desc": "<project-root>/.settings/org.eclipse.jdt.core.prefs",
     "prefix": "eclipse-prefs",
     "body": [
+      "# file: <project-root>/.settings/org.eclipse.jdt.core.prefs",
       "eclipse.preferences.version=1",
       "org.eclipse.jdt.core.compiler.source=${1:21}",
       "org.eclipse.jdt.core.compiler.compliance=${1:21}",
@@ -34,7 +35,7 @@
 
   "Java Basic Classpath": {
     "desc": "Java base .classpath on the project root",
-    "prefix": "xml-base",
+    "prefix": "classpath-base",
     "body": [
       "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
       "<classpath>",
