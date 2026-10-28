@@ -16,6 +16,11 @@ let
   ];
 in
 {
+  filetype.pattern = {
+    ".classpath" = "xml";
+    ".project" = "xml";
+  };
+
   plugins = {
     # jdtls = { enable = true; };
     java = {
