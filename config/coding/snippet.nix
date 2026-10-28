@@ -1,50 +1,27 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
+let
+  inherit (lib.nixvim) mkRaw;
+  enabled = name: config.plugins.${name}.enable or false;
+  loader = "require('mini.snippets').gen_loader";
+in
 {
   plugins = {
-    # luasnip = {
-    #   enable = true;
-    #   settings = {
-    #     history = true;
-    #     delete_check_events = "TextChanged";
-    #   };
-    # };
-
     friendly-snippets.enable = true;
 
-    # nvim-snippets = {
-    #   enable = true;
-    #   settings = {
-    #     # create_autocmd = true;
-    #     # create_cmp_source = true;
-    #     extended_filetypes = {
-    #       typescript = [ "javascript" ];
-    #     };
-    #     friendly_snippets = true;
-    #     # ignored_filetypes = [ "lua" ];
-    #     search_paths = [
-    #       { __raw = "vim.fn.stdpath('config') .. '/snippets'"; }
-    #       { __raw = "'~/dev/github.com/iguntur/vnix/snippets'"; }
-    #     ];
-    #   };
-    # };
-
-    mini.modules.snippets = {
-      snippets = {
-        __unkeyed-1.__raw = lib.mkIf config.plugins.friendly-snippets.enable # lua
-          ''
-            require("mini.snippets").gen_loader.from_file("${config.plugins.friendly-snippets.package}/snippets/global.json")
-          '';
-
-        __unkeyed-2.__raw = lib.mkIf config.plugins.friendly-snippets.enable # lua
-          ''
-            require("mini.snippets").gen_loader.from_file("~/dev/github.com/iguntur/vnix/snippets/java.json")
-          '';
-
-        __unkeyed-3.__raw = # lua
-          ''
-            require("mini.snippets").gen_loader.from_lang()
-          '';
-      };
-    };
+    mini.enable = true; # abaikan jika sudah diset di file lain
+    mini.modules.snippets.snippets =
+      # Snippet global dari friendly-snippets
+      lib.optional (enabled "friendly-snippets")
+        (
+          mkRaw "${loader}.from_file('${config.plugins.friendly-snippets.package}/snippets/global.json')"
+        )
+      ++ lib.optional (enabled "friendly-snippets") (
+        mkRaw "${loader}.from_file('~/dev/github.com/iguntur/vnix/snippets/java.json')"
+      )
+      # Snippet per filetype dari runtimepath: snippets/<lang>.json
+      ++ [ (mkRaw "${loader}.from_lang()") ];
   };
+
+  # Masuk ke runtimepath sebagai snippets/java.json, jadi hanya aktif di filetype java.
+  # extraFiles."snippets/java.json".source = ../../snippets/java.json;
 }
