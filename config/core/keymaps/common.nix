@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, vnix, ... }:
 {
   keymaps = [
     # --------------------------------------------------------------------------------
@@ -133,12 +133,15 @@
     # Comments
     # --------------------------------------------------------------------------------
     {
-      mode = [
-        "n"
-        "i"
-      ];
+      mode = [ "n" "i" ];
       key = "<C-_>"; # control-/
-      action = "<esc>gcc<esc>";
+      # action = "<esc>gcc<esc>";
+      action = vnix.lua.fnRaw # lua
+        ''
+          local cursor = vim.api.nvim_win_get_cursor(0)
+          vim.cmd.normal("gcc")
+          vim.api.nvim_win_set_cursor(0, cursor)
+        '';
       options = {
         desc = "Comment current line";
         silent = true;
