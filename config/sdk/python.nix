@@ -26,24 +26,26 @@
       # An extremely fast Python linter and code formatter, written in Rust.
       ruff = {
         enable = true;
-        settings = {
-          # init_options.settings = {
-          #   logLevel = "debug";
-          # };
-        };
+        # config = {
+        #   # init_options.settings = {
+        #   #   logLevel = "debug";
+        #   # };
+        # };
       };
     };
 
     # ------------------------------------------------------------------------------
     # Formatter
     # ------------------------------------------------------------------------------
-    # conform-nvim.settings.formatters_by_ft = {
-    #   python = [
-    #     "ruff_organize_imports"
-    #     # "isort"
-    #     # "black"
-    #   ];
-    # };
+    conform-nvim.settings.formatters_by_ft = {
+      python = [
+        "ruff_organize_imports"
+        "ruff_format"
+        "ruff_fix"
+        # "isort"
+        # "black"
+      ];
+    };
 
     # ------------------------------------------------------------------------------
     # Debug
