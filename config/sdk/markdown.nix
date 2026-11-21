@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 {
   plugins = {
-    lsp.servers.marksman.enable = true;
+    # lsp.servers.marksman.enable = true;
 
     markdown-preview = {
       enable = true; # command: MarkdownPreview
@@ -15,12 +15,17 @@
 
     conform-nvim.settings = {
       formatters_by_ft = {
-        markdown = {
-          __unkeyed-1 = "prettierd";
-          __unkeyed-2 = "prettier";
-          timeout_ms = 2000;
-          stop_after_first = true;
-        };
+        markdown = [
+          "prettierd"
+          "prettier"
+        ];
+
+        # markdown = {
+        #   __unkeyed-1 = "prettierd";
+        #   __unkeyed-2 = "prettier";
+        #   timeout_ms = 2000;
+        #   stop_after_first = true;
+        # };
       };
     };
   };
