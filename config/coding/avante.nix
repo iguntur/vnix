@@ -1,7 +1,7 @@
 { config, lib, pkgs, vnix, ... }:
 {
   plugins.avante = {
-    enable = true;
+    # enable = true;
     # package = pkgs.vimPlugins.avante-nvim.overrideAttrs (prevAttrs: {
     #   src = pkgs.fetchFromGitHub {
     #     owner = "yetone";
